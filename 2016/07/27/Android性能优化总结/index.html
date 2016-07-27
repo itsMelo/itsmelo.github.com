@@ -84,16 +84,20 @@
 
 
 
-<meta name="description" content="Android的性能优化总结写在前面：
+<meta name="description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
+零：性能指标
+布局复杂度：布局复杂会导致布局需要更">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android的性能优化总结">
 <meta property="og:url" content="http://yoursite.com/2016/07/27/Android性能优化总结/index.html">
 <meta property="og:site_name" content="Melo's Blog">
-<meta property="og:description" content="Android的性能优化总结写在前面：
+<meta property="og:description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
+零：性能指标
+布局复杂度：布局复杂会导致布局需要更">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8a608fd303dd4794?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-bf7ba57ad4a13785?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-2d6386707155cca9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -112,12 +116,14 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-fa051d42cda87d9b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-deba30db8bba7cac?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-4d539ff1d892e076?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-07-27T13:21:41.980Z">
+<meta property="og:updated_time" content="2016-07-27T13:29:17.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android的性能优化总结">
-<meta name="twitter:description" content="Android的性能优化总结写在前面：
+<meta name="twitter:description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
+零：性能指标
+布局复杂度：布局复杂会导致布局需要更">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-8a608fd303dd4794?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -327,12 +333,10 @@
       
 
       
-        <h2 id="Android的性能优化总结"><a href="#Android的性能优化总结" class="headerlink" title="Android的性能优化总结"></a>Android的性能优化总结</h2><p><strong>写在前面：</strong></p>
+        <h2 id="Android的性能优化"><a href="#Android的性能优化" class="headerlink" title="Android的性能优化"></a>Android的性能优化</h2><p><strong>写在前面：</strong></p>
 <pre><code>公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
 文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-</code></pre><a id="more"></a>
-<p>####<strong>零：性能指标</strong></p>
-<ol>
+</code></pre><h2 id="零：性能指标"><a href="#零：性能指标" class="headerlink" title="零：性能指标"></a><strong>零：性能指标</strong></h2><ol>
 <li><strong>布局复杂度</strong>：布局复杂会导致布局需要更长的时间，从而导致进入应用慢、页面切换慢；</li>
 <li><strong>耗电量</strong>：耗电量大会导致机器发热、缩短机器的有效使用时长；</li>
 <li><strong>内存</strong>：内存消耗大会导致频繁GC，GC时会暂停其它工作，导致页面卡顿；内存泄露会导致剩余可用内存越来越小；内存不足会导致应用异常；</li>
@@ -367,7 +371,7 @@
 </ul>
 <p><strong>布局优化相关网址：</strong><br><a href="http://blog.csdn.net/xyz_lmn/article/details/14524567" target="_blank" rel="external">三种优化标签的使用情景和优势—张业兴</a><br><a href="http://www.it165.net/pro/html/201409/22192.html" target="_blank" rel="external">布局优化标签的源码分析</a></p>
 <p>有关布局优化的一些基础知识准备(郭霖老师的两篇博客)：<br><a href="http://blog.csdn.net/guolin_blog/article/details/12921889" target="_blank" rel="external">Android LayoutInflater原理分析，带你一步步深入了解View(一)</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/16330267" target="_blank" rel="external"> Android视图绘制流程完全解析，带你一步步深入了解View(二)</a></p>
-<p>####<strong>二：Android开发者模式—GPU过渡绘制</strong><br><strong>GPU过度绘制定义：</strong></p>
+<h2 id="二：Android开发者模式—GPU过渡绘制"><a href="#二：Android开发者模式—GPU过渡绘制" class="headerlink" title="二：Android开发者模式—GPU过渡绘制"></a><strong>二：Android开发者模式—GPU过渡绘制</strong></h2><p><strong>GPU过度绘制定义：</strong></p>
 <p>如果你粉刷过一个房间或一所房子，就会知道给墙壁涂上颜色需要做大量的工作。假如你还要重新粉刷一次的话，第二次粉刷的颜色会覆盖住第一次的颜色，第一次的颜色就永远不可见了，等于你第一次粉刷做的大量工作就完全被浪费掉。这太可怕了。</p>
 <p>同样的道理，如果在你的应用程序中浪费精力去绘制一些东西同样会产生性能问题。过度绘制这个名词就是用来描述屏幕上一个像素在单个帧中被重绘了多少次。</p>
 <p>GPU过度绘制就指的是在屏幕一个像素上绘制多次(超过一次)，GPU过度绘制或多或少对性能有些影响。</p>
@@ -392,14 +396,14 @@
 <pre><code>第一个建议是：使用ViewStub来加载一些不常用的布局，它是一个轻量级且默认不可见的视图，可以动态的加载一个布局，只有你用到这个重叠着的view的时候才加载，推迟加载的时间。第二个建议是：如果使用了类似viewpager+Fragment这样的组合或者有多个Fragment在一个界面上，需要控制Fragment的显示和隐藏，尽量使用动态地Inflation view，它的性能要比SetVisiblity好。
 </code></pre><ol>
 <li><p>复杂的Layout层级</p>
-<p>  这里的建议比较多一些，首先推荐用Android提供的布局工具Hierarchy<br>####<strong>三：Android中耗电量的测试</strong><br><a href="http://www.cnblogs.com/hyddd/p/4402621.html" target="_blank" rel="external">深入浅出Android App耗电量统计</a></p>
+<p>  这里的建议比较多一些，首先推荐用Android提供的布局工具Hierarchy</p>
+<h2 id="三：Android中耗电量的测试"><a href="#三：Android中耗电量的测试" class="headerlink" title="三：Android中耗电量的测试"></a><strong>三：Android中耗电量的测试</strong></h2><p><a href="http://www.cnblogs.com/hyddd/p/4402621.html" target="_blank" rel="external">深入浅出Android App耗电量统计</a></p>
 </li>
 </ol>
 <p>测试截图：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1915184-b9ad7e49225531eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
 <p>本人认为这一点没有过多补充的，大多数App都不会消耗过多的电量。</p>
-<p>####<strong>四：内存、CPU、GPU</strong></p>
-<p>应用运行时内存使用情况查看：Android Studio—Memory/CPU/GPU</p>
+<h2 id="四：内存、CPU、GPU"><a href="#四：内存、CPU、GPU" class="headerlink" title="四：内存、CPU、GPU"></a><strong>四：内存、CPU、GPU</strong></h2><p>应用运行时内存使用情况查看：Android Studio—Memory/CPU/GPU</p>
 <p>通常这种测试应该使用一个自动化工具（monkey）去不停的点击App，或者切换界面，来观察内存、cpu的情况。</p>
 <ol>
 <li><p><strong>内存</strong></p>
@@ -428,8 +432,7 @@
 </ol>
 <p><strong>结论：</strong></p>
 <p>可以通过切换界面，看图形的峰值和颜色去判断绘制View每个阶段所花费的时间，然后根据你的需求进行优化。</p>
-<p>####<strong>五：程序的执行效率</strong></p>
-<ol>
+<h2 id="五：程序的执行效率"><a href="#五：程序的执行效率" class="headerlink" title="五：程序的执行效率"></a><strong>五：程序的执行效率</strong></h2><ol>
 <li><p>静态代码检查工具：Android studio—Analyze—Inspect Code…/Code cleanup… ，用于检测代码中潜在的问题、存在效率问题的代码段并提供改善方案；</p>
 </li>
 <li><p>DDMS—TraceView，用于查找程序运行时具体耗时在哪；</p>
@@ -506,6 +509,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/07/27/你足够了解Context吗/" rel="prev" title="你足够了解Context吗？">
+                你足够了解Context吗？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -576,7 +583,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -593,7 +600,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -642,7 +649,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android的性能优化总结"><span class="nav-number">1.</span> <span class="nav-text">Android的性能优化总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-实现相同界面效果并且层级结构相同时，选用何种Layout最好"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1. 实现相同界面效果并且层级结构相同时，选用何种Layout最好</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-减少布局的层级结构"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2. 减少布局的层级结构</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android的性能优化"><span class="nav-number">1.</span> <span class="nav-text">Android的性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零：性能指标"><span class="nav-number">2.</span> <span class="nav-text">零：性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-实现相同界面效果并且层级结构相同时，选用何种Layout最好"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1. 实现相同界面效果并且层级结构相同时，选用何种Layout最好</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-减少布局的层级结构"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2. 减少布局的层级结构</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：Android开发者模式—GPU过渡绘制"><span class="nav-number">3.</span> <span class="nav-text">二：Android开发者模式—GPU过渡绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：Android中耗电量的测试"><span class="nav-number">4.</span> <span class="nav-text">三：Android中耗电量的测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：内存、CPU、GPU"><span class="nav-number">5.</span> <span class="nav-text">四：内存、CPU、GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五：程序的执行效率"><span class="nav-number">6.</span> <span class="nav-text">五：程序的执行效率</span></a></li></ol></div>
             
           </div>
         </section>

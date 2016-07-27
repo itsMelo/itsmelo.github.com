@@ -1,28 +1,320 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Melo&#39;s Blog</title>
-  <subtitle>耐心的偏执狂，浪漫的现实主义</subtitle>
-  <link href="/atom.xml" rel="self"/>
+<!doctype html>
+
+
+
   
-  <link href="http://yoursite.com/"/>
-  <updated>2016-07-27T13:32:04.828Z</updated>
-  <id>http://yoursite.com/</id>
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <author>
-    <name>Melo</name>
-    <email>MeloAndroid@163.com</email>
-  </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
   
-  <entry>
-    <title>你足够了解Context吗？</title>
-    <link href="http://yoursite.com/2016/07/27/%E4%BD%A0%E8%B6%B3%E5%A4%9F%E4%BA%86%E8%A7%A3Context%E5%90%97/"/>
-    <id>http://yoursite.com/2016/07/27/你足够了解Context吗/</id>
-    <published>2016-07-27T13:29:52.585Z</published>
-    <updated>2016-07-27T13:32:04.828Z</updated>
+  
+  
+  
+
+  
     
-    <content type="html"><![CDATA[<h2 id="你足够了解Context吗？"><a href="#你足够了解Context吗？" class="headerlink" title="你足够了解Context吗？"></a><strong>你足够了解Context吗？</strong></h2><p>这里有关于Context的一切</p>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Context,源码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="你足够了解Context吗？这里有关于Context的一切
+-写在前面：
+
+当我还是一个24K纯Android新手的时候（现在是也是个小Android萌新），拿着工具书对着电脑敲敲打打，那个时候我就有一个非常大的疑问：Context到底为何这么牛？show一个Dialog，启动一个Activity，Service，发送一个Broadcast，还有各种方法需要传入的参数。几乎在Android中，Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你足够了解Context吗？">
+<meta property="og:url" content="http://yoursite.com/2016/07/27/你足够了解Context吗/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="你足够了解Context吗？这里有关于Context的一切
+-写在前面：
+
+当我还是一个24K纯Android新手的时候（现在是也是个小Android萌新），拿着工具书对着电脑敲敲打打，那个时候我就有一个非常大的疑问：Context到底为何这么牛？show一个Dialog，启动一个Activity，Service，发送一个Broadcast，还有各种方法需要传入的参数。几乎在Android中，Co">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-21051266e7de1602?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-c666a310a5737c5f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-27T13:32:04.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你足够了解Context吗？">
+<meta name="twitter:description" content="你足够了解Context吗？这里有关于Context的一切
+-写在前面：
+
+当我还是一个24K纯Android新手的时候（现在是也是个小Android萌新），拿着工具书对着电脑敲敲打打，那个时候我就有一个非常大的疑问：Context到底为何这么牛？show一个Dialog，启动一个Activity，Service，发送一个Broadcast，还有各种方法需要传入的参数。几乎在Android中，Co">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-21051266e7de1602?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/27/你足够了解Context吗/"/>
+
+  <title> 你足够了解Context吗？ | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                你足够了解Context吗？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T21:29:52+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/27/你足够了解Context吗/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/27/你足够了解Context吗/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="你足够了解Context吗？"><a href="#你足够了解Context吗？" class="headerlink" title="你足够了解Context吗？"></a><strong>你足够了解Context吗？</strong></h2><p>这里有关于Context的一切</p>
 <h2 id=""><a href="#" class="headerlink" title="-"></a>-</h2><p><strong>写在前面：</strong></p>
 <blockquote>
 <p>当我还是一个24K纯Android新手的时候（现在是也是个小Android萌新），拿着工具书对着电脑敲敲打打，那个时候我就有一个非常大的疑问：Context到底为何这么牛？show一个Dialog，启动一个Activity，Service，发送一个Broadcast，还有各种方法需要传入的参数。几乎在Android中，Context的身影处处可见，所以弄懂它，似乎是一件迫在眉睫的事，所以深呼吸，整理思路，来看看Context到底是什么。</p>
@@ -124,215 +416,338 @@
 </blockquote>
 <p>转载请注明出处。</p>
 <p><strong>如果大家觉得喜欢有价值，就关注我，点下赞哈，你们的支持是我持续原创的动力。</strong></p>
-]]></content>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Context/" rel="tag">#Context</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/Android性能优化总结/" rel="next" title="Android的性能优化总结">
+                <i class="fa fa-chevron-left"></i> Android的性能优化总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-    <summary type="html">
+      <div class="ds-thread" data-thread-key="2016/07/27/你足够了解Context吗/"
+           data-title="你足够了解Context吗？" data-url="http://yoursite.com/2016/07/27/你足够了解Context吗/">
+      </div>
     
-      &lt;h2 id=&quot;你足够了解Context吗？&quot;&gt;&lt;a href=&quot;#你足够了解Context吗？&quot; class=&quot;headerlink&quot; title=&quot;你足够了解Context吗？&quot;&gt;&lt;/a&gt;&lt;strong&gt;你足够了解Context吗？&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;这里有关于Context的一切&lt;/p&gt;
-&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;-&quot;&gt;&lt;/a&gt;-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;当我还是一个24K纯Android新手的时候（现在是也是个小Android萌新），拿着工具书对着电脑敲敲打打，那个时候我就有一个非常大的疑问：Context到底为何这么牛？show一个Dialog，启动一个Activity，Service，发送一个Broadcast，还有各种方法需要传入的参数。几乎在Android中，Context的身影处处可见，所以弄懂它，似乎是一件迫在眉睫的事，所以深呼吸，整理思路，来看看Context到底是什么。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
-    
-      <category term="Context" scheme="http://yoursite.com/tags/Context/"/>
-    
-      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
-    
-  </entry>
+  </div>
+
+
+        </div>
+        
+          
   
-  <entry>
-    <title>Android的性能优化总结</title>
-    <link href="http://yoursite.com/2016/07/27/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2016/07/27/Android性能优化总结/</id>
-    <published>2016-07-27T13:18:04.904Z</published>
-    <updated>2016-07-27T13:29:17.446Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Android的性能优化"><a href="#Android的性能优化" class="headerlink" title="Android的性能优化"></a>Android的性能优化</h2><p><strong>写在前面：</strong></p>
-<pre><code>公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-</code></pre><h2 id="零：性能指标"><a href="#零：性能指标" class="headerlink" title="零：性能指标"></a><strong>零：性能指标</strong></h2><ol>
-<li><strong>布局复杂度</strong>：布局复杂会导致布局需要更长的时间，从而导致进入应用慢、页面切换慢；</li>
-<li><strong>耗电量</strong>：耗电量大会导致机器发热、缩短机器的有效使用时长；</li>
-<li><strong>内存</strong>：内存消耗大会导致频繁GC，GC时会暂停其它工作，导致页面卡顿；内存泄露会导致剩余可用内存越来越小；内存不足会导致应用异常；</li>
-<li><strong>网络</strong>：频繁的网络访问会导致耗电和影响应用的性能；网络交互数据大小会影响网络传输的效率；</li>
-<li><strong>程序执行效率</strong>：糟糕的代码会严重影响程序的运行效率，UI线程过多的任务会阻塞应用的正常运行，长时间持有某个对象会导致潜在的内存泄露，频繁的IO操作、网络操作而不用缓存会严重影响程序的运行效率。<br>####<strong>一：布局复杂度的优化</strong><br><strong>关于布局的优化，主要分两个大方向</strong><h5 id="1-实现相同界面效果并且层级结构相同时，选用何种Layout最好"><a href="#1-实现相同界面效果并且层级结构相同时，选用何种Layout最好" class="headerlink" title="1. 实现相同界面效果并且层级结构相同时，选用何种Layout最好"></a><strong>1. 实现相同界面效果并且层级结构相同时，选用何种Layout最好</strong></h5>在Android中单独的布局性能：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FrameLayout&gt;LinearLayout&gt;RelativeLayout</div></pre></td></tr></table></figure>
-<p>可供参考的网址：<a href="http://www.jianshu.com/p/8a7d059da746" target="_blank" rel="external">LinearLayout与RelativeLayout的性能比较</a><br><strong>总结:</strong></p>
-<ul>
-<li><p>RelativeLayout会让子View调用2次onMeasure，LinearLayout 在有weight时，也会调用子View2次onMeasure;</p>
-</li>
-<li><p>RelativeLayout的子View如果高度和RelativeLayout不同，则会引发效率问题，当子View很复杂时，这个问题会更加严重。如果可以，尽量使用padding代替margin;</p>
-</li>
-<li><p>在不影响层级深度的情况下,使用LinearLayout和FrameLayout而不是RelativeLayout;</p>
-</li>
-<li><p>使用组合控件性能要好于两个独立控件，比如一个文本旁边有一个图片，这中情况最好要用DrawableLeft的这种属性设置图片;</p>
-</li>
-</ul>
-<h5 id="2-减少布局的层级结构"><a href="#2-减少布局的层级结构" class="headerlink" title="2. 减少布局的层级结构"></a><strong>2. 减少布局的层级结构</strong></h5><ul>
-<li>HierarchyViewer—可查看布局层次结构，View绘制时耗时。<br><a href="http://blog.csdn.net/xyz_lmn/article/details/14222975" target="_blank" rel="external">HierarchyViewer的使用</a></li>
-<li>无线UIViewer—强烈推荐App工具，可在手机端直接实现HierarchyViewer的功能，查看任意界面的UI布局。<br><a href="http://download.csdn.net/detail/duantihi/9448886" target="_blank" rel="external">无线UIViewer下载</a></li>
-</ul>
-<p><strong>测试图片如下：</strong><br><img src="http://upload-images.jianshu.io/upload_images/1915184-8a608fd303dd4794?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用无线UIViewer测试出的结果"><br>当前界面的UI布局层级如上图所示</p>
-<p><strong>总结：</strong></p>
-<ul>
-<li><p>一些复用性很高的布局文件，比如一个App的标题栏，建议使用布局重用<strong>include</strong>标签，方便引入和共同管理。</p>
-</li>
-<li><p>观察上图第三个层级和第四个层级，无论是Layout类型，还是所覆盖的坐标点，都是重合的，因为父FrameLayout作为一个Container，子FrameLayout作为一个子View的跟布局，这种情况，可使用<strong>merge</strong>标签进行布局层级的优化。</p>
-</li>
-<li><p>有些在特定情况下才会出现的界面，比如联网之后，或者未必百分之百出现的界面，可用<strong>ViewStub</strong>标签进行懒加载，性能明显要优于加载出这个界面然后<strong>gone</strong>掉。</p>
-</li>
-</ul>
-<p><strong>布局优化相关网址：</strong><br><a href="http://blog.csdn.net/xyz_lmn/article/details/14524567" target="_blank" rel="external">三种优化标签的使用情景和优势—张业兴</a><br><a href="http://www.it165.net/pro/html/201409/22192.html" target="_blank" rel="external">布局优化标签的源码分析</a></p>
-<p>有关布局优化的一些基础知识准备(郭霖老师的两篇博客)：<br><a href="http://blog.csdn.net/guolin_blog/article/details/12921889" target="_blank" rel="external">Android LayoutInflater原理分析，带你一步步深入了解View(一)</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/16330267" target="_blank" rel="external"> Android视图绘制流程完全解析，带你一步步深入了解View(二)</a></p>
-<h2 id="二：Android开发者模式—GPU过渡绘制"><a href="#二：Android开发者模式—GPU过渡绘制" class="headerlink" title="二：Android开发者模式—GPU过渡绘制"></a><strong>二：Android开发者模式—GPU过渡绘制</strong></h2><p><strong>GPU过度绘制定义：</strong></p>
-<p>如果你粉刷过一个房间或一所房子，就会知道给墙壁涂上颜色需要做大量的工作。假如你还要重新粉刷一次的话，第二次粉刷的颜色会覆盖住第一次的颜色，第一次的颜色就永远不可见了，等于你第一次粉刷做的大量工作就完全被浪费掉。这太可怕了。</p>
-<p>同样的道理，如果在你的应用程序中浪费精力去绘制一些东西同样会产生性能问题。过度绘制这个名词就是用来描述屏幕上一个像素在单个帧中被重绘了多少次。</p>
-<p>GPU过度绘制就指的是在屏幕一个像素上绘制多次(超过一次)，GPU过度绘制或多或少对性能有些影响。</p>
-<p><strong>GPU过度绘制分析：</strong></p>
-<p>过度绘制其实是一个性能和设计的交叉点。我们在设计上追求很华丽的视觉效果，但一般来说这种视觉效果会采用非常多的层叠组件来实现，这时候就会带来过度绘制的问题。我们再来看看具体显示在Android界面层级关系：</p>
-<p>当我们来绘制一个界面时，会有一个windows，然后是建立Activity，在Activity里可以建立多个view，或view group，view也可以嵌套view。这些组件从上到下分布，上面的组件是可以被用户看见的，而在下面的组件是不可见的，但是我们依然要花很多时间去绘制那些不可见的组件，因为在某些时候，它也可能会显示出来。</p>
-<p><strong>检测过度绘制：</strong></p>
-<p>设置-开发者选项-调试GPU过度绘制-显示过度绘制区域(过度渲染等，不同机器可能不同)</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-bf7ba57ad4a13785?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开过度绘制的流程图"></p>
-<p><strong>测试的颜色标识含义：</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-2d6386707155cca9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><strong>项目测试截图：</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-ac12fc0ef9ab361b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br><img src="http://upload-images.jianshu.io/upload_images/1915184-7d0b5cec974ef972?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br><img src="http://upload-images.jianshu.io/upload_images/1915184-3e54c1605d23c069?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p>可以看到项目中并不存在太大问题，有关减少过度绘制的一些建议：</p>
-<ol>
-<li>太多重叠的背景</li>
-</ol>
-<pre><code>这个问题其实最容易解决，建议前期在设计时尽量保持整体背景统一，另外开发可以检查你在布局和代码中设置的背景，有些背景是被隐藏在底下的，它永远不可能显示出来，这种没必要的背景一定要移除，因为它很可能会严重影响到app的性能。
-</code></pre><ol>
-<li>太多重叠的view</li>
-</ol>
-<pre><code>第一个建议是：使用ViewStub来加载一些不常用的布局，它是一个轻量级且默认不可见的视图，可以动态的加载一个布局，只有你用到这个重叠着的view的时候才加载，推迟加载的时间。第二个建议是：如果使用了类似viewpager+Fragment这样的组合或者有多个Fragment在一个界面上，需要控制Fragment的显示和隐藏，尽量使用动态地Inflation view，它的性能要比SetVisiblity好。
-</code></pre><ol>
-<li><p>复杂的Layout层级</p>
-<p>  这里的建议比较多一些，首先推荐用Android提供的布局工具Hierarchy</p>
-<h2 id="三：Android中耗电量的测试"><a href="#三：Android中耗电量的测试" class="headerlink" title="三：Android中耗电量的测试"></a><strong>三：Android中耗电量的测试</strong></h2><p><a href="http://www.cnblogs.com/hyddd/p/4402621.html" target="_blank" rel="external">深入浅出Android App耗电量统计</a></p>
-</li>
-</ol>
-<p>测试截图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-b9ad7e49225531eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p>本人认为这一点没有过多补充的，大多数App都不会消耗过多的电量。</p>
-<h2 id="四：内存、CPU、GPU"><a href="#四：内存、CPU、GPU" class="headerlink" title="四：内存、CPU、GPU"></a><strong>四：内存、CPU、GPU</strong></h2><p>应用运行时内存使用情况查看：Android Studio—Memory/CPU/GPU</p>
-<p>通常这种测试应该使用一个自动化工具（monkey）去不停的点击App，或者切换界面，来观察内存、cpu的情况。</p>
-<ol>
-<li><p><strong>内存</strong></p>
-<p><strong>测试截图：</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-61398ca5ea9cecbe?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p>在地图界面不断地刷新，正常的内存成锯齿状分布。</p>
-<p>需要注意的情况：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-e9d03f898bcfcfdb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p>出现了针状分布，说明内存发生了突变，如果内存峰值不能降下来，就说明出现了内存溢出，就值得引起我们的关注了。</p>
-</li>
-<li><p><strong>CPU</strong></p>
-<p>测试图片：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-4b31f6ced46442ab?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-</li>
-</ol>
-<ol>
-<li><p><strong>GPU</strong></p>
-<p>Android Studio 1.4增加一项新功能：分析GPU渲染功能。作者详细讲解这一新功能的分析方法。</p>
-<p>在GPU选项卡下，可以在屏幕上看到图形化显示的渲染每帧所花费的时间。图形中每条都表示被渲染的一帧。颜色表示进程的不同周期：</p>
-<p><strong>绘画（蓝色）</strong><br>表示View#onDraw()方法。那部分建立/更改DisplayList对象，然后转换成GPU能够理解的OpenGL命令。高的条形可能是视图复杂，而要求更多的时间绘制它们的显示列表，而许多视图在短时间内就失效了。</p>
-<p><strong>准备（紫色）</strong><br>在Lollipop中，加入另一个线程，以帮助UI线程渲染更快。这个线程叫：RenderThread。它的责任是转换显示列表为OpenGL命令，再发送给GPU。这样在渲染过程中，UI线程可以开始处理下一个帧。这时UI线程将所有资源传送给RenderThread。如果有许多资源要传递（如许多/繁重显示列表），这一步可能需要较长时间。</p>
-<p><strong>处理（红色）</strong><br>执行显示列表产生OpenGL命令。由于需要视图重绘，如果有许多/复杂显示列表要执行转换，这一步可能需要较长时间。当视图无效或是移动时，都要要重绘视图。</p>
-<p><strong>执行（黄色）</strong><br>发送OpenGL命令到GPU。由于CPU发送这些缓存的命令到GPU，并期待收回干净缓存，这就阻塞调用了。缓存数量有限，并且GPU也很忙<br>——<br>CPU会发现自己必须先等待缓存释放。因此，如果在这一步我们见高的条形，就可能意味着GPU在绘制UI时非常忙，这个绘制在短时间内太复杂了。</p>
-<p>测试截图：<br><img src="http://upload-images.jianshu.io/upload_images/1915184-3c27ec3ed25d38bf?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-</li>
-</ol>
-<p><strong>结论：</strong></p>
-<p>可以通过切换界面，看图形的峰值和颜色去判断绘制View每个阶段所花费的时间，然后根据你的需求进行优化。</p>
-<h2 id="五：程序的执行效率"><a href="#五：程序的执行效率" class="headerlink" title="五：程序的执行效率"></a><strong>五：程序的执行效率</strong></h2><ol>
-<li><p>静态代码检查工具：Android studio—Analyze—Inspect Code…/Code cleanup… ，用于检测代码中潜在的问题、存在效率问题的代码段并提供改善方案；</p>
-</li>
-<li><p>DDMS—TraceView，用于查找程序运行时具体耗时在哪；</p>
-</li>
-<li><p>StrictMode：用于查找程序运行时具体耗时在哪，需要集成到代码中；</p>
-</li>
-</ol>
-<p>####<strong>六：知名的三方性能优化工具</strong></p>
-<ol>
-<li><p><strong>LeakCanary</strong><br>LeakCanary是一个检测内存泄露的开源类库。你可以在 debug<br>包种轻松检测内存泄露。强烈推荐LeakCanary，大多数公司都在使用它进行内存泄漏的测试。</p>
-<p>以下是我找到的学习资料，写的非常棒： </p>
-<p><a href="http://www.liaohuqiu.net/cn/posts/leak-canary/" target="_blank" rel="external">LeakCanary:<br>让内存泄露无所遁形</a></p>
-<p><a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary<br>中文使用说明</a></p>
-<p>具体使用请参考以上两个链接，下面给出一个测试截图，供大家直观感受其便捷和强大的功能。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-9eac174d478347f7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-e01c35d7c95a01eb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><strong>结论：</strong> LeakCanary非常直观的展现了MainActivity出现了内存泄漏，并且指出引用路径中的哪个引用是不该有的，然后修复问题。总而言之非常好用，处理内存泄漏首选的工具。</p>
-</li>
-<li><p><strong>GT</strong> GT是腾讯开发的一款APP的随身调测平台，利用GT，可以对CPU、内存、流量、点亮、帧率/流畅度进行测试，还可以查看开发日志、crash日志、抓取网络数据包、APP内部参数调试、真机代码耗时统计等等，需要说明的是，应用需要集成GT的sdk后，GT这个apk才能在应用运行时对各个性能进行检测。</p>
-<p><a href="http://gt.qq.com/" target="_blank" rel="external">GT官方网址</a></p>
-<p>下面是使用GT测试项目的截图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-3a9f005484fdfaa5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-8292f2b33b7532c5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-fa051d42cda87d9b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-deba30db8bba7cac?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-4d539ff1d892e076?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
-<p>具体图片是什么含义，大家去点击官网去了解学习就可以，GT还是很全面好用的，慢慢发掘吧。</p>
-</li>
-</ol>
-<blockquote>
-<p>第一次写技术博客，并没有贴出大量代码，如果大家需要了解原理，点进链接去看就好了，如果有什么建议和问题大家可以给我留言。有什么好的工具和方法可以同大家一起分享。</p>
-</blockquote>
-<p><strong>如果对大家喜欢请点赞收藏哈，你们的认可是我写作的动力O(∩_∩)O</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Android的性能优化&quot;&gt;&lt;a href=&quot;#Android的性能优化&quot; class=&quot;headerlink&quot; title=&quot;Android的性能优化&quot;&gt;&lt;/a&gt;Android的性能优化&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;/p&gt;
-&lt;pr
-    
-    </summary>
-    
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
-    
-      <category term="性能优化" scheme="http://yoursite.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="经验" scheme="http://yoursite.com/tags/%E7%BB%8F%E9%AA%8C/"/>
-    
-  </entry>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你足够了解Context吗？"><span class="nav-number">1.</span> <span class="nav-text">你足够了解Context吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零：官方定义"><span class="nav-number">3.</span> <span class="nav-text">零：官方定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一：继承关系"><span class="nav-number">4.</span> <span class="nav-text">一：继承关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：源码阅读"><span class="nav-number">5.</span> <span class="nav-text">二：源码阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：关联时机"><span class="nav-number">6.</span> <span class="nav-text">三：关联时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：Context资源详解"><span class="nav-number">7.</span> <span class="nav-text">三：Context资源详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：Context内存泄漏"><span class="nav-number">8.</span> <span class="nav-text">四：Context内存泄漏</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/07/26/hello-world/"/>
-    <id>http://yoursite.com/2016/07/26/hello-world/</id>
-    <published>2016-07-26T07:59:04.773Z</published>
-    <updated>2016-07-27T13:05:02.809Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
   
-</feed>
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
