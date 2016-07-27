@@ -1,0 +1,708 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,技巧,Json," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="5分钟让你学会用最高效的工具解析所有Json
+原创博客，转载请经过本人允许，你们的点赞和关注是我长期写作的动力~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5分钟让你学会用最高效的工具解析所有Json">
+<meta property="og:url" content="http://yoursite.com/2016/07/27/5分钟让你学会用最高效的工具解析所有Json/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="5分钟让你学会用最高效的工具解析所有Json
+原创博客，转载请经过本人允许，你们的点赞和关注是我长期写作的动力~">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-37902f91956283a6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-c0e69c1f32a9b485?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-6142704e39e36afe?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-27T14:03:18.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5分钟让你学会用最高效的工具解析所有Json">
+<meta name="twitter:description" content="5分钟让你学会用最高效的工具解析所有Json
+原创博客，转载请经过本人允许，你们的点赞和关注是我长期写作的动力~">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-37902f91956283a6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/27/5分钟让你学会用最高效的工具解析所有Json/"/>
+
+  <title> 5分钟让你学会用最高效的工具解析所有Json | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                5分钟让你学会用最高效的工具解析所有Json
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T22:02:25+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/27/5分钟让你学会用最高效的工具解析所有Json/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/27/5分钟让你学会用最高效的工具解析所有Json/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="5分钟让你学会用最高效的工具解析所有Json"><a href="#5分钟让你学会用最高效的工具解析所有Json" class="headerlink" title="5分钟让你学会用最高效的工具解析所有Json"></a>5分钟让你学会用最高效的工具解析所有Json</h1><blockquote>
+<p>原创博客，转载请经过本人允许，你们的点赞和关注是我长期写作的动力~</p>
+</blockquote>
+<a id="more"></a>
+<p>如果你是一个Android开发工程师，学会解析Json字符串是你的必修课，本篇文章主要以实例的方式手把手教你怎么做，花五分钟时间阅读本篇文章你就可以学会解析所有的Json字符串啦。</p>
+<p><strong>准备：</strong></p>
+<ul>
+<li>json字符串</li>
+<li>fastjson</li>
+<li>HiJson格式化json工具</li>
+</ul>
+<p><strong>开始教程：</strong></p>
+<ul>
+<li><p><strong>fastjson：</strong></p>
+<p>常用工作中解析json的工具类有谷歌的GSON，jackson，fastjson，这里就不做一一比较了，博主告诉大家，fastjson就是最高效最好用的，选它就没错了。FastJson出自阿里工程师之手，是一个Json处理工具包，包括“序列化”和“反序列化”两部分，它具备如下特征：</p>
+<ul>
+<li><p>速度最快，测试表明，fastjson具有极快的性能，超越任其他的Java Json parser。包括自称最快的JackJson，是GSON解析速度的6倍；</p>
+</li>
+<li><p>功能强大，完全支持Java Bean、集合、Map、日期、Enum，支持范型，支持自省；无依赖，能够直接运行在Java SE 5.0以上版本；支持Android；开源 (Apache 2.0)</p>
+</li>
+</ul>
+<p><strong>下载地址：</strong></p>
+<pre><code>[fastjson jar包下载地址](http://download.csdn.net/detail/pdsyzbaozi/8199419)
+</code></pre></li>
+<li><p><strong>HiJson：</strong></p>
+<p>HiJson是一个将 json <strong>字符串格式化</strong>的工具，非常好用，让你的json字符串结构一目了然，并且可以直接复制键值，强烈推荐！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-37902f91956283a6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HiJson格式化json"></p>
+<p><strong>下载地址：</strong></p>
+<p><a href="http://download.csdn.net/download/u012017406/8195263" target="_blank" rel="external">HiJson下载地址</a></p>
+</li>
+</ul>
+<p>Fastjson API入口类是com.alibaba.fastjson.JSON，常用的序列化操作都可以在JSON类上的静态方法直接完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static final Object parse(String text); // 把JSON文本parse为JSONObject或者JSONArray </div><div class="line">public static final JSONObject parseObject(String text)； // 把JSON文本parse成JSONObject    </div><div class="line">public static final  T parseObject(String text, Class clazz); // 把JSON文本parse为JavaBean </div><div class="line">public static final JSONArray parseArray(String text); // 把JSON文本parse成JSONArray </div><div class="line">public static final  List parseArray(String text, Class clazz); //把JSON文本parse成JavaBean集合 </div><div class="line">public static final String toJSONString(Object object); // 将JavaBean序列化为JSON文本 </div><div class="line">public static final String toJSONString(Object object, boolean prettyFormat); // 将JavaBean序列化为带格式的JSON文本 </div><div class="line">public static final Object toJSON(Object javaObject); 将JavaBean转换为JSONObject或者JSONArray。</div></pre></td></tr></table></figure>
+<p>如果你从没解析过json，看不太明白没关系，现在我上面那个json字符串，手把手的教你怎么解析，学会解析这个较复杂的json串，相信其他的你也肯定也会解析了。</p>
+<p><strong>json串提供给大家拿去练手</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	&quot;status&quot;: &quot;2000&quot;,</div><div class="line">	&quot;msg&quot;: &quot;Successful!&quot;,</div><div class="line">	&quot;data&quot;: [&#123;</div><div class="line">		&quot;details&quot;: [&#123;</div><div class="line">			&quot;distance&quot;: 2847,</div><div class="line">			&quot;nextLat&quot;: 39.994076,</div><div class="line">			&quot;nextLong&quot;: 116.47764,</div><div class="line">			&quot;nexti&quot;: &quot;MeloDev&quot;,</div><div class="line">			&quot;status&quot;: 4</div><div class="line">		&#125;],</div><div class="line">		&quot;distance&quot;: 2847,</div><div class="line">		&quot;imageUrl&quot;: &quot;&quot;,</div><div class="line">		&quot;overview&quot;: &quot;长期原创Android博客&quot;,</div><div class="line">		&quot;source&quot;: &quot;http://www.jianshu.com/users/f5909165c1e8/latest_articles&quot;,</div><div class="line">		&quot;status&quot;: &quot;SUCCESSFUL&quot;</div><div class="line">	&#125;, &#123;</div><div class="line">		&quot;details&quot;: [&#123;</div><div class="line">			&quot;distance&quot;: 2769,</div><div class="line">			&quot;nextLat&quot;: 39.97691,</div><div class="line">			&quot;nextLong&quot;: 116.46019,</div><div class="line">			&quot;nexti&quot;: &quot;MeloDev&quot;,</div><div class="line">			&quot;status&quot;: 4</div><div class="line">		&#125;],</div><div class="line">		&quot;distance&quot;: 2769,</div><div class="line">		&quot;imageUrl&quot;: &quot;&quot;,</div><div class="line">		&quot;overview&quot;: &quot;喜欢请加关注&quot;,</div><div class="line">		&quot;source&quot;: &quot;http://www.jianshu.com/users/f5909165c1e8/latest_articles&quot;,</div><div class="line">		&quot;status&quot;: &quot;SUCCESSFUL&quot;</div><div class="line">	&#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好的万事俱备，马上就开始！</p>
+<p>把下载的fastjson的两个jar包导入libs目录下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-c0e69c1f32a9b485?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="导入fastjson的jar包"></p>
+<p>现在开始比较关键的一步，新建一个bean对象，去作为json解析之后的载体，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">public class QueryResultInfo &#123;</div><div class="line">	public String status;</div><div class="line">	public String msg;</div><div class="line">	public List&lt;DataList&gt; data;</div><div class="line"></div><div class="line">	public class DataList &#123;</div><div class="line">		public int distance;</div><div class="line">		public String imageUrl;</div><div class="line">		public String overview;</div><div class="line">		public String source;</div><div class="line">		public String status;</div><div class="line">		public List&lt;DetailsList&gt; details;</div><div class="line"></div><div class="line">		@Override</div><div class="line">		public String toString() &#123;</div><div class="line">			return &quot;DataList [distance=&quot; + distance + &quot;, imageUrl=&quot; + imageUrl + &quot;, overview=&quot; + overview + &quot;, source=&quot; + source + &quot;, status=&quot; + status + &quot;, details=&quot; + details.toString() + &quot;]&quot;;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		public class DetailsList &#123;</div><div class="line">			public int distance;</div><div class="line">			public double nextLat;</div><div class="line">			public double nextLong;</div><div class="line">			public String nexti;</div><div class="line">			public int status;</div><div class="line"></div><div class="line">			@Override</div><div class="line">			public String toString() &#123;</div><div class="line">				return &quot;DetailsList [distance=&quot; + distance + &quot;, nextLat=&quot; + nextLat + &quot;, nextLong=&quot; + nextLong + &quot;, nexti=&quot; + nexti + &quot;, status=&quot; + status + &quot;]&quot;;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public String toString() &#123;</div><div class="line">		return &quot;QueryResultInfo [status=&quot; + status + &quot;, msg=&quot; + msg + &quot;, data=&quot; + data.toString() + &quot;]&quot;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我来告诉大家，写一个解析json之后bean对象的技巧。首先观察json格式化的结果（HiJson工具右侧视图），java代码中：</p>
+<ul>
+<li><p><strong>数据的类型、键的名称都必须与json字符串保证一一对应</strong><br>也就是例子中，每个变量都是以json的<strong>键名称</strong>命名的，不能写错，而且数据类型也必须对应，String就是String，int就是int，float就是float</p>
+</li>
+<li><p>如果出现嵌套的数组，就写一个<strong>内部类</strong>，用同样的方式命名各个json字段，用List接收它，注意List的命名也得是用json中的<strong>键名</strong>。多层嵌套以此类推。</p>
+</li>
+<li><p>所有变量的访问域都是<strong>public</strong>的。</p>
+</li>
+</ul>
+<p><strong>好了bean对象就完成了。</strong></p>
+<p>我把json字符串存在了String.xml下，点击按钮之后，解析json字符串，layout文件很简单，这里就不放出了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-6142704e39e36afe?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainActivity"></p>
+<p>可以看到，我们调用JSON.parseObject(myJson,AppInfo.class)这一行代码，我们就把json字符串的所有信息都解析到了appInfo对象中，想用什么就直接取出来就可以了。</p>
+<p>这个json字符串相对还是复杂的，多层嵌套，所以这个你都会了，简单的你也肯定没问题了，当然fastjson的强大不止于此，如果有特殊需要，再慢慢发掘吧~！</p>
+<blockquote>
+<p>喜欢请关注哦，未来要写一篇有关线程消息机制Handler的字典型博客，正在深入研究中！</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/技巧/" rel="tag">#技巧</a>
+          
+            <a href="/tags/Json/" rel="tag">#Json</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/Android开发必读博客/" rel="next" title="Android开发必读博客">
+                <i class="fa fa-chevron-left"></i> Android开发必读博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/27/别让培训机构毁了你这一辈子/" rel="prev" title="别让培训机构毁了你这一辈子">
+                别让培训机构毁了你这一辈子 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/27/5分钟让你学会用最高效的工具解析所有Json/"
+           data-title="5分钟让你学会用最高效的工具解析所有Json" data-url="http://yoursite.com/2016/07/27/5分钟让你学会用最高效的工具解析所有Json/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5分钟让你学会用最高效的工具解析所有Json"><span class="nav-number">1.</span> <span class="nav-text">5分钟让你学会用最高效的工具解析所有Json</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

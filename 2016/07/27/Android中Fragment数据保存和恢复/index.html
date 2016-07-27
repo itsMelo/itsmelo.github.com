@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Fragment,数据," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android中Fragment数据保存和恢复写在前面：上周我们总结了Activity中数据的保存和恢复，我们花两分钟来回顾一下：Android中Activity数据的保存和恢复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中Fragment数据保存和恢复">
+<meta property="og:url" content="http://yoursite.com/2016/07/27/Android中Fragment数据保存和恢复/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="Android中Fragment数据保存和恢复写在前面：上周我们总结了Activity中数据的保存和恢复，我们花两分钟来回顾一下：Android中Activity数据的保存和恢复">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-84f1eaec23de028d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-183cacefa4387d8e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-99af7b0a6ca0f2e2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-6d89724ceff62e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-d8961dd8db6cf972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-d0fdbf4ea4c1e944.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-dbd03c5a2f1419ea?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-27T14:14:48.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android中Fragment数据保存和恢复">
+<meta name="twitter:description" content="Android中Fragment数据保存和恢复写在前面：上周我们总结了Activity中数据的保存和恢复，我们花两分钟来回顾一下：Android中Activity数据的保存和恢复">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-84f1eaec23de028d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/27/Android中Fragment数据保存和恢复/"/>
+
+  <title> Android中Fragment数据保存和恢复 | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android中Fragment数据保存和恢复
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T22:13:44+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/27/Android中Fragment数据保存和恢复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/27/Android中Fragment数据保存和恢复/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android中Fragment数据保存和恢复"><a href="#Android中Fragment数据保存和恢复" class="headerlink" title="Android中Fragment数据保存和恢复"></a>Android中Fragment数据保存和恢复</h1><p><strong>写在前面：</strong><br>上周我们总结了Activity中数据的保存和恢复，我们花两分钟来回顾一下：<br><a href="http://www.jianshu.com/p/6622434511f7" target="_blank" rel="external">Android中Activity数据的保存和恢复</a><br><a id="more"></a><br><strong>一句话总结：</strong></p>
+<ul>
+<li><p>临时数据<br>对于<strong>临时数据</strong>，我们使用<strong>onSaveInstanceState</strong>方法进行保存，并且在<strong>onCreate</strong>方法中恢复。</p>
+</li>
+<li><p>永久数据<br>对于<strong>持久性数据</strong>，我们要在onPause方法中进行存储，但是要注意，onPause方法中不能进行大量操作，会影响其他Activity进入任务栈栈顶。</p>
+</li>
+</ul>
+<p>ps：在Activity中弹出一个当前Activity的<strong>Dialog</strong>并不会有任何生命周期方法调用（以前我曾以为会调用onPause方法）。因为Dialog作为一个View本身就是属于当前Activity的，Activity并没有<strong>失去焦点</strong>。</p>
+<p>ok，完成了回顾，下面来开始本篇博客：</p>
+<p><strong>Fragment</strong>在我们的项目中真的太实用和常见了，它的使用频率和数量甚至超过了Activity，所以本文目的是探究Fragment的数据保存和恢复。</p>
+<p>在开始讲解之前，你应该对Fragment的<strong>生命周期方法</strong>有一定了解，推荐给大家一篇博客，我认为不错：</p>
+<p><a href="http://blog.csdn.net/wanghao200906/article/details/45561385" target="_blank" rel="external">Fragment生命周期方法详解</a></p>
+<p>准备工作做了这么多，下面我们正式开始吧！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-84f1eaec23de028d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="测试App截图"></p>
+<p>本文直接选用了《第一行代码》中Fragment模块的讲解例子，点击下面的按钮<strong>分别跳转</strong>这四个Fragment。为了方便观察，我重写了Fragment所有<strong>生命周期方法</strong>和<strong>onSaveInstanceState</strong>方法，并打印了Log。</p>
+<p>我们目的是探究Fragment数据的保存和恢复，在这里我把它分为两大类的情况：</p>
+<ol>
+<li><p>单个Fragment遭遇一些突发情况</p>
+</li>
+<li><p>Fragment之间相互的切换或覆盖</p>
+</li>
+</ol>
+<p>在此之前，先引入一个<strong>返回栈</strong>的概念。<br>我想你应该知道返回栈是什么，并且你以前接触的应该是保存Activity的返回栈，类比Activity，Fragment返回栈其实是保存Fragment的栈结构。区别在于：<strong>Fragment的返回栈由Activity管理；而Activity的返回栈由系统管理。</strong></p>
+<p>在未修改之前，本文添加并切换Fragment的方式都是在返回栈中<strong>仅有一个</strong> fragment：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-183cacefa4387d8e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加切换fragment"></p>
+<p>不要心急，过一会再说怎么去在返回栈中压入多个fragment，我们先来处理<strong>只有一个</strong>的情况</p>
+<ol>
+<li><p>单个Fragment遭遇突发情况</p>
+<p>仍然是用以下<strong>突发情况</strong>进行测试：</p>
+<ul>
+<li><p>点击back键</p>
+</li>
+<li><p>点击锁屏键</p>
+</li>
+<li><p>点击home键</p>
+</li>
+<li><p>其他APP进入前台</p>
+</li>
+<li><p>启动了另一个Activity</p>
+</li>
+<li><p>屏幕方向旋转</p>
+</li>
+<li><p>APP被Kill</p>
+</li>
+</ul>
+<p>不过与上篇博客不同的是，我们在清单文件中，给Activity做了如下配置：<br><img src="http://upload-images.jianshu.io/upload_images/1915184-99af7b0a6ca0f2e2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="配置configChange"></p>
+<p>这么做的目的是当屏幕方向发生改变的时候，fragment所依附的Activity并不会重新销毁再创建，让<strong>情况相对简单一点</strong>。</p>
+<p><strong>测试结果：</strong></p>
+<p>当一个fragment孤零零地呆在返回栈时，它所处的情况与Activity如出一辙。类比Activity对数据的保存和恢复，我们可以对此得出结论：</p>
+<ul>
+<li><p>临时数据 对于<strong>临时数据</strong>，我们使用<strong>onSaveInstanceState</strong>方法进行保存，并且在<strong>onCreateView</strong>方法中恢复（请注意是onCreateView）。</p>
+</li>
+<li><p>永久数据 对于<strong>持久性数据</strong>，我们要在onPause方法中进行存储。</p>
+</li>
+</ul>
+</li>
+<li>Fragment之间的相互切换或覆盖<br>当返回栈中保证<strong>只有一个Fragment</strong>，相互切换时，生命周期方法的调用是怎样的呢？例如本例中，从fragment03切换到fragment04：</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-6d89724ceff62e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="fragment03切换fragment04"><br>　　可以看到，上述的这种情况，两个fragment从创建到销毁，经历了所有的生命周期方法。<br>　　如果返回栈中fragment的数量为多个呢？首先在切换时，加上以下代码，保证将fragment放入返回栈中：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-d8961dd8db6cf972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="addToBackStack"><br>　　使用addToBackStack方法，就能将fragment放入相应的返回栈中去了，从表象上来看区别在于进入其他fragment时，点击back键时，可以返回上一个fragment。这时候切换时，生命周期方法就是如何调用的呢？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-d0fdbf4ea4c1e944.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="返回栈有多个fragment切换"></p>
+<p>　　对比这两张生命周期方法的图，能得出两个结论。<br>　　1.无论任务栈中fragment数量为多少，onSaveInstanceState方法都没有调用<br>　　2.当fragment任务栈中有多个fragment时，进入下一个fragment时，并不会销毁<strong>fragment实例</strong>，而是仅仅<strong>销毁视图</strong>，最终调用的方法为onDestoryView。<br>　　所以此时我们要去保存临时数据，并不能仅保存在onSaveInstanceState中（因为它可能不会调用），还应该在onDestoryView方法中进行保存临时数据的操作，源码如下：<br><img src="http://upload-images.jianshu.io/upload_images/1915184-dbd03c5a2f1419ea?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码截图"></p>
+<p>因为没有了系统提供的bundle参数，我们选择把数据保存在Arguments中，代码就不带着大家一步一步的看了，因为逻辑并不复杂，挺好理解的。通过这种方式，我们就挺容易的将<strong>临时数据和fragment的一些状态</strong>保存进bundle中并在需要时恢复了。</p>
+<p>不知不觉本篇文章就要结束了，感兴趣的可以尝试当调用<strong>ft.add()</strong>方式去添加fragment时，生命周期方法又是怎样调用的呢？</p>
+<p><strong>结束之前我们来一句话总结下本文：</strong><br>Fragment对<strong>临时数据</strong>的保存，仅仅依靠<strong>onSaveInstanceState</strong>方法是不行的，还需要在<strong>onDestoryView</strong>中进行相应操作，具体参考上面的代码。</p>
+<p>Fragment中对于一些持久性的数据，仍应在<strong>onPause</strong>中保存。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Fragment/" rel="tag">#Fragment</a>
+          
+            <a href="/tags/数据/" rel="tag">#数据</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/5分钟打造Android一键退出功能/" rel="next" title="5分钟打造Android一键退出功能">
+                <i class="fa fa-chevron-left"></i> 5分钟打造Android一键退出功能
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/27/Android中Fragment数据保存和恢复/"
+           data-title="Android中Fragment数据保存和恢复" data-url="http://yoursite.com/2016/07/27/Android中Fragment数据保存和恢复/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android中Fragment数据保存和恢复"><span class="nav-number">1.</span> <span class="nav-text">Android中Fragment数据保存和恢复</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

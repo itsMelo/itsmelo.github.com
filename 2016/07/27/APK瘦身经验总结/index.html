@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,经验,瘦身," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android APK瘦身经验总结写在前面：无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴张明云、胡凯等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上资料的链接。如果能对你有所帮助，那真的再好不过了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APK瘦身经验总结">
+<meta property="og:url" content="http://yoursite.com/2016/07/27/APK瘦身经验总结/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="Android APK瘦身经验总结写在前面：无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴张明云、胡凯等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上资料的链接。如果能对你有所帮助，那真的再好不过了。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-48bfa4535ec6721c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8ff20ea64821e1e2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-27T13:48:14.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APK瘦身经验总结">
+<meta name="twitter:description" content="Android APK瘦身经验总结写在前面：无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴张明云、胡凯等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上资料的链接。如果能对你有所帮助，那真的再好不过了。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-48bfa4535ec6721c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/27/APK瘦身经验总结/"/>
+
+  <title> APK瘦身经验总结 | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                APK瘦身经验总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T21:46:57+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/27/APK瘦身经验总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/27/APK瘦身经验总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android-APK瘦身经验总结"><a href="#Android-APK瘦身经验总结" class="headerlink" title="Android APK瘦身经验总结"></a>Android APK瘦身经验总结</h1><p><strong>写在前面：</strong><br>无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴<strong>张明云、胡凯</strong>等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上<strong>资料的链接</strong>。如果能对你有所帮助，那真的再好不过了。<br><a id="more"></a></p>
+<h2 id="零：瘦身的指标"><a href="#零：瘦身的指标" class="headerlink" title="零：瘦身的指标"></a>零：瘦身的指标</h2><p>是什么造成了APK越来越大呢？ 先来看一张解压之后的APK的目录图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-48bfa4535ec6721c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解压APK之后的目录"> </p>
+<p>应该从哪些方面入手对APK进行瘦身呢？</p>
+<ul>
+<li><p>冗余的代码，不必要的jar包；</p>
+</li>
+<li><p>未使用的静态资源，libs；</p>
+</li>
+<li><p>屏幕适配时，资源的重复使用；</p>
+</li>
+<li><p>错误地预置数据</p>
+</li>
+<li><p>native code</p>
+</li>
+<li><p><strong>未进行图片资源的优化与压缩（重点）</strong></p>
+</li>
+</ul>
+<p>如果看到这里感觉还没形成相应的概念，没关系，接下来对这些指标进行逐个分析，相信你很快就能明了。</p>
+<h2 id="一：剔除冗余代码"><a href="#一：剔除冗余代码" class="headerlink" title="一：剔除冗余代码"></a>一：剔除冗余代码</h2><ul>
+<li><p><strong>Proguard</strong></p>
+<p>Proguard是编译时对java代码进行压缩，混淆，优化，预编译等操作的集成化工具。Proguard<br>会遍历你的所有代码然后找出无用处的代码。所有这些不可达（或者不需要）的代码都会在生成最终的apk文件之前被清除掉。Proguard<br>也会重命名你的类属性，类和接口，然整个代码尽可能地保持轻量级水平。</p>
+<p><a href="http://blog.csdn.net/fengyuzhengfan/article/details/43876197" target="_blank" rel="external">Android代码混淆规则设置</a></p>
+<p><a href="http://blog.isming.me/2014/05/31/use-proguard/" target="_blank" rel="external">使用Proguard混淆Android代码</a></p>
+<p>有关Proguard的配置和使用，网上有很多资料，以上两个是我认为还不错的，通过Proguard工具通常能使你的APK减小200K左右。</p>
+</li>
+<li><p><strong>AndResGuard</strong></p>
+<p>AndResGuard是微信客户端高级工程师 shwen 的开源项目，可以做到直接处理安装包.<br>不依赖源码，不依赖编译过程，仅仅输入一个安装包，得到一个混淆包。AndResGuard的功能还是非常强大，腾讯多个产品都使用到了它，具体的源码和使用方法移步到Github上学习，已开源。</p>
+<p><a href="https://github.com/shwenzhang/AndResGuard" target="_blank" rel="external">AndResGuard–github</a></p>
+</li>
+</ul>
+<h2 id="二：剔除无用的资源"><a href="#二：剔除无用的资源" class="headerlink" title="二：剔除无用的资源"></a>二：剔除无用的资源</h2><ul>
+<li><p><strong>Lint</strong></p>
+<p>Proguard它只会对代码进行分析，对比如图片之类的资源就束手无策了，不过这个时候Lint就可以发挥非常大的作用了。</p>
+<p>Lint 一个静态的代码分析器，你只需通过调用 <strong>./gradlew<br>lint</strong>这个简单地命令它就能帮你检查所有无用的资源文件。它在检测完之后会提供一份详细的资源文件清单，并将无用的资源列在“<strong>UnusedResources:Unused resources</strong>” 区域之下。只要你不通过反射来反问这些无用资源，你就可以放心地移除这些文件了。</p>
+<p><a href="http://waychel.com/shi-yong-android-studiode-lintqing-chu-wu-yong-de-zi-yuan-wen-jian/" target="_blank" rel="external">Android Studio中Lint的使用</a></p>
+</li>
+</ul>
+<p>值得注意的是，Lint 会分析资源文件(比如 /res 文件夹下面的文件) ，但是会跳过 <strong>assets</strong> 文件 ( /assets 文件夹下面的文件)。事实上 assets 文件是可以通过它们的文件名直接访问的，而不需要通过Java引用或者XML引用。因此，Lint 也不能判定某个 asset 文件在项目中是否有用。这全取决于开发者对这个文件夹的维护了。所以你要去人工排查一下assets文件夹下有没有无用的资源，如果有就移除它。</p>
+<h2 id="三：对资源文件进行取舍"><a href="#三：对资源文件进行取舍" class="headerlink" title="三：对资源文件进行取舍"></a>三：对资源文件进行取舍</h2><p>其实这步操作更多的针对是<strong>屏幕适配</strong>的知识，曾经听说一个开发者对Android所有屏幕密度下的文件夹都提供了一套图片资源（ldpi, mdpi, tvdpi, hdpi, xhdpi, xxhdpi and xxxhdpi），这是非常不理智的行为，虽然Android支持这么多的屏幕密度，但是不代表你需要为每一个都提供一套资源，下面对资源取舍的一些<strong>建议</strong>：</p>
+<ul>
+<li><p>尽量使用一套图片资源，对于一些图片在不同分辨率手机上变现差异过大的情况，再考虑去相应文件夹下放入这个特定的图片</p>
+</li>
+<li><p>使用一套图、一套布局，多套dimens.xml文件，在使用最小资源的情况下搞定多分辨率适配</p>
+</li>
+<li><p>尽量重用图片，例如对称的图片，只需要提供一张，另外一张图片可以通过代码旋转的方式实现</p>
+</li>
+<li><p>去除无用的库，功能上重复的库，使用更轻量级的库，比如你仅仅是想做一些网络请求，使用volley即可，没必要去引入xutils，这就要根据你项目的情况去具体分析了。</p>
+</li>
+<li><p>错误的预置一些图片资源，有一些没必要跟随程序展示的图片就在需要加载它的时候再加载它，将程序与资源尽可能的分离。</p>
+</li>
+</ul>
+<h2 id="四：对图片资源进行优化"><a href="#四：对图片资源进行优化" class="headerlink" title="四：对图片资源进行优化"></a>四：对图片资源进行优化</h2><p>好了终于来到本篇博客的重头戏，其实上对一个APK大小的优化更多的就是对图片资源的一些处理技巧，我们应该在不降低图片的显示效果、保证APK显示效果的前提下压缩图片文件的大小。</p>
+<ul>
+<li><p><strong>tinypng</strong></p>
+<p><a href="http://leonshi.com/2015/11/02/tinypng-compress/" target="_blank" rel="external">图片压缩利器tinypng</a></p>
+<p>据官网介绍，它的原理是通过合并图片中相似的颜色，通过将 24 位的 PNG 图片压缩成小得多的 8 位色值的图片，并且去掉了图片中不必要的<br>metadata（元数据，从 Photoshop 等工具中导出的图片都会带有此类信息），这种方式几乎能完美支持原图片的透明度。</p>
+<p>拖拽图片即可使用，压缩率甚至达到了70%，感叹它强大的同时，有精力的同学可以去研究研究它的<strong>算法</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-8ff20ea64821e1e2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="压缩率达到了70%"></p>
+<p><a href="https://github.com/mogujie/TinyPIC_Gradle_Plugin" target="_blank" rel="external">开源的tinypng插件</a></p>
+</li>
+</ul>
+<p><strong>webP</strong></p>
+<p><a href="http://blog.csdn.net/rogerjava/article/details/48783743" target="_blank" rel="external">有关webP的简介</a></p>
+<p>WEBP 是google推出的意图改变web图片JPG、PNG、GIF三分天下局势的一种图片格式。它不仅支持无损或有损压缩、alpha通道，还支持动画演示。在同画质的情况下，webp格式图片占用体积相较于jpg图片大约减少40%，相较于无损png图片大约减少30%。具不完全统计，互联网流量中60%都产生于图片，如果能用上webp格式，网站的访问速度将会大大提升。</p>
+<p>不过android 4.0+才原生支持webp, 但是我们的app是兼容2.3+，所以4.0以下的设备将无法看到图片。但是引入兼容的SO文件，APK也会变大，这时候自己做个取舍吧！</p>
+<p><strong>写在最后：</strong></p>
+<p><strong>其实还有一些给APK瘦身的技巧和细节，并没有一一列举出，而且有些新的优化技巧涉及到一些兼容性的问题，大家多查阅资料就能明白了。</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/经验/" rel="tag">#经验</a>
+          
+            <a href="/tags/瘦身/" rel="tag">#瘦身</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/如何在你的应用中正确使用Context/" rel="next" title="如何在你的应用中正确使用Context">
+                <i class="fa fa-chevron-left"></i> 如何在你的应用中正确使用Context
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/27/移动开发必读书单/" rel="prev" title="移动开发必读书单">
+                移动开发必读书单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/27/APK瘦身经验总结/"
+           data-title="APK瘦身经验总结" data-url="http://yoursite.com/2016/07/27/APK瘦身经验总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-APK瘦身经验总结"><span class="nav-number">1.</span> <span class="nav-text">Android APK瘦身经验总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#零：瘦身的指标"><span class="nav-number">1.1.</span> <span class="nav-text">零：瘦身的指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一：剔除冗余代码"><span class="nav-number">1.2.</span> <span class="nav-text">一：剔除冗余代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二：剔除无用的资源"><span class="nav-number">1.3.</span> <span class="nav-text">二：剔除无用的资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：对资源文件进行取舍"><span class="nav-number">1.4.</span> <span class="nav-text">三：对资源文件进行取舍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：对图片资源进行优化"><span class="nav-number">1.5.</span> <span class="nav-text">四：对图片资源进行优化</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
