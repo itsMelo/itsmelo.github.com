@@ -86,18 +86,14 @@
 
 <meta name="description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-零：性能指标
-布局复杂度：布局复杂会导致布局需要更">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android的性能优化总结">
 <meta property="og:url" content="http://yoursite.com/2016/07/27/Android性能优化总结/index.html">
 <meta property="og:site_name" content="Melo's Blog">
 <meta property="og:description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-零：性能指标
-布局复杂度：布局复杂会导致布局需要更">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8a608fd303dd4794?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-bf7ba57ad4a13785?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-2d6386707155cca9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -116,14 +112,12 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-fa051d42cda87d9b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-deba30db8bba7cac?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-4d539ff1d892e076?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-07-27T13:29:17.446Z">
+<meta property="og:updated_time" content="2016-07-27T13:34:31.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android的性能优化总结">
 <meta name="twitter:description" content="Android的性能优化写在前面：
 公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
-文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-零：性能指标
-布局复杂度：布局复杂会导致布局需要更">
+文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-8a608fd303dd4794?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -336,7 +330,8 @@
         <h2 id="Android的性能优化"><a href="#Android的性能优化" class="headerlink" title="Android的性能优化"></a>Android的性能优化</h2><p><strong>写在前面：</strong></p>
 <pre><code>公司给了我一周的时间去学习Android性能的优化，参考了张明云老师的一片文章，并且用公司的实际项目进行测试（附有截图），还进行了一些知识点，注意事项以及很多网址链接的补充，希望这篇博文能让做性能测试的朋友们少走一些弯路。
 文中没有贴出大段代码，但是几乎所有的知识点都有链接，点进去就能看你想看的。转载注明出处。
-</code></pre><h2 id="零：性能指标"><a href="#零：性能指标" class="headerlink" title="零：性能指标"></a><strong>零：性能指标</strong></h2><ol>
+</code></pre><a id="more"></a>
+<h2 id="零：性能指标"><a href="#零：性能指标" class="headerlink" title="零：性能指标"></a><strong>零：性能指标</strong></h2><ol>
 <li><strong>布局复杂度</strong>：布局复杂会导致布局需要更长的时间，从而导致进入应用慢、页面切换慢；</li>
 <li><strong>耗电量</strong>：耗电量大会导致机器发热、缩短机器的有效使用时长；</li>
 <li><strong>内存</strong>：内存消耗大会导致频繁GC，GC时会暂停其它工作，导致页面卡顿；内存泄露会导致剩余可用内存越来越小；内存不足会导致应用异常；</li>
@@ -501,10 +496,6 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/26/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
           </div>
 
           <div class="post-nav-prev post-nav-item">
@@ -583,7 +574,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
