@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-26T14:16:51.184Z</updated>
+  <updated>2016-07-27T12:56:36.776Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2016/07/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A01/"/>
+    <id>http://yoursite.com/2016/07/27/测试文章1/</id>
+    <published>2016-07-27T12:54:57.925Z</published>
+    <updated>2016-07-27T12:56:36.776Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<h2 id="title-TextBlog"><a href="#title-TextBlog" class="headerlink" title=" title: TextBlog"></a> title: TextBlog</h2><blockquote>
+<p>����һͷ<strong>Сë¿</strong>�������Ҵ��������</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;h2 id=&quot;title-TextBlog&quot;&gt;&lt;a href=&quot;#title-TextBlog&quot; class=&quot;headerlink&quot; title=&quot; title: TextBlog&quot;&gt;&lt;/a&gt; title: TextBlog&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title></title>
