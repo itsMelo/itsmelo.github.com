@@ -1,0 +1,697 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,ActivityThread,源码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ActivityThread的main方法究竟做了什么？写在前面：在暴雨天能去上课的都是好学生，能去上班的都是游泳运动员~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ActivityThread的main方法究竟做了什么？">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/ActivityThread的main方法究竟做了什么？/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="ActivityThread的main方法究竟做了什么？写在前面：在暴雨天能去上课的都是好学生，能去上班的都是游泳运动员~">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-0dd4fc7c8f275bd3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-a143e41ffdd1b71a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-b76be1a1e19381df?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-28T02:39:14.195Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ActivityThread的main方法究竟做了什么？">
+<meta name="twitter:description" content="ActivityThread的main方法究竟做了什么？写在前面：在暴雨天能去上课的都是好学生，能去上班的都是游泳运动员~">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-0dd4fc7c8f275bd3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/28/ActivityThread的main方法究竟做了什么？/"/>
+
+  <title> ActivityThread的main方法究竟做了什么？ | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ActivityThread的main方法究竟做了什么？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T10:38:32+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/ActivityThread的main方法究竟做了什么？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/ActivityThread的main方法究竟做了什么？/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ActivityThread的main方法究竟做了什么？"><a href="#ActivityThread的main方法究竟做了什么？" class="headerlink" title="ActivityThread的main方法究竟做了什么？"></a>ActivityThread的main方法究竟做了什么？</h1><p><strong>写在前面：</strong><br>在暴雨天能去上课的都是好学生，能去上班的都是游泳运动员~<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1915184-0dd4fc7c8f275bd3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="轻松一下"></p>
+<p><strong>问大家一个问题：</strong></p>
+<p>Android中一个应用程序的<strong>真正入口</strong>是什么？</p>
+<p><strong>无论你知道不知道，别着急回答，再问大家一个问题：</strong></p>
+<p>Android不能像java一样直接跑在<strong>main方法</strong>的原因是什么？</p>
+<p>Android应用程序的载体是APK文件，它本质上，是一个<strong>资源和组件的容器</strong>，APK文件和我们常见的<strong>可执行文件</strong>的区别在何处？</p>
+<p>每个可执行文件运行在一个进程中，但是APK文件可能运行在一个单独的进程，也可以和其他APK运行在同一进程中，结合上面，我想表达的是：</p>
+<p><strong>Android系统的设计理念就是弱化进程，取而代之是组件的概念。</strong></p>
+<p>但是我们都知道，Android系统基于<strong>Linux</strong>系统之上，而Linux系统的运行环境恰恰就是由<strong>进程</strong>组成。所有的Android应用进程都是有Zygote进程fork出来的，因此构成进程的地层系统、虚拟机、动态库等，都是相同的。</p>
+<p>当然Android除了继承从Zygote中得到的某些基础的“家当”之外，Android还需要在应用的Java层建立一套框架来管理运行的组件。由于每个应用的配置都不相同，因此不能再Zygote中完全建立好再继承，只能在应用启动时创建。</p>
+<p><strong>这套框架就构成了Android应用的基础。</strong></p>
+<p>而这套框架有很多核心类，比如：</p>
+<p><strong>ActivityThread</strong>、<strong>ApplicationThread</strong>、<strong>Context</strong>、<strong>ActivityManagerService</strong>等等。这里我先给自己挖一个坑，将来慢慢填上，争取清晰简洁的给大家讲明白<strong>Android的组件管理</strong>。</p>
+<p>而今天，我们现在聊聊<strong>ActivityThread</strong>的<strong>main</strong>方法</p>
+<h2 id="ActivityThread"><a href="#ActivityThread" class="headerlink" title="ActivityThread"></a>ActivityThread</h2><p>好像忘了点什么。。。</p>
+<p>对对，回头看看，我们还有两个问题没解答呢，整个Android应用进程的体系非常复杂，而ActivityThread是真正的核心类，它的<strong>main方法</strong>，是<strong>整个应用进程的入口</strong>。</p>
+<p>所以当有人问你应用进程的真正入口是什么，你回答“Activity 的 onCreate 方法”显然就没理解这个问题的意思。</p>
+<p>而第二个问题，相信你心里肯定知道大概怎么回答，我们的一个Android应用程序可以是理解为是<strong>四大组件和各种资源的集合</strong>，它需要各种各样的环境资源，当然不能像Java直接跑在main方法里面。</p>
+<p>而今天我们就来看看ActivityThread的main方法究竟做了些什么。</p>
+<p>在此之前，安利一个看源码的网站，非常不错</p>
+<p><a href="http://grepcode.com/" target="_blank" rel="external">http://grepcode.com/</a></p>
+<p>点击进去类名就可以查看源码了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-a143e41ffdd1b71a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成员变量"></p>
+<p>ActivityThread的源码有5000多行，显然我没能力弄懂它每一行代码的意思，不过我们只要知道它大体上负责着什么功能和职责，就可以了。</p>
+<p>看看上图中的成员变量，在给大家上一个图，就能理解<strong>ActivityThread管理着</strong>什么。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-b76be1a1e19381df?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ActivityThread类的对象的关联图"></p>
+<p>从图中可以知道，<strong>mActivities</strong>、<strong>mServices</strong>和<strong>mProviderMap</strong> 这三个变量都被保存在<strong>ArrayMap</strong>之中，他们分别保存了应用中所有的<strong>Activity</strong>对象、<strong>Services</strong>对象、和<strong>ContentProvider</strong>对象。 咦？同为四大组件的BroadcastReceive去哪里了？注意，BroadcastReceiver对象没有必要用任何数据结构来保存，因为BroadcastReceiver对象的生命周期很短暂，属于我调用它时，再创建运行，因此不需要保存<strong>BroadcastReceiver</strong>的对象。</p>
+<p>我们都知道应用中Applicaiton对象是唯一的，而<strong>mInitialApplication</strong>变量是恰恰是Application对象。当你的应用自定义一个派生Applicaiton类，则它就是mInitialApplication了。</p>
+<p><strong>ApplicationThread</strong>类型变量mAppThread是一个<strong>Binder</strong>实体对象，<strong>ActivityManagerService</strong>作为Client端调用ApplicationThread的接口，目的是用来调度管理Activity，这个我们未来会细说。</p>
+<p>变量<strong>mResourcesManager</strong>管理着应用中的资源。</p>
+<p>一口气说了这么多，怎么样，ActivityThread是不是相当于一个CEO，管理调度着几乎所有的<strong>Android应用进程的资源和四大组件</strong></p>
+<p>上面非常多的问题我未来会给大家慢慢解答，因为篇幅太长反而会影响阅读和知识的吸收，话不多说，<strong>来看看入口方法main都做了些什么</strong>？</p>
+<h2 id="ActivityThread的main方法"><a href="#ActivityThread的main方法" class="headerlink" title="ActivityThread的main方法"></a>ActivityThread的main方法</h2><p>感兴趣的同学去刚才给出的网站上搜搜ActivityThread的类，大致浏览一下，这里先贴出<strong>main方法</strong>的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static void More ...main(String[] args) &#123;</div><div class="line">5220        SamplingProfilerIntegration.start();</div><div class="line">5221</div><div class="line">5222        // CloseGuard defaults to true and can be quite spammy.  We</div><div class="line">5223        // disable it here, but selectively enable it later (via</div><div class="line">5224        // StrictMode) on debug builds, but using DropBox, not logs.</div><div class="line">5225        CloseGuard.setEnabled(false);</div><div class="line">5226		// 初始化应用中需要使用的系统路径</div><div class="line">5227        Environment.initForCurrentUser();</div><div class="line">5228</div><div class="line">5229        // Set the reporter for event logging in libcore</div><div class="line">5230        EventLogger.setReporter(new EventLoggingReporter());</div><div class="line">5231		//增加一个保存key的provider</div><div class="line">5232        Security.addProvider(new AndroidKeyStoreProvider());</div><div class="line">5233</div><div class="line">5234        // Make sure TrustedCertificateStore looks in the right place for CA certificates</div><div class="line">			//为应用设置当前用户的CA证书保存的位置</div><div class="line">5235        final File configDir = Environment.getUserConfigDirectory(UserHandle.myUserId());</div><div class="line">5236        TrustedCertificateStore.setDefaultUserDirectory(configDir);</div><div class="line">5237		//设置进程的名称</div><div class="line">5238        Process.setArgV0(&quot;&lt;pre-initialized&gt;&quot;);</div><div class="line">5239</div><div class="line">5240        Looper.prepareMainLooper();</div><div class="line">5241		//创建ActivityThread 对象</div><div class="line">5242        ActivityThread thread = new ActivityThread();</div><div class="line">5243        thread.attach(false);</div><div class="line">5244</div><div class="line">5245        if (sMainThreadHandler == null) &#123;</div><div class="line">5246            sMainThreadHandler = thread.getHandler();</div><div class="line">5247        &#125;</div><div class="line">5248</div><div class="line">5249        if (false) &#123;</div><div class="line">5250            Looper.myLooper().setMessageLogging(new</div><div class="line">5251                    LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));</div><div class="line">5252        &#125;</div><div class="line">5253</div><div class="line">5254        Looper.loop();</div><div class="line">5255</div><div class="line">5256        throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);</div><div class="line">5257    &#125;</div></pre></td></tr></table></figure>
+<p>代码并不多，但是条条关键，这些操作我都为大家写了注释，看一下就知道程序在做什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Looper.prepareMainLooper();</div><div class="line">//创建ActivityThread 对象</div><div class="line">      ActivityThread thread = new ActivityThread();</div><div class="line">      thread.attach(false);</div><div class="line">      </div><div class="line">      if (sMainThreadHandler == null) &#123;</div><div class="line">           sMainThreadHandler =thread.getHandler();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      if (false) &#123;</div><div class="line">          Looper.myLooper().setMessageLogging(new</div><div class="line">                  LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));</div><div class="line">      &#125;</div><div class="line">	</div><div class="line">      Looper.loop();</div><div class="line">	</div><div class="line">      throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>这几行代码拿出来单独讲解一下，首先Looper.prepareMainLooper();是为主线程创建了Looper，然后thread.getHandler();是保存了主线程的Handler，最后Looper.loop();进入消息循环。</p>
+<p>如果不了解Android的消息机制，大家可以来看看以前我写的文章来了解一下：</p>
+<p><a href="http://www.jianshu.com/p/fad4e2ae32f5" target="_blank" rel="external">Android消息机制详解</a></p>
+<p>马上就要大功告成了，最后还剩下一行代码还没解释：</p>
+<p>thread.attach(false);</p>
+<p>继续跟进attach方法，一探究竟：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">			if (!system) &#123;</div><div class="line">5080            ViewRootImpl.addFirstDrawHandler(new Runnable() &#123;</div><div class="line">5081                @Override</div><div class="line">5082                public void More ...run() &#123;</div><div class="line">5083                    ensureJitEnabled();</div><div class="line">5084                &#125;</div><div class="line">5085            &#125;);</div><div class="line">5086            android.ddm.DdmHandleAppName.setAppName(&quot;&lt;pre-initialized&gt;&quot;,</div><div class="line">5087                                                    UserHandle.myUserId());</div><div class="line">//将mAppThread放到RuntimeInit类中的静态变量</div><div class="line">5088            RuntimeInit.setApplicationObject(mAppThread.asBinder());</div><div class="line">5089            final IActivityManager mgr = ActivityManagerNative.getDefault();</div><div class="line">5090            try &#123;</div><div class="line">					//将mAppThread传入ActivityThreadManager中</div><div class="line">5091                mgr.attachApplication(mAppThread);</div><div class="line">5092            &#125; catch (RemoteException ex) &#123;</div><div class="line">5093                // Ignore</div><div class="line">5094            &#125;</div><div class="line">5095            // Watch for getting close to heap limit.</div><div class="line">5096            BinderInternal.addGcWatcher(new Runnable() &#123;</div><div class="line">5097                @Override public void More ...run() &#123;</div><div class="line">5098                    if (!mSomeActivitiesChanged) &#123;</div><div class="line">5099                        return;</div><div class="line">5100                    &#125;</div><div class="line">5101                    Runtime runtime = Runtime.getRuntime();</div><div class="line">5102                    long dalvikMax = runtime.maxMemory();</div><div class="line">5103                    long dalvikUsed = runtime.totalMemory() - runtime.freeMemory();</div><div class="line">5104                    if (dalvikUsed &gt; ((3*dalvikMax)/4)) &#123;</div><div class="line">5105                        if (DEBUG_MEMORY_TRIM) Slog.d(TAG, &quot;Dalvik max=&quot; + (dalvikMax/1024)</div><div class="line">5106                                + &quot; total=&quot; + (runtime.totalMemory()/1024)</div><div class="line">5107                                + &quot; used=&quot; + (dalvikUsed/1024));</div><div class="line">5108                        mSomeActivitiesChanged = false;</div><div class="line">5109                        try &#123;</div><div class="line">5110                            mgr.releaseSomeActivities(mAppThread);</div><div class="line">5111                        &#125; catch (RemoteException e) &#123;</div><div class="line">5112                        &#125;</div><div class="line">5113                    &#125;</div><div class="line">5114                &#125;</div><div class="line">5115            &#125;);</div><div class="line">5116        &#125;</div></pre></td></tr></table></figure>
+<p>当传入的参数为false时，就走到了如上面贴出的代码中：</p>
+<p>此时主要完成两件事</p>
+<p>1.调用 RuntimeInit.setApplicationObject() 方法，把对象mAppThread（Binder）放到了RuntimeInit类中的静态变量mApplicationObject中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">	public static final void More ...setApplicationObject(IBinder app) &#123;</div><div class="line">360        mApplicationObject = app;</div><div class="line">361    &#125;</div></pre></td></tr></table></figure>
+<p>mAppThread的类型是<strong>ApplicationThread</strong>，它是ActivityThread的成员变量，定义和初始化如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">final ApplicationThread mAppThread = new ApplicationThread();</div></pre></td></tr></table></figure>
+<p>第二件事比较关键了，就是调用<strong>ActivityManagerService</strong>的attachApplication()方法，将mAppThread 作为参数传入ActivityManagerService，这样ActivityManagerService就可以调用<strong>ApplicaitonThread</strong>的接口了。这与我们刚才说的，ActivityManagerService作为Client端调用ApplicaitonThread的接口管理Activity，就不谋而合了。</p>
+<p><strong>写在后面：</strong><br>本文我们明白了ActiivtyThread作为进程的核心类它都管理着哪些对象，并且解释了程序真正入口ActivityThread的main方法都完成了哪些重要的操作，之后会继续带大家了解相关共同组成Android应用进程的核心类，如果有问题和疑问可以多交流，毕竟我也是边学习变整理总结嘛~</p>
+<p>如果有需要，推荐你了解一下Context，对你会很有帮助哦~</p>
+<p><a href="http://www.jianshu.com/p/46c35c5079b4" target="_blank" rel="external">你足够了解Context吗？</a></p>
+<p>最后PS：<br><strong>注意保护电脑不要被水淹！</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/ActivityThread/" rel="tag">#ActivityThread</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/Android微信自动回复功能/" rel="next" title="Android微信自动回复功能">
+                <i class="fa fa-chevron-left"></i> Android微信自动回复功能
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/28/ActivityThread的main方法究竟做了什么？/"
+           data-title="ActivityThread的main方法究竟做了什么？" data-url="http://yoursite.com/2016/07/28/ActivityThread的main方法究竟做了什么？/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ActivityThread的main方法究竟做了什么？"><span class="nav-number">1.</span> <span class="nav-text">ActivityThread的main方法究竟做了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ActivityThread"><span class="nav-number">1.1.</span> <span class="nav-text">ActivityThread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActivityThread的main方法"><span class="nav-number">1.2.</span> <span class="nav-text">ActivityThread的main方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

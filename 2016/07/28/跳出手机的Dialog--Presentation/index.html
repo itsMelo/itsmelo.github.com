@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Presentation,硬件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="跳出手机的Dialog–Presentation写在前面：Presentation 是 what？也许你刚看到标题的时候，会默默把这个单词扔到翻译工具里面，就像老大最开始跟我提起这个单词的时候一样。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跳出手机的Dialog--Presentation">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/跳出手机的Dialog--Presentation/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="跳出手机的Dialog–Presentation写在前面：Presentation 是 what？也许你刚看到标题的时候，会默默把这个单词扔到翻译工具里面，就像老大最开始跟我提起这个单词的时候一样。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-7e831736d001e10a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-9b65f51ad6fddc47?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-a732a40ac5b0917c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-ac89976cb382208d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-bf37642c0f80de9e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-64ae611bb26eb676?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-3eaea827329729f0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-28T02:34:20.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跳出手机的Dialog--Presentation">
+<meta name="twitter:description" content="跳出手机的Dialog–Presentation写在前面：Presentation 是 what？也许你刚看到标题的时候，会默默把这个单词扔到翻译工具里面，就像老大最开始跟我提起这个单词的时候一样。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-7e831736d001e10a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/28/跳出手机的Dialog--Presentation/"/>
+
+  <title> 跳出手机的Dialog--Presentation | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                跳出手机的Dialog--Presentation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T10:33:09+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/跳出手机的Dialog--Presentation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/跳出手机的Dialog--Presentation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="跳出手机的Dialog–Presentation"><a href="#跳出手机的Dialog–Presentation" class="headerlink" title="跳出手机的Dialog–Presentation"></a>跳出手机的Dialog–Presentation</h1><p><strong>写在前面：</strong><br><strong>Presentation 是 what？</strong><br>也许你刚看到标题的时候，会默默把这个单词扔到翻译工具里面，就像老大最开始跟我提起这个单词的时候一样。<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/1915184-7e831736d001e10a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="容我想想"></p>
+<p>Presentation是说明书？<br>Presentation是一个颁奖典礼？<br><strong>Presentation还是某卖药公司UE总监让所有IT人尴尬癌尽犯的PPT Presentation？</strong></p>
+<p>公司做的是智能硬件方向，国内有关Presentation资料几乎是空白的，所以我的研究更多参考了Presentation官方文档和一些英文资料。<strong>如果各位看官有什么建议，一定要记得补充。</strong></p>
+<h2 id="presentation的定义"><a href="#presentation的定义" class="headerlink" title="presentation的定义"></a>presentation的定义</h2><p>好吧，既然上面这些都不是，Presentation是一个类，我们翻过太平洋的墙，来看看Presentation的定义。</p>
+<blockquote>
+<p>A presentation is a special kind of dialog whose purpose is to present content on a secondary display.</p>
+</blockquote>
+<p>我们仅仅先来看这一句定义，因为当你对一个东西完全不了解时候，知道的越多，越会影响你的判断。</p>
+<p>翻译下：presentation 是一种特殊的 <strong>dialog</strong> ，目的是为了在<strong>辅助屏幕</strong>上展示不同的内容。</p>
+<p>在这句话上，我收集到了两个关键的信息：</p>
+<ul>
+<li><p><strong>presentation 是一个 dialog</strong><br>根据<strong>生物遗传学</strong>的角度，presentation 无论被描述成什么天花乱坠的模样，它也是一个dialog。</p>
+</li>
+<li><p><strong>presentation 目的是显示在辅助屏幕上</strong></p>
+</li>
+</ul>
+<p>进一步思考下，也就是说：</p>
+<p>我可以拿着我自己的手机，点击一个按钮，然后在你的电脑上或者手机上，弹出一个<strong>自定义的Dialog</strong>（<strong>脑补一下恶作剧场景O(∩_∩)O</strong>）？</p>
+<p>这与我们之前，通过一些软件，将手机屏幕同步到电脑上，<strong>区别</strong>又在哪里呢？</p>
+<p>相信很多人都能立刻想明白，区别在于：<strong>展示不同内容</strong></p>
+<p>通过软件同步到电脑，展示的东西始终与我的手机屏幕相同。</p>
+<p>而利用 presentation 我可以自由的展示我想展示的内容，因为它是一个Dialog，是局部可控的。</p>
+<h2 id="寻找并投影到辅助屏幕"><a href="#寻找并投影到辅助屏幕" class="headerlink" title="寻找并投影到辅助屏幕"></a>寻找并投影到辅助屏幕</h2><p>产品经理找到我，向我提出了以下几个疑问：</p>
+<p>现在手里有一部Android手机</p>
+<p> 能否连接以下几种设备</p>
+<ul>
+<li><p>另一部Android手机</p>
+</li>
+<li><p>笔记本电脑</p>
+</li>
+<li><p>智能电视</p>
+</li>
+<li><p>小米盒子等</p>
+</li>
+</ul>
+<p>并且连接之后，利用presentation展示不同内容。</p>
+<p>我乍一看这几个设备，感觉都没问题呀。可是当我拿着手机挨个尝试，几次失败，并且耐心分析之后，发现了问题。</p>
+<p>首先Presentation是Android 4.2引出的，与之同时Android 4.2 还支持 Miracast 影像传输协议。所以它俩一定是有联系的。</p>
+<p><strong>Miracast</strong> </p>
+<p><a href="http://www.360doc.com/content/15/0422/21/1204156_465287702.shtml" target="_blank" rel="external">Miracast简介</a></p>
+<p>Miracast是一种基于WIFI的传输协议，Android 4.2以上的手机、Win8电脑、智能电视、盒子几乎都是支持它的。</p>
+<p>不过Miracast它将设备分为发送端和接收端<br>发送端有手机、电脑。<br>接收端有智能电视、电视盒子。</p>
+<p>所以，手机连手机或电脑展示Presentation，是行不通的。手机作为发射端，去寻找智能电视和盒子才是正解。</p>
+<h2 id="Presentation"><a href="#Presentation" class="headerlink" title="Presentation"></a>Presentation</h2><p>终于弄明白了要寻找的设备是怎样的，建立连接之前，参考官方文档的样例，我们先把<strong>Presentation</strong>给搭建好。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-9b65f51ad6fddc47?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Presentation类"></p>
+<p>可以看到，和Activity一样，可以通过setContentView来给Presentation设置一个布局。自然布局里可以有各种各样的组件，还可以有像GLSurfaceView、SurfaceView 这种重量级的组件，来显示炫酷的动画。这里我们就仅仅写一个TextView，展示一行“show a Presentation”文字。</p>
+<p>值得一提的是，在Presentation中的getContext得到的context与它依附的Activity的context是不同的，Presentation的context是目标屏幕属性的context，包含着辅助屏幕的属性信息。</p>
+<h2 id="获取辅助屏幕"><a href="#获取辅助屏幕" class="headerlink" title="获取辅助屏幕"></a>获取辅助屏幕</h2><p>获取辅助屏幕有两种方式</p>
+<ul>
+<li><p><strong>MediaRouter</strong></p>
+</li>
+<li><p><strong>DisplayManager</strong></p>
+</li>
+</ul>
+<p><strong>MediaRouter</strong></p>
+<p>利用MediaRouter的API寻找周围设备是一种最简单的方式了，它会直接绑定周围最合适的设备。就相当于你用谷歌搜索直接点击“<strong>手气不错</strong>”</p>
+<p>代码如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-a732a40ac5b0917c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击按钮，展示Presentation"></p>
+<p>可以看到在Presentation的构造中，传入了一个display，这就是搜索到的那个设备</p>
+<p>先来测试一下，Android 4.2的手机在开发中选项中，都有模拟辅助屏幕的功能，我们选择一个分辨率，打开它，模拟一个外部的屏幕。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-ac89976cb382208d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开模拟辅助屏幕"></p>
+<p>默认辅助屏幕是同步手机屏幕的，打开之后，进入测试app，点击按钮：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-bf37642c0f80de9e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<p>注意这可不是一个Dialog，而是我们把内容展示在了一个模拟的辅助屏幕上，回头看看标题，是不是就实现了呢？</p>
+<p><strong>DisplayManager</strong></p>
+<p>第二种搜索设备的方法是DisplayManager，他可以搜索周围所有可用的display，产生一个display数组，然后你就可以选择合适的设备进行展示了。</p>
+<p>代码如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-64ae611bb26eb676?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="DisplayManager"></p>
+<p>代码还是挺简单的，搜索到周围所有可用设备之后，展示到ListView上，点击条目，在APP上和Presentataion上分别跑一个秒表，看看延时性如何，截图如下。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-3eaea827329729f0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="DisplayManager"></p>
+<p>可以看到，搜索到的设备名称是  <strong>叠加视图#1</strong> ，点击条目之后两个秒表也分别跑了起来。</p>
+<p><strong>总结：</strong></p>
+<p>上面对Presentation进行了一个简略的介绍，因为相信大家如果做的不是智能硬件方向，基本上不会遇到这个需求。关于Activity对Presentation的管理方式，官方文档的有两个Demo可以参考，需要时可以去查看。</p>
+<p><strong>写在后面：</strong></p>
+<p>周末在连接智能电视测试时，发现延时很小，完全可以投入使用。<br>关于Presentation资料比较少，欢迎大家一同交流</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Presentation/" rel="tag">#Presentation</a>
+          
+            <a href="/tags/硬件/" rel="tag">#硬件</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/3分钟傻瓜式反编译一个APP/" rel="next" title="3分钟傻瓜式反编译一个APP">
+                <i class="fa fa-chevron-left"></i> 3分钟傻瓜式反编译一个APP
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/Android微信自动回复功能/" rel="prev" title="Android微信自动回复功能">
+                Android微信自动回复功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/28/跳出手机的Dialog--Presentation/"
+           data-title="跳出手机的Dialog--Presentation" data-url="http://yoursite.com/2016/07/28/跳出手机的Dialog--Presentation/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#跳出手机的Dialog–Presentation"><span class="nav-number">1.</span> <span class="nav-text">跳出手机的Dialog–Presentation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#presentation的定义"><span class="nav-number">1.1.</span> <span class="nav-text">presentation的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找并投影到辅助屏幕"><span class="nav-number">1.2.</span> <span class="nav-text">寻找并投影到辅助屏幕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Presentation"><span class="nav-number">1.3.</span> <span class="nav-text">Presentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取辅助屏幕"><span class="nav-number">1.4.</span> <span class="nav-text">获取辅助屏幕</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

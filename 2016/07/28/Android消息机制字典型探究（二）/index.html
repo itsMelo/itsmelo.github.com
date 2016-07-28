@@ -1,0 +1,696 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,源码,handler," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android消息机制字典型探究（二）写在前面：Android消息机制字典型探究（一）为了完成整个Android消息机制的探究，我准备将知识点细分成一个个模块。在连载的第一篇文章中，在子线程更新UI导致崩溃，我们去分析探究了Android中不允许子线程更新UI的原因，是由于线程安全的问题。当然我们目前分析的东西和写出文字都与Android消息机制无关。不过我其实是想给大家展示学习编程，或者说学习A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android消息机制字典型探究（二）">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/Android消息机制字典型探究（二）/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="Android消息机制字典型探究（二）写在前面：Android消息机制字典型探究（一）为了完成整个Android消息机制的探究，我准备将知识点细分成一个个模块。在连载的第一篇文章中，在子线程更新UI导致崩溃，我们去分析探究了Android中不允许子线程更新UI的原因，是由于线程安全的问题。当然我们目前分析的东西和写出文字都与Android消息机制无关。不过我其实是想给大家展示学习编程，或者说学习A">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8d34278385fceccd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-ee3a4f5a9a294b01?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-215bb46aaa0df885?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-80f462b718e89b2a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-40b751ac6dcb8c73?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-f35b59a4217f4ad7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-e4f720124308ab1b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-2d101a24320abf9c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-2c64da2ca248d98a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-5dc923d75bd384d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-28T02:15:31.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android消息机制字典型探究（二）">
+<meta name="twitter:description" content="Android消息机制字典型探究（二）写在前面：Android消息机制字典型探究（一）为了完成整个Android消息机制的探究，我准备将知识点细分成一个个模块。在连载的第一篇文章中，在子线程更新UI导致崩溃，我们去分析探究了Android中不允许子线程更新UI的原因，是由于线程安全的问题。当然我们目前分析的东西和写出文字都与Android消息机制无关。不过我其实是想给大家展示学习编程，或者说学习A">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-8d34278385fceccd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/28/Android消息机制字典型探究（二）/"/>
+
+  <title> Android消息机制字典型探究（二） | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android消息机制字典型探究（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T10:14:33+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/Android消息机制字典型探究（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/Android消息机制字典型探究（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android消息机制字典型探究（二）"><a href="#Android消息机制字典型探究（二）" class="headerlink" title="Android消息机制字典型探究（二）"></a>Android消息机制字典型探究（二）</h1><p><img src="http://upload-images.jianshu.io/upload_images/1915184-8d34278385fceccd?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br><strong>写在前面：</strong><br><a href="http://www.jianshu.com/p/8c06b1d7ca68" target="_blank" rel="external">Android消息机制字典型探究（一）</a><br>为了完成整个<strong>Android消息机制的探究</strong>，我准备将知识点细分成一个个模块。在连载的第一篇文章中，在子线程更新UI导致崩溃，我们去分析探究了Android中<strong>不允许子线程更新UI</strong>的原因，是由于<strong>线程安全</strong>的问题。<br>当然我们<strong>目前</strong>分析的东西和写出文字都与Android消息机制无关。不过我其实是想给大家展示学习编程，或者说学习Android的一些好的习惯和解决问题的思路，总结起来就是：<strong>实践去发现问题，全面的理解问题，寻找最优解</strong>。Android本身就是一个复杂而有机的整体，<strong>由一个知识点可以牵出一条知识线。从而构成相关的知识体系</strong>。<br><a id="more"></a><br><strong>这种学习方式会让你知道的越来越多，也能站在一定的高度上体会Android在设计之时的巧妙，全局的理解Android，做到融会贯通。也能在你的代码中，收获很多有益的启发。</strong></p>
+<p>说完以上这些，就可以正式开始本文的话题了。既然在我们只可以在主线程更新UI，那解决这个问题，一共有几种方式呢？我就来直接告诉大家，解决子线程更新UI问题的方式，<strong>一共有三种。</strong></p>
+<ol>
+<li><p><strong>runOnUiThread</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-ee3a4f5a9a294b01?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="runOnUiThread的使用"></p>
+<p>简单讲解一下代码，点击crash按钮，开启一个子线程，显然我们在子线程中直接给 <strong>iv_handler</strong><br>设置一张图片，是肯定崩溃的。当我们调用<strong>runOnUiThread</strong>方法，并且传入一个<strong>Runnable</strong>对象，并且在其中设置<strong>更新UI</strong>的逻辑，问题就解决了。相信你也和我一样对此非常好奇，那就赶紧点进去看看，源码中是如何实现的吧！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-215bb46aaa0df885?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="runOnUiThread实现原理"></p>
+<p>先来翻译一下这段注释：</p>
+<blockquote>
+<p>在UI线程中执行该Runnable.  <em> 如果当前线程是UI线程,那么该Runnable会立即执行.  </em> 如果当前的线程不是UI线程则调用UI线程handler的post()方法将其放入UI线程的消息队列中.  *<br>注意:勿在runOnUiThread(Runnable runnable)中做耗时操作</p>
+</blockquote>
+<p>首先我想说明的是，runOnUiThread方法是属于<strong>Activity</strong>的，也就是说我们能拿到Activity才能使用该方法。我们本文的这个例子，明显是执行了<strong>mHandler.post(action)</strong>方法。我们目前不去研究<strong>handler.post</strong>方法，因为一会你就知道为什么了。再来看看第二种解决问题的办法。</p>
+</li>
+<li><p><strong>view.post</strong> <img src="http://upload-images.jianshu.io/upload_images/1915184-80f462b718e89b2a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="view.post方法使用"></p>
+<p>代码跟上一个解决办法如出一辙，我们还是来看看源码，分析一下这个方法的实现方式。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-40b751ac6dcb8c73?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="view.post源码"></p>
+<p>先来翻译一下注释的意思：</p>
+<blockquote>
+<p>将Runnable对象添加到message queue中，并且这个runnable对象会跑在UI线程中。</p>
+</blockquote>
+<p>翻译完注释再来看代码，当View和Activity完成attach操作时，会产生一个<strong>attachInfo</strong>参数，在attachInfo参数中取出来了属于activity的mHandler，仍然去调用了mHandler.post(action)方法。也就是说无论我们是选择第一种方法还是第二种方法去解决这个崩溃问题，都是<strong>殊途同归</strong>的，最后经过层层封装，都走到了<strong>handler.post</strong>方法中。</p>
+</li>
+</ol>
+<p><strong>handler.post</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-f35b59a4217f4ad7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发送message到主线程"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-e4f720124308ab1b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="handler处理信息"></p>
+<p>啊哈哈，我们连载通篇的主角<strong>Handler</strong>今天终于正式登场了，没错上面的代码就是将子线程的消息发送到主线程并处理的标准写法。等等，post方法在哪里？别着急，在本篇文章中，我并不打算给大家展开整个Handler知识体系的研究。我们先来看看post方法调用层级</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-2d101a24320abf9c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="post"><br><img src="http://upload-images.jianshu.io/upload_images/1915184-2c64da2ca248d98a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="sendMessageDelayed"><br><img src="http://upload-images.jianshu.io/upload_images/1915184-5dc923d75bd384d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="sendMessageAtTime"></p>
+<p>可以看到，方法的调用顺序为post–sendMessageDelayed–sendMessageAtTime.</p>
+<p>在本文中我们不再继续深究下去，未来我会对这些方法的调用层级、顺序、以及使用场景为大家进行一下完整地整理总结，本文不再赘述。</p>
+<p><strong>想强调的是：</strong><br>其实在这篇博客的目的：<br>1.从解决问题并寻找方法的角度引出Handler，真正开启Handler的知识体系。</p>
+<p>2.思考问题，解决问题的过程。回首第一篇文章中，我因为在子线程更新UI而造成了崩溃，然后：</p>
+<ul>
+<li><p>在寻找解决办法之前，带着强烈的好奇心，去寻找了为何不能在子线程更新UI原因。在这个过程中，我理解了什么<strong>线程安全</strong>，深入理解了<strong>Context</strong>。</p>
+</li>
+<li><p>去寻找解决问题的所有办法（三种），并且去探究了这几种方法的原理，试图选择在本例中的最优解（事实上这几种方法本质上没区别）。</p>
+</li>
+<li><p>将问题简单化，所有问题的解决办法都指向了Handler，所以我们只需要探究Handler即可。</p>
+</li>
+</ul>
+<p><strong>写在最后：</strong></p>
+<p>很多初学者认为Handler就是为了解决子线程更新UI的问题而存在的，事实上这种理解是<strong>错误</strong>的。Handler作为Android的线程间通信的机制，意义远不止此。下一篇中，Melo将带大家真正的理解Android的消息机制。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
+            <a href="/tags/handler/" rel="tag">#handler</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/Android消息机制字典型探究（一）/" rel="next" title="Android消息机制字典型探究（一）">
+                <i class="fa fa-chevron-left"></i> Android消息机制字典型探究（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/5分钟实现Android中更换头像功能/" rel="prev" title="5分钟实现Android中更换头像功能">
+                5分钟实现Android中更换头像功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/28/Android消息机制字典型探究（二）/"
+           data-title="Android消息机制字典型探究（二）" data-url="http://yoursite.com/2016/07/28/Android消息机制字典型探究（二）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android消息机制字典型探究（二）"><span class="nav-number">1.</span> <span class="nav-text">Android消息机制字典型探究（二）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

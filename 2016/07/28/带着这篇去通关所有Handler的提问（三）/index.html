@@ -1,0 +1,739 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,源码,handler," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="带着这篇去通关所有Handler的提问（三）写在前面：大家久等了，Melo前阵花了一周的时间去毕业旅行，所以更新就拖延了一阵，话不多说，我们来回顾一下本系列的前两篇文章的思路和知识点：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带着这篇去通关所有Handler的提问（三）">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/带着这篇去通关所有Handler的提问（三）/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="带着这篇去通关所有Handler的提问（三）写在前面：大家久等了，Melo前阵花了一周的时间去毕业旅行，所以更新就拖延了一阵，话不多说，我们来回顾一下本系列的前两篇文章的思路和知识点：">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-5b46d5a0584720ff?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-7a0d4ec7091a39fc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-989ad8fda07a2608?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-d41410cd42ed3d8d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-514571cad65f7171?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-080d1ddd6f3223a8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8982fddc999074a1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-39a9617e0ae54894?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-52c8a9bd457f43b5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-304ec3faab1a3176?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-0b9ad4781e0b1861?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-fd684532b5c792e5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-12ec385d2ec1164f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-bed816d7d28d1c87?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-9fe5b7b2e249c771?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-2a78bc7e32ab5990?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-663c57da42f084c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-b6daebfefccb8e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-07-28T02:18:29.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="带着这篇去通关所有Handler的提问（三）">
+<meta name="twitter:description" content="带着这篇去通关所有Handler的提问（三）写在前面：大家久等了，Melo前阵花了一周的时间去毕业旅行，所以更新就拖延了一阵，话不多说，我们来回顾一下本系列的前两篇文章的思路和知识点：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-5b46d5a0584720ff?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/28/带着这篇去通关所有Handler的提问（三）/"/>
+
+  <title> 带着这篇去通关所有Handler的提问（三） | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                带着这篇去通关所有Handler的提问（三）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T10:17:44+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/带着这篇去通关所有Handler的提问（三）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/带着这篇去通关所有Handler的提问（三）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="带着这篇去通关所有Handler的提问（三）"><a href="#带着这篇去通关所有Handler的提问（三）" class="headerlink" title="带着这篇去通关所有Handler的提问（三）"></a>带着这篇去通关所有Handler的提问（三）</h1><p><img src="http://upload-images.jianshu.io/upload_images/1915184-5b46d5a0584720ff?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br><strong>写在前面：</strong><br>大家久等了，Melo前阵花了一周的时间去毕业旅行，所以更新就拖延了一阵，话不多说，我们来回顾一下本系列的前两篇文章的<strong>思路</strong>和<strong>知识点</strong>：<br><a id="more"></a><br><a href="http://www.jianshu.com/p/8c06b1d7ca68" target="_blank" rel="external">Android消息机制字典型探究（一）</a></p>
+<p>在第一篇文章中，我们总结了Android系统不允许在子线程更新UI的原因，本质上是<strong>线程安全问题</strong>，从而引出了Handler。</p>
+<p><a href="http://www.jianshu.com/p/8501d3b0c359" target="_blank" rel="external">Android消息机制字典型探究（二）</a></p>
+<p>在第二篇文章中，我们又分析了三种在子线程更新UI的方法，分别是：<strong>View.post(param); Activity.runOnUIThread(param); Handler</strong>，当我们对这三种方法的源码进一步分析发现，其实都是对Handler做了一些封装，所以本文我们就来正式全面探究有关<strong>Handler</strong>的知识点。</p>
+<p>当时我去面试的四家公司，都问到了Handler的相关知识，有深有浅，所以重要程度<strong>不言而喻</strong>。面试官拿起你的简历，让你谈谈Handler，你仅仅在表象上回答了Android线程通信的机理，然后面试官紧接着问了你如下的几个问题：</p>
+<ul>
+<li><p>Handler是属于哪个类的？</p>
+</li>
+<li><p>Handler、Looper、MessageQueue何时建立的相互关系？</p>
+</li>
+<li><p>主线程的Looper和MessageQueue是何时创建的？</p>
+</li>
+<li><p>在同一线程中，Looper和MessageQueue是怎样的数量对应关系，与Handler又是怎样的数量对应关系？</p>
+</li>
+<li><p>MessageQueue中消息为空，线程阻塞挂起等待，为什么不会造成ANR？</p>
+</li>
+<li><p>有关Handler的内存泄漏是怎么一回事？</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-7a0d4ec7091a39fc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一脸萌比"></p>
+<p>so…光知道表象很可能是不够的，而且还给自己挖了一个坑，所以我们对于一个知识点的探寻要全面充分一点。下面正式开始本文。</p>
+<h2 id="Windows和Android消息机制的区别"><a href="#Windows和Android消息机制的区别" class="headerlink" title="Windows和Android消息机制的区别"></a>Windows和Android消息机制的区别</h2><p>现在的操作系统普遍采用消息驱动模式。Windows操作系统就是典型的<strong>消息驱动模型</strong>。但是，Android的消息处理机制和Windows的消息处理机制又不太相同。我给大家画了图，看看二者的区别。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-989ad8fda07a2608?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Windows进程消息模型"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-d41410cd42ed3d8d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Android进程消息模型"></p>
+<p>通过消息机制图的对比，Windows消息处理模型中，存在一个系统的消息队列，这个队列是整个进程的核心，几乎所有的动作都要转换成消息，然后放到这个队列中，由主线程统一处理。</p>
+<p>而Android没有全局的消息队列，消息队列是和某个线程相关联在一起的。每个线程最多有一个消息队列，消息的取出和处理，也在这个线程本身中完成。</p>
+<p>也就是说，Android中，如果你想在当前线程使用消息模型，则必须构建一个消息队列，而消息机制的相关主要类是：<strong>Looper、Handler、MessageQueue、Message。</strong></p>
+<p>我们并不着急去翻看这些类的源码，理清楚底层实现的逻辑，而且先在宏观表象上看看，Android消息机制是如何运行的？</p>
+<h2 id="Android消息机制的宏观原理"><a href="#Android消息机制的宏观原理" class="headerlink" title="Android消息机制的宏观原理"></a>Android消息机制的宏观原理</h2><p>先来看一张<strong>Android消息处理类之间的关系图</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-514571cad65f7171?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Android消息处理机制"></p>
+<p>我们从表象上解释一下原理，Handler负责将Message发送至当前线程的MessageQueue中，Looper时时刻刻监视着MessageQueue，将符合时间要求的Message取出，再带给发送消息的那个Handler通过HandleMessage处理。</p>
+<p>对于消息机制的理解不能仅仅停留在这一步，下面我们从源码的角度分析一下具体的逻辑细节。</p>
+<h2 id="Android消息机制相关类的源码分析"><a href="#Android消息机制相关类的源码分析" class="headerlink" title="Android消息机制相关类的源码分析"></a>Android消息机制相关类的源码分析</h2><p>其实写这篇文章之前，我就一直在思考，站在什么角度展开这个机制的描述，更容易让大家理解接受。思来想去，我觉得还是以一个Message游历的形式去描写，会显着有趣和清晰一点。</p>
+<p><strong>Message：</strong></p>
+<p>人在边境X（<strong>子线程</strong>）服役的士兵Message慵懒得躺在一个人数为50（池中最大数量）的军营（Message池）中。不料这时突然接到了上司的obtain()命令（据说obtain命令更加节省军费），让他去首都（<strong>主线程</strong>）告诉中央领导一些神秘代码。小Message慌乱地整理了下衣角和帽子，带上信封，准备出发。</p>
+<p>上司让士兵Message收拾完毕之后等待一个神秘人的电话，并且嘱咐他：到了首都之后，0是这次任务的暗号。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-080d1ddd6f3223a8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Message的创建和携带信息"></p>
+<p>Message是消息的载体，Message设计成为<strong>Parcelable</strong>类的派生类，这表明Message可以通过<strong>binder</strong>来跨进程发送。<br>通常我们都会用<strong>obtain()</strong>方法去创建Message，如果消息池中有Message有，则取出，没有，再重新创建。这样可以防止对象的重复创建，节省资源。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-8982fddc999074a1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="obtain方法源码"></p>
+<p>“铃铃铃…”小Message接到了一个陌生男子的电话。<br>“我叫handler，来自activity大本营，是你这次任务的接受者，一会我带你去首都的消息中心去报道。”</p>
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>来自Activity大本营Handler部门是整个消息机制系统的核心部门，当然部门下有<strong>很多个</strong> Handler，这次协助小Message任务的叫mHandler。Handler部门下的员工都有一个特点，就是只关心自己的message。</p>
+<p>Handler属于Activity，创建任何一个Handler都属于重写了Activity中的Handler。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-39a9617e0ae54894?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Activity中定义了Handler"></p>
+<p>在Handler的构造中，默认完成了对当前线程Looper的绑定，至于Looper是谁，一会再谈。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-52c8a9bd457f43b5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Handler的构造方法"></p>
+<p>通过Looper.myLooper()获取了当前线程保存的Looper实例，又通过mLooper.mQueue获取了Looper中的MessageQueue实例。在此时，mhandler实例与looper和messageQueue实例，关联上了。</p>
+<p>mHandler神情骄傲得对小Message说：我已经跟首都的消息中心打好了招呼，准备接收你了，现在有两种车，一种车名叫“<strong>send</strong>”，一种叫“<strong>post</strong>”，你想坐哪辆去首都都可以，不过要根据你上司的命令，选择车种类下对应的型号哦~</p>
+<ul>
+<li><p><strong>send</strong><br><img src="http://upload-images.jianshu.io/upload_images/1915184-304ec3faab1a3176?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+</li>
+<li><p><strong>post</strong><br><img src="http://upload-images.jianshu.io/upload_images/1915184-0b9ad4781e0b1861?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+</li>
+</ul>
+<p>从代码的实现上来看，post方法也是在使用send类的方法在发送消息，只是他们的参数要求是Runnable对象。</p>
+<p>通过对Handler源码的分析，发现除了sendMessageAtFrontOfQueue方法之外，其余任何send的相关方法，都经过层层包装走到了sendMessageAtTime方法中，我们来看看源码：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-fd684532b5c792e5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="sendMessageAtTime源码"></p>
+<p>这时小Message和mHandler一同上了车牌号为“sendMessage”的车，行驶在一条叫“enqueueMessage”的高速公路上，mHandler向一无所知的小Message介绍说，每个像他一样的Message都是通过<strong>enqueueMessage</strong>路进入MessageQueue的。我们是要去首都的MessageQueue中心，其实你的消息到时候也是我处理的，不过现在还不是时候哦，因为我很忙。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-12ec385d2ec1164f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="enqueueMessage源码"></p>
+<p>enqueueMessage是MessageQueue的方法，用来将Message根据时间排序，放入到MessageQueue中。其中msg.target = this，<strong>是保证每个发送Message的Handler也能处理这个Message。</strong></p>
+<h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><p>路上的时间不短不长，mHandler依然为小Message热心介绍着MessageQueue和Looper<br>“在每个驻扎地（线程）中，只有一个MessageQueue和一个Looper，他们两个是相杀相爱，同生共死的好基友，Looper是个跑不死的邮差，一直负责取出MessageQueue中的Message”<br>“不过通常只有首都（主线程）的Looper和MessageQueue是创建好的，其他地方需要我们人为地创建哦~”</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-bed816d7d28d1c87?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="prepare方法"></p>
+<p>Looper类提供了prepare方法来创建Looper。可以看到，当重复创建Looper时，会抛出异常，也就是说，每个线程只有一个Looper。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-9fe5b7b2e249c771?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Looper构造"></p>
+<p>紧接着在Looper的构造方法中，又创建了与它一一对应的MessageQueue，既然Looper在一个线程中是唯一的，所以MessageQueue也是唯一的。</p>
+<p>在Android中，ActivityThread的main方法是程序的入口，主线程的Looper和MessageQueue就是在此时创建的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-2a78bc7e32ab5990?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ActivityThread的main方法"></p>
+<p>可以看到，在main方法中，既创建了Looper，也调用了<strong>Looper.loop()</strong>方法。</p>
+<p>mHandler和小Message通过enqueueMessage路来到了MessageQueue中，进入之前，门卫仔仔细细地给小Message贴上了以下标签：<br>“mHandler负责带入”<br>“处理时间为0ms”<br>并且告诉小Message，一定要按照时间顺序排队。<br>进入队伍中，Looper大哥正在不辞辛劳的将一个又一个跟小Message一样的士兵带走。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-663c57da42f084c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="loop方法"></p>
+<p>分析一下loop方法，有一个for的死循环，不断地调用queue.next方法，在消息队列中取Message。并且在Message中取出target，这个target其实就是发送消息的handler，调用它的dispatchMessage方法。</p>
+<p>首都的MessageQueue中心虽然人很多，但是大家都井井有条的排着队伍，Looper老哥看了一眼手里的名单，叫到了小Message的名字，看了一眼小Message身上的标签，对他说：“喔，又是mHandler带来的人啊，那把你交给他处理了”</p>
+<p>忐忑不安的小Message看到了一个熟悉的身影，mHandler就在面前，显然mHandler有些健忘，可能是接触了太多跟小Message一样的人，为了让mHandler想起自己，小Message说出了上司交给他的暗号0.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-b6daebfefccb8e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="dispatchMessage方法"></p>
+<p>可以看见dispatchMessage方法中的逻辑比较简单，具体就是如果mCallback不为空，则调用mCallback的handleMessage()方法，否则直接调用Handler的handleMessage()方法，并将消息对象作为参数传递过去。</p>
+<p>在handlerMessage()方法中，小Message出色的完成了自己的任务。</p>
+<p><strong>写在后面：</strong></p>
+<p>下一篇中，我们会探讨一下为什么loop方法中for死循环不会造成ANR，有一些有关Handler的使用技巧，以及可能造成的内存泄漏，敬请期待。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
+            <a href="/tags/handler/" rel="tag">#handler</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/5分钟实现Android中更换头像功能/" rel="next" title="5分钟实现Android中更换头像功能">
+                <i class="fa fa-chevron-left"></i> 5分钟实现Android中更换头像功能
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/Handler可能造成内存泄漏（四）/" rel="prev" title="Handler可能造成内存泄漏（四）">
+                Handler可能造成内存泄漏（四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/28/带着这篇去通关所有Handler的提问（三）/"
+           data-title="带着这篇去通关所有Handler的提问（三）" data-url="http://yoursite.com/2016/07/28/带着这篇去通关所有Handler的提问（三）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#带着这篇去通关所有Handler的提问（三）"><span class="nav-number">1.</span> <span class="nav-text">带着这篇去通关所有Handler的提问（三）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows和Android消息机制的区别"><span class="nav-number">1.1.</span> <span class="nav-text">Windows和Android消息机制的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android消息机制的宏观原理"><span class="nav-number">1.2.</span> <span class="nav-text">Android消息机制的宏观原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android消息机制相关类的源码分析"><span class="nav-number">1.3.</span> <span class="nav-text">Android消息机制相关类的源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler"><span class="nav-number">1.4.</span> <span class="nav-text">Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Looper"><span class="nav-number">1.5.</span> <span class="nav-text">Looper</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
