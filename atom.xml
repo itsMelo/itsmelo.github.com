@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-01T09:52:46.578Z</updated>
+  <updated>2016-08-12T08:33:18.136Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,145 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开发一个Android应用之前，应该考虑点什么？</title>
+    <link href="http://yoursite.com/2016/08/12/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AAAndroid%E5%BA%94%E7%94%A8%E4%B9%8B%E5%89%8D%EF%BC%8C%E5%BA%94%E8%AF%A5%E8%80%83%E8%99%91%E7%82%B9%E4%BB%80%E4%B9%88/"/>
+    <id>http://yoursite.com/2016/08/12/开发一个Android应用之前，应该考虑点什么/</id>
+    <published>2016-08-12T08:33:18.120Z</published>
+    <updated>2016-08-12T08:33:18.136Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="开发一个Android应用之前，应该考虑点什么？"><a href="#开发一个Android应用之前，应该考虑点什么？" class="headerlink" title="开发一个Android应用之前，应该考虑点什么？"></a>开发一个Android应用之前，应该考虑点什么？</h1><p><img src="http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br><a id="more"></a><br><strong>写在前面：</strong><br>昨天参加了秋百万大大组织的北京<strong>GDG</strong>活动，收获颇丰。又跟几个有写作习惯的朋友建立了一个“神秘组织”，每两周为一个周期，每人都会产出一篇原创的文章，互相校验和探讨，意在督促组员之间学习和分享开源技术。而简书上的平台就交给我维护了，不出意外，几天之内大家就可以看到我们的主页和第一期成员的文章啦，<strong>敬请期待~</strong></p>
+<p>前几天接手了一个老员工遗留下来的代码，别提多痛苦了，甚至有了让我推倒重写的冲动，很多地方的设计问题颇多，老大也快无法忍受了。。。上学的时候写一篇作文，要想好主题立意和分段，解数学题的时候也得在草稿纸上梳理清楚逻辑之后再下笔。其实开发一个Android也应是如此，不做准备，埋头苦写，最后会导致问题颇多。所以本文会<strong>根据网络上优秀内容和我实际的开发经验</strong>讨论总结一下，<strong>开发一个Android应用之前，都应该做哪些准备</strong>。</p>
+<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a><strong>编码规范</strong></h2><p><strong>编码规范</strong>的问题是我最先想强调的，因为我接手的项目命名就极其混乱，甚至在一个类中的命名都没有统一化（生无可恋脸）。代码可能不是你自己一个人写，<strong>保证代码可读性</strong>是非常必要的。而规范存在的意义就是淡化每个人的习惯而达到统一。不多说，下面就介绍<strong>Android的编码规范</strong>。</p>
+<ul>
+<li>除了注释，代码中不出现中文</li>
+<li>每个类写上必要的注释，类的说明，作者，联系方式</li>
+<li>方法加上必要的注释说明，方便以后维护</li>
+</ul>
+<p><strong>包管理</strong></p>
+<ul>
+<li>base:存放基础类的包，里面的类以Base为前缀，例如BaseActivity；</li>
+<li>activity:存放activity的包，每个activity命名以Activity结尾，例如MainActivity;</li>
+<li>fragment:存放fragment的包，每个fragment命名以Fragment结尾，例如ChatFragment;</li>
+<li>receiver:存放receiver的包；</li>
+<li>service:存放service的包；</li>
+<li>adapter:存放adapter的包，每个adapter命名以Adapter结尾，例如EventItemAdapter;</li>
+<li>common:存放一些公共常量，例如后端接口、SharedPreferenceKey、IntentExtra等;</li>
+<li>utils:存放工具类的包，比如常见的工具类：LogUtils、DateUtils；</li>
+<li>entity:存放实体类的包；</li>
+<li>widget:存放自定义View的包；</li>
+</ul>
+<p>以上是一些常见的包，但不局限于此，视项目的具体情况而定。</p>
+<p><strong>命名</strong></p>
+<p><strong>大驼峰命名(UpperCamelCase)：每个单词的第一个字母都大写。</strong></p>
+<p><strong>小驼峰命名(lowerCamelCase)：除第一个单词以外，每一个单词的第一个字母大写。</strong></p>
+<p><strong>命名的基本原则:</strong></p>
+<ul>
+<li>尽可能地使用统一的命名规范；</li>
+<li>不使用汉语拼音；</li>
+<li>除了常见的英文缩写，尽量少地使用缩写；</li>
+</ul>
+<p><strong>包命名</strong></p>
+<ul>
+<li>小写字母，参见上文包管理；</li>
+<li>连续的单词直接连接起来，不使用下划线；</li>
+</ul>
+<p><strong>Java类命名</strong></p>
+<ul>
+<li>大驼峰命名 UserListAdapter；</li>
+<li>除常见的缩写单词以外，不使用缩写，缩写的单词每个字母都大写 RequesURLList；</li>
+<li>公共的工具类建议以Utils、Manager为后缀，如LogUtils；</li>
+<li>接口命名遵循以上原则，以able或ible为后缀；</li>
+</ul>
+<p><strong>变量命名</strong></p>
+<ul>
+<li>成员变量命名<ul>
+<li>小驼峰命名；</li>
+<li>不推荐使用谷歌的前面加m的编码风格（如果使用团队中使用m，则统一使用）；</li>
+</ul>
+</li>
+<li>常量命名<ul>
+<li>单词每个字母均大写；</li>
+<li>单词之间下划线连接；</li>
+</ul>
+</li>
+<li>控件变量命名<ul>
+<li>小驼峰命名；</li>
+<li>建议使用 控件缩写+逻辑名称 格式，例如 tvPostTitle、etUserName；</li>
+<li>对应的控件的id的命名控件缩写_逻辑名称，单词均小写，用下划线连接，例如：tv_post_title、</li>
+<li>et_user_name；</li>
+</ul>
+</li>
+<li>常见的控件缩写如下：<br>控件 缩写<br>Linearlayout    ll<br>RelativeLayout    rl<br>TextView    tv<br>EditText    et<br>Button    btn<br>ImageView    iv<br>CheckBox    chb<br>ListView    lv<br>GridView    gv<br>RadioButton    rb</li>
+</ul>
+<p><strong>方法命名</strong></p>
+<ul>
+<li>小驼峰命名；</li>
+<li>Getter和Setter方法，推荐使用自动生成的，写起来也很方便。注意，bool类型的变量Getter方法写成isTrue这种；</li>
+<li>方法名应当保证见名知义的原则，尽量不使用or或者and，遵循“do one thing”原则；</li>
+</ul>
+<p><strong>布局文件命名</strong></p>
+<ul>
+<li>activity、fragment布局文件名以对应的类别名称为前缀，逻辑名称放在其后，以下划线连接，例如activity_home、fragment_chat_list，方便查找；</li>
+<li>ListView、GridView的item布局文件建议以list_item、gird_item为前缀，加上对应的逻辑名称，例如<br>list_item_post、grid_item_photo；</li>
+<li>Dialog的布局文件以dialog为前缀，逻辑名称放在其后，下划线连接，例如dialog_warnning;<br>包含项布局命名以include开头，在加上对应的逻辑名称，例如include_foot</li>
+<li>控件的id命名参见控件变量命名；</li>
+</ul>
+<p><strong>资源命名</strong></p>
+<ul>
+<li>图标资源以ic为前缀，例如ic_chat，指聊天图标；</li>
+<li>背景图片以bg为前缀，例如bg_login，指的是登录页的背景图；</li>
+<li>按钮图片以btn为前缀，例如btn_login，指的是登录按钮的图片，不过这只有一种状态，需要加上状态的可以在后面添加，例如btn_login_pressed，表示登录按钮按下的图片；</li>
+<li>当使用shape和selector文件为背景或者按钮时，命名参照以上说明；</li>
+</ul>
+<h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a><strong>项目架构</strong></h2><p><strong>项目框架</strong><br>一个好的项目架构可以降低项目的复杂性，并且易扩展、易维护，耦合低，结构清晰，功能内聚。<br><strong>MVC</strong>，<strong>MVP</strong>，<strong>MVVM</strong>还有一些设计模式，结合你app的业务，自行选择一个最合适的一条路走到黑，建议不要“混搭”。</p>
+<p><strong>开源框架</strong></p>
+<p>开源框架的选择分两大类，一是权威性毫无争议，放心选择的这类帮助我们快速开发的，比如：</p>
+<ul>
+<li>网络 Retrofit + OkHttp+ RxJava、Volley、android-async-http</li>
+<li>依赖注入 Dagger2、ButterKnife、RoboGuice</li>
+<li>事件总线 otto、EventBus</li>
+<li>图片加载 Fresco、Glide、Picasso</li>
+<li>数据库 GreenDao、Ormlite、LitePal</li>
+<li>日志输出 logger、LogUtils</li>
+<li>当然不能忘了Google提供的兼容support全家桶</li>
+</ul>
+<p>还有一类框架虽然不是毫无争议，但是也能极大节省我们的时间，提升开发效率，对于这类项目，要在Github上长期<strong>淘宝</strong>了。找那种star很多，issues解决很快，长期维护的项目，这种坑会比较少。</p>
+<h2 id="代码细节"><a href="#代码细节" class="headerlink" title="代码细节"></a><strong>代码细节</strong></h2><p><strong>抽取基类</strong><br>即使目前你没有需要，也一定要抽取一个BaseActivity和BaseFragment，因为早晚会用到，切记！<br>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseActivity extends Activity&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) &#123;</div><div class="line">        super.onCreate(savedInstanceState, persistentState);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void init() &#123;</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        initView();</div><div class="line">        initData();</div><div class="line">        initListener();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化布局</div><div class="line">     */</div><div class="line">    protected abstract void initView();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化数据</div><div class="line">     */</div><div class="line">    protected  abstract void initData();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化侦听</div><div class="line">     */</div><div class="line">    protected abstract void initListener();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BaseFragment也同理，随着业务的增加和抽象，基类会继续扩展。其实不仅仅是<strong>BaseActivity</strong>和<strong>BaseFragment</strong>，如果你一个业务模块中有很多相似和相同的逻辑，也可以抽取一个<strong>BaseXXX</strong>这是非常好的一个习惯。</p>
+<p>还有一些建议，不做展开，大家请自行搜索：</p>
+<ul>
+<li>Android Studio上好用的插件</li>
+<li>selector</li>
+<li>图片的.9处理</li>
+<li>Resources xml文件中，记得用注释分割每个类用到的资源，建议不共用</li>
+<li>慎用static关键字</li>
+<li>定期code review，不断代码重构</li>
+</ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>推荐一个我曾经写过的总结：</p>
+<p><a href="http://www.jianshu.com/p/be05874965d4" target="_blank" rel="external">Android性能优化总结</a></p>
+<p><strong>写在后面：</strong></p>
+<p>本文做了一个初步总结，未来会慢慢扩展和完善，如果有遗漏，大家可以补充~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;开发一个Android应用之前，应该考虑点什么？&quot;&gt;&lt;a href=&quot;#开发一个Android应用之前，应该考虑点什么？&quot; class=&quot;headerlink&quot; title=&quot;开发一个Android应用之前，应该考虑点什么？&quot;&gt;&lt;/a&gt;开发一个Android应用之前，应该考虑点什么？&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;开心一刻&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="规范" scheme="http://yoursite.com/tags/%E8%A7%84%E8%8C%83/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Activity的生命周期，你足够了解吗？</title>
@@ -1349,100 +1488,6 @@ action (such as pressing the BACK key)
       <category term="移动开发" scheme="http://yoursite.com/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="书单" scheme="http://yoursite.com/tags/%E4%B9%A6%E5%8D%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>APK瘦身经验总结</title>
-    <link href="http://yoursite.com/2016/07/27/APK%E7%98%A6%E8%BA%AB%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2016/07/27/APK瘦身经验总结/</id>
-    <published>2016-07-27T13:46:57.118Z</published>
-    <updated>2016-07-27T13:48:14.493Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Android-APK瘦身经验总结"><a href="#Android-APK瘦身经验总结" class="headerlink" title="Android APK瘦身经验总结"></a>Android APK瘦身经验总结</h1><p><strong>写在前面：</strong><br>无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴<strong>张明云、胡凯</strong>等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上<strong>资料的链接</strong>。如果能对你有所帮助，那真的再好不过了。<br><a id="more"></a></p>
-<h2 id="零：瘦身的指标"><a href="#零：瘦身的指标" class="headerlink" title="零：瘦身的指标"></a>零：瘦身的指标</h2><p>是什么造成了APK越来越大呢？ 先来看一张解压之后的APK的目录图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-48bfa4535ec6721c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解压APK之后的目录"> </p>
-<p>应该从哪些方面入手对APK进行瘦身呢？</p>
-<ul>
-<li><p>冗余的代码，不必要的jar包；</p>
-</li>
-<li><p>未使用的静态资源，libs；</p>
-</li>
-<li><p>屏幕适配时，资源的重复使用；</p>
-</li>
-<li><p>错误地预置数据</p>
-</li>
-<li><p>native code</p>
-</li>
-<li><p><strong>未进行图片资源的优化与压缩（重点）</strong></p>
-</li>
-</ul>
-<p>如果看到这里感觉还没形成相应的概念，没关系，接下来对这些指标进行逐个分析，相信你很快就能明了。</p>
-<h2 id="一：剔除冗余代码"><a href="#一：剔除冗余代码" class="headerlink" title="一：剔除冗余代码"></a>一：剔除冗余代码</h2><ul>
-<li><p><strong>Proguard</strong></p>
-<p>Proguard是编译时对java代码进行压缩，混淆，优化，预编译等操作的集成化工具。Proguard<br>会遍历你的所有代码然后找出无用处的代码。所有这些不可达（或者不需要）的代码都会在生成最终的apk文件之前被清除掉。Proguard<br>也会重命名你的类属性，类和接口，然整个代码尽可能地保持轻量级水平。</p>
-<p><a href="http://blog.csdn.net/fengyuzhengfan/article/details/43876197" target="_blank" rel="external">Android代码混淆规则设置</a></p>
-<p><a href="http://blog.isming.me/2014/05/31/use-proguard/" target="_blank" rel="external">使用Proguard混淆Android代码</a></p>
-<p>有关Proguard的配置和使用，网上有很多资料，以上两个是我认为还不错的，通过Proguard工具通常能使你的APK减小200K左右。</p>
-</li>
-<li><p><strong>AndResGuard</strong></p>
-<p>AndResGuard是微信客户端高级工程师 shwen 的开源项目，可以做到直接处理安装包.<br>不依赖源码，不依赖编译过程，仅仅输入一个安装包，得到一个混淆包。AndResGuard的功能还是非常强大，腾讯多个产品都使用到了它，具体的源码和使用方法移步到Github上学习，已开源。</p>
-<p><a href="https://github.com/shwenzhang/AndResGuard" target="_blank" rel="external">AndResGuard–github</a></p>
-</li>
-</ul>
-<h2 id="二：剔除无用的资源"><a href="#二：剔除无用的资源" class="headerlink" title="二：剔除无用的资源"></a>二：剔除无用的资源</h2><ul>
-<li><p><strong>Lint</strong></p>
-<p>Proguard它只会对代码进行分析，对比如图片之类的资源就束手无策了，不过这个时候Lint就可以发挥非常大的作用了。</p>
-<p>Lint 一个静态的代码分析器，你只需通过调用 <strong>./gradlew<br>lint</strong>这个简单地命令它就能帮你检查所有无用的资源文件。它在检测完之后会提供一份详细的资源文件清单，并将无用的资源列在“<strong>UnusedResources:Unused resources</strong>” 区域之下。只要你不通过反射来反问这些无用资源，你就可以放心地移除这些文件了。</p>
-<p><a href="http://waychel.com/shi-yong-android-studiode-lintqing-chu-wu-yong-de-zi-yuan-wen-jian/" target="_blank" rel="external">Android Studio中Lint的使用</a></p>
-</li>
-</ul>
-<p>值得注意的是，Lint 会分析资源文件(比如 /res 文件夹下面的文件) ，但是会跳过 <strong>assets</strong> 文件 ( /assets 文件夹下面的文件)。事实上 assets 文件是可以通过它们的文件名直接访问的，而不需要通过Java引用或者XML引用。因此，Lint 也不能判定某个 asset 文件在项目中是否有用。这全取决于开发者对这个文件夹的维护了。所以你要去人工排查一下assets文件夹下有没有无用的资源，如果有就移除它。</p>
-<h2 id="三：对资源文件进行取舍"><a href="#三：对资源文件进行取舍" class="headerlink" title="三：对资源文件进行取舍"></a>三：对资源文件进行取舍</h2><p>其实这步操作更多的针对是<strong>屏幕适配</strong>的知识，曾经听说一个开发者对Android所有屏幕密度下的文件夹都提供了一套图片资源（ldpi, mdpi, tvdpi, hdpi, xhdpi, xxhdpi and xxxhdpi），这是非常不理智的行为，虽然Android支持这么多的屏幕密度，但是不代表你需要为每一个都提供一套资源，下面对资源取舍的一些<strong>建议</strong>：</p>
-<ul>
-<li><p>尽量使用一套图片资源，对于一些图片在不同分辨率手机上变现差异过大的情况，再考虑去相应文件夹下放入这个特定的图片</p>
-</li>
-<li><p>使用一套图、一套布局，多套dimens.xml文件，在使用最小资源的情况下搞定多分辨率适配</p>
-</li>
-<li><p>尽量重用图片，例如对称的图片，只需要提供一张，另外一张图片可以通过代码旋转的方式实现</p>
-</li>
-<li><p>去除无用的库，功能上重复的库，使用更轻量级的库，比如你仅仅是想做一些网络请求，使用volley即可，没必要去引入xutils，这就要根据你项目的情况去具体分析了。</p>
-</li>
-<li><p>错误的预置一些图片资源，有一些没必要跟随程序展示的图片就在需要加载它的时候再加载它，将程序与资源尽可能的分离。</p>
-</li>
-</ul>
-<h2 id="四：对图片资源进行优化"><a href="#四：对图片资源进行优化" class="headerlink" title="四：对图片资源进行优化"></a>四：对图片资源进行优化</h2><p>好了终于来到本篇博客的重头戏，其实上对一个APK大小的优化更多的就是对图片资源的一些处理技巧，我们应该在不降低图片的显示效果、保证APK显示效果的前提下压缩图片文件的大小。</p>
-<ul>
-<li><p><strong>tinypng</strong></p>
-<p><a href="http://leonshi.com/2015/11/02/tinypng-compress/" target="_blank" rel="external">图片压缩利器tinypng</a></p>
-<p>据官网介绍，它的原理是通过合并图片中相似的颜色，通过将 24 位的 PNG 图片压缩成小得多的 8 位色值的图片，并且去掉了图片中不必要的<br>metadata（元数据，从 Photoshop 等工具中导出的图片都会带有此类信息），这种方式几乎能完美支持原图片的透明度。</p>
-<p>拖拽图片即可使用，压缩率甚至达到了70%，感叹它强大的同时，有精力的同学可以去研究研究它的<strong>算法</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-8ff20ea64821e1e2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="压缩率达到了70%"></p>
-<p><a href="https://github.com/mogujie/TinyPIC_Gradle_Plugin" target="_blank" rel="external">开源的tinypng插件</a></p>
-</li>
-</ul>
-<p><strong>webP</strong></p>
-<p><a href="http://blog.csdn.net/rogerjava/article/details/48783743" target="_blank" rel="external">有关webP的简介</a></p>
-<p>WEBP 是google推出的意图改变web图片JPG、PNG、GIF三分天下局势的一种图片格式。它不仅支持无损或有损压缩、alpha通道，还支持动画演示。在同画质的情况下，webp格式图片占用体积相较于jpg图片大约减少40%，相较于无损png图片大约减少30%。具不完全统计，互联网流量中60%都产生于图片，如果能用上webp格式，网站的访问速度将会大大提升。</p>
-<p>不过android 4.0+才原生支持webp, 但是我们的app是兼容2.3+，所以4.0以下的设备将无法看到图片。但是引入兼容的SO文件，APK也会变大，这时候自己做个取舍吧！</p>
-<p><strong>写在最后：</strong></p>
-<p><strong>其实还有一些给APK瘦身的技巧和细节，并没有一一列举出，而且有些新的优化技巧涉及到一些兼容性的问题，大家多查阅资料就能明白了。</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Android-APK瘦身经验总结&quot;&gt;&lt;a href=&quot;#Android-APK瘦身经验总结&quot; class=&quot;headerlink&quot; title=&quot;Android APK瘦身经验总结&quot;&gt;&lt;/a&gt;Android APK瘦身经验总结&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;br&gt;无论手机的内存有多大， 我们自然都希望一个应用的安装包能越小越好，更小的APK标示着更多地用户愿意去下载和体验。本文借鉴&lt;strong&gt;张明云、胡凯&lt;/strong&gt;等老师的博客，对常规的APK瘦身方法进行归纳和总结并附上&lt;strong&gt;资料的链接&lt;/strong&gt;。如果能对你有所帮助，那真的再好不过了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
-    
-      <category term="瘦身" scheme="http://yoursite.com/tags/%E7%98%A6%E8%BA%AB/"/>
-    
-      <category term="经验" scheme="http://yoursite.com/tags/%E7%BB%8F%E9%AA%8C/"/>
     
   </entry>
   

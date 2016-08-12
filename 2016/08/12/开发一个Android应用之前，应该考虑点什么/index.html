@@ -1,0 +1,754 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,规范,开源库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="开发一个Android应用之前，应该考虑点什么？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发一个Android应用之前，应该考虑点什么？">
+<meta property="og:url" content="http://yoursite.com/2016/08/12/开发一个Android应用之前，应该考虑点什么/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="开发一个Android应用之前，应该考虑点什么？">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-08-12T08:33:18.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开发一个Android应用之前，应该考虑点什么？">
+<meta name="twitter:description" content="开发一个Android应用之前，应该考虑点什么？">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/12/开发一个Android应用之前，应该考虑点什么/"/>
+
+  <title> 开发一个Android应用之前，应该考虑点什么？ | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                开发一个Android应用之前，应该考虑点什么？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-12T16:33:18+08:00" content="2016-08-12">
+              2016-08-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/12/开发一个Android应用之前，应该考虑点什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/开发一个Android应用之前，应该考虑点什么/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="开发一个Android应用之前，应该考虑点什么？"><a href="#开发一个Android应用之前，应该考虑点什么？" class="headerlink" title="开发一个Android应用之前，应该考虑点什么？"></a>开发一个Android应用之前，应该考虑点什么？</h1><p><img src="http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br><a id="more"></a><br><strong>写在前面：</strong><br>昨天参加了秋百万大大组织的北京<strong>GDG</strong>活动，收获颇丰。又跟几个有写作习惯的朋友建立了一个“神秘组织”，每两周为一个周期，每人都会产出一篇原创的文章，互相校验和探讨，意在督促组员之间学习和分享开源技术。而简书上的平台就交给我维护了，不出意外，几天之内大家就可以看到我们的主页和第一期成员的文章啦，<strong>敬请期待~</strong></p>
+<p>前几天接手了一个老员工遗留下来的代码，别提多痛苦了，甚至有了让我推倒重写的冲动，很多地方的设计问题颇多，老大也快无法忍受了。。。上学的时候写一篇作文，要想好主题立意和分段，解数学题的时候也得在草稿纸上梳理清楚逻辑之后再下笔。其实开发一个Android也应是如此，不做准备，埋头苦写，最后会导致问题颇多。所以本文会<strong>根据网络上优秀内容和我实际的开发经验</strong>讨论总结一下，<strong>开发一个Android应用之前，都应该做哪些准备</strong>。</p>
+<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a><strong>编码规范</strong></h2><p><strong>编码规范</strong>的问题是我最先想强调的，因为我接手的项目命名就极其混乱，甚至在一个类中的命名都没有统一化（生无可恋脸）。代码可能不是你自己一个人写，<strong>保证代码可读性</strong>是非常必要的。而规范存在的意义就是淡化每个人的习惯而达到统一。不多说，下面就介绍<strong>Android的编码规范</strong>。</p>
+<ul>
+<li>除了注释，代码中不出现中文</li>
+<li>每个类写上必要的注释，类的说明，作者，联系方式</li>
+<li>方法加上必要的注释说明，方便以后维护</li>
+</ul>
+<p><strong>包管理</strong></p>
+<ul>
+<li>base:存放基础类的包，里面的类以Base为前缀，例如BaseActivity；</li>
+<li>activity:存放activity的包，每个activity命名以Activity结尾，例如MainActivity;</li>
+<li>fragment:存放fragment的包，每个fragment命名以Fragment结尾，例如ChatFragment;</li>
+<li>receiver:存放receiver的包；</li>
+<li>service:存放service的包；</li>
+<li>adapter:存放adapter的包，每个adapter命名以Adapter结尾，例如EventItemAdapter;</li>
+<li>common:存放一些公共常量，例如后端接口、SharedPreferenceKey、IntentExtra等;</li>
+<li>utils:存放工具类的包，比如常见的工具类：LogUtils、DateUtils；</li>
+<li>entity:存放实体类的包；</li>
+<li>widget:存放自定义View的包；</li>
+</ul>
+<p>以上是一些常见的包，但不局限于此，视项目的具体情况而定。</p>
+<p><strong>命名</strong></p>
+<p><strong>大驼峰命名(UpperCamelCase)：每个单词的第一个字母都大写。</strong></p>
+<p><strong>小驼峰命名(lowerCamelCase)：除第一个单词以外，每一个单词的第一个字母大写。</strong></p>
+<p><strong>命名的基本原则:</strong></p>
+<ul>
+<li>尽可能地使用统一的命名规范；</li>
+<li>不使用汉语拼音；</li>
+<li>除了常见的英文缩写，尽量少地使用缩写；</li>
+</ul>
+<p><strong>包命名</strong></p>
+<ul>
+<li>小写字母，参见上文包管理；</li>
+<li>连续的单词直接连接起来，不使用下划线；</li>
+</ul>
+<p><strong>Java类命名</strong></p>
+<ul>
+<li>大驼峰命名 UserListAdapter；</li>
+<li>除常见的缩写单词以外，不使用缩写，缩写的单词每个字母都大写 RequesURLList；</li>
+<li>公共的工具类建议以Utils、Manager为后缀，如LogUtils；</li>
+<li>接口命名遵循以上原则，以able或ible为后缀；</li>
+</ul>
+<p><strong>变量命名</strong></p>
+<ul>
+<li>成员变量命名<ul>
+<li>小驼峰命名；</li>
+<li>不推荐使用谷歌的前面加m的编码风格（如果使用团队中使用m，则统一使用）；</li>
+</ul>
+</li>
+<li>常量命名<ul>
+<li>单词每个字母均大写；</li>
+<li>单词之间下划线连接；</li>
+</ul>
+</li>
+<li>控件变量命名<ul>
+<li>小驼峰命名；</li>
+<li>建议使用 控件缩写+逻辑名称 格式，例如 tvPostTitle、etUserName；</li>
+<li>对应的控件的id的命名控件缩写_逻辑名称，单词均小写，用下划线连接，例如：tv_post_title、</li>
+<li>et_user_name；</li>
+</ul>
+</li>
+<li>常见的控件缩写如下：<br>控件 缩写<br>Linearlayout    ll<br>RelativeLayout    rl<br>TextView    tv<br>EditText    et<br>Button    btn<br>ImageView    iv<br>CheckBox    chb<br>ListView    lv<br>GridView    gv<br>RadioButton    rb</li>
+</ul>
+<p><strong>方法命名</strong></p>
+<ul>
+<li>小驼峰命名；</li>
+<li>Getter和Setter方法，推荐使用自动生成的，写起来也很方便。注意，bool类型的变量Getter方法写成isTrue这种；</li>
+<li>方法名应当保证见名知义的原则，尽量不使用or或者and，遵循“do one thing”原则；</li>
+</ul>
+<p><strong>布局文件命名</strong></p>
+<ul>
+<li>activity、fragment布局文件名以对应的类别名称为前缀，逻辑名称放在其后，以下划线连接，例如activity_home、fragment_chat_list，方便查找；</li>
+<li>ListView、GridView的item布局文件建议以list_item、gird_item为前缀，加上对应的逻辑名称，例如<br>list_item_post、grid_item_photo；</li>
+<li>Dialog的布局文件以dialog为前缀，逻辑名称放在其后，下划线连接，例如dialog_warnning;<br>包含项布局命名以include开头，在加上对应的逻辑名称，例如include_foot</li>
+<li>控件的id命名参见控件变量命名；</li>
+</ul>
+<p><strong>资源命名</strong></p>
+<ul>
+<li>图标资源以ic为前缀，例如ic_chat，指聊天图标；</li>
+<li>背景图片以bg为前缀，例如bg_login，指的是登录页的背景图；</li>
+<li>按钮图片以btn为前缀，例如btn_login，指的是登录按钮的图片，不过这只有一种状态，需要加上状态的可以在后面添加，例如btn_login_pressed，表示登录按钮按下的图片；</li>
+<li>当使用shape和selector文件为背景或者按钮时，命名参照以上说明；</li>
+</ul>
+<h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a><strong>项目架构</strong></h2><p><strong>项目框架</strong><br>一个好的项目架构可以降低项目的复杂性，并且易扩展、易维护，耦合低，结构清晰，功能内聚。<br><strong>MVC</strong>，<strong>MVP</strong>，<strong>MVVM</strong>还有一些设计模式，结合你app的业务，自行选择一个最合适的一条路走到黑，建议不要“混搭”。</p>
+<p><strong>开源框架</strong></p>
+<p>开源框架的选择分两大类，一是权威性毫无争议，放心选择的这类帮助我们快速开发的，比如：</p>
+<ul>
+<li>网络 Retrofit + OkHttp+ RxJava、Volley、android-async-http</li>
+<li>依赖注入 Dagger2、ButterKnife、RoboGuice</li>
+<li>事件总线 otto、EventBus</li>
+<li>图片加载 Fresco、Glide、Picasso</li>
+<li>数据库 GreenDao、Ormlite、LitePal</li>
+<li>日志输出 logger、LogUtils</li>
+<li>当然不能忘了Google提供的兼容support全家桶</li>
+</ul>
+<p>还有一类框架虽然不是毫无争议，但是也能极大节省我们的时间，提升开发效率，对于这类项目，要在Github上长期<strong>淘宝</strong>了。找那种star很多，issues解决很快，长期维护的项目，这种坑会比较少。</p>
+<h2 id="代码细节"><a href="#代码细节" class="headerlink" title="代码细节"></a><strong>代码细节</strong></h2><p><strong>抽取基类</strong><br>即使目前你没有需要，也一定要抽取一个BaseActivity和BaseFragment，因为早晚会用到，切记！<br>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseActivity extends Activity&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) &#123;</div><div class="line">        super.onCreate(savedInstanceState, persistentState);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void init() &#123;</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        initView();</div><div class="line">        initData();</div><div class="line">        initListener();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化布局</div><div class="line">     */</div><div class="line">    protected abstract void initView();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化数据</div><div class="line">     */</div><div class="line">    protected  abstract void initData();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化侦听</div><div class="line">     */</div><div class="line">    protected abstract void initListener();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BaseFragment也同理，随着业务的增加和抽象，基类会继续扩展。其实不仅仅是<strong>BaseActivity</strong>和<strong>BaseFragment</strong>，如果你一个业务模块中有很多相似和相同的逻辑，也可以抽取一个<strong>BaseXXX</strong>这是非常好的一个习惯。</p>
+<p>还有一些建议，不做展开，大家请自行搜索：</p>
+<ul>
+<li>Android Studio上好用的插件</li>
+<li>selector</li>
+<li>图片的.9处理</li>
+<li>Resources xml文件中，记得用注释分割每个类用到的资源，建议不共用</li>
+<li>慎用static关键字</li>
+<li>定期code review，不断代码重构</li>
+</ul>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>推荐一个我曾经写过的总结：</p>
+<p><a href="http://www.jianshu.com/p/be05874965d4" target="_blank" rel="external">Android性能优化总结</a></p>
+<p><strong>写在后面：</strong></p>
+<p>本文做了一个初步总结，未来会慢慢扩展和完善，如果有遗漏，大家可以补充~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/规范/" rel="tag">#规范</a>
+          
+            <a href="/tags/开源库/" rel="tag">#开源库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/Activity的生命周期，你足够了解吗？/" rel="next" title="Activity的生命周期，你足够了解吗？">
+                <i class="fa fa-chevron-left"></i> Activity的生命周期，你足够了解吗？
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/12/开发一个Android应用之前，应该考虑点什么/"
+           data-title="开发一个Android应用之前，应该考虑点什么？" data-url="http://yoursite.com/2016/08/12/开发一个Android应用之前，应该考虑点什么/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发一个Android应用之前，应该考虑点什么？"><span class="nav-number">1.</span> <span class="nav-text">开发一个Android应用之前，应该考虑点什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码规范"><span class="nav-number">1.1.</span> <span class="nav-text">编码规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目架构"><span class="nav-number">1.2.</span> <span class="nav-text">项目架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码细节"><span class="nav-number">1.3.</span> <span class="nav-text">代码细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化"><span class="nav-number">1.4.</span> <span class="nav-text">性能优化</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
