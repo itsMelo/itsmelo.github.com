@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-19T14:28:37.417Z</updated>
+  <updated>2016-08-19T14:31:22.082Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,22 +16,21 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>Activity 中不得不谈的 setContentView</title>
     <link href="http://yoursite.com/2016/08/19/Android%20%E4%B8%AD%E4%B8%8D%E5%BE%97%E4%B8%8D%E8%B0%88%E7%9A%84%20setContentView/"/>
     <id>http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/</id>
     <published>2016-08-19T14:24:34.071Z</published>
-    <updated>2016-08-19T14:28:37.417Z</updated>
+    <updated>2016-08-19T14:31:22.082Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <ul>
 <li>文章来源：itsCoder 的 <a href="https://github.com/itsCoder/weeklyblog" target="_blank" rel="external">WeeklyBolg</a> 项目</li>
 <li>itsCoder主页：<a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
 <li>作者：<a href="https://itsmelo.github.io/" target="_blank" rel="external">Melo</a></li>
-<li>审阅者：<a href="">暂无</a></li>
+<li>审阅者：<a href="">暂无</a><br><strong>写在前面：</strong><br>几个月之前在做项目的布局优化时，使用 <strong>Hierarchy Viewer</strong> 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。<a id="more"></a>
+也许有的同学没看过 Hierarchy Viewer 下项目的界面布局，没关系，我现在带大家了解下。<br>新建一个 module ，打开 sdk tool 文件夹下的 Hierarchy Viewer ，布局结构展示如下：</li>
 </ul>
 </blockquote>
-<p><strong>写在前面：</strong></p>
-<p>几个月之前在做项目的布局优化时，使用 <strong>Hierarchy Viewer</strong> 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。<br><a id="more"></a><br>也许有的同学没看过 Hierarchy Viewer 下项目的界面布局，没关系，我现在带大家了解下。<br>新建一个 module ，打开 sdk tool 文件夹下的 Hierarchy Viewer ，布局结构展示如下：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1915184-cec85b655a857ea2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainActivity界面层级"></p>
 <p>先别着急找放大镜，想想我们新建项目的默认布局，按理说根布局应该是 RelativeLayout ，并且子 View 是一个 TextView 写着 “Hello World”才对啊~ <strong>多出来的这些布局层级是什么</strong>？</p>
 <p>既然陌生又看不懂，那就先从我们熟悉的入手，找一下我们自己写的布局：</p>
@@ -91,14 +90,18 @@
 &lt;li&gt;文章来源：itsCoder 的 &lt;a href=&quot;https://github.com/itsCoder/weeklyblog&quot;&gt;WeeklyBolg&lt;/a&gt; 项目&lt;/li&gt;
 &lt;li&gt;itsCoder主页：&lt;a href=&quot;http://itscoder.com/&quot;&gt;http://itscoder.com/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;作者：&lt;a href=&quot;https://itsmelo.github.io/&quot;&gt;Melo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;审阅者：&lt;a href=&quot;&quot;&gt;暂无&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;几个月之前在做项目的布局优化时，使用 &lt;strong&gt;Hierarchy Viewer&lt;/strong&gt; 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。&lt;br&gt;
+&lt;li&gt;审阅者：&lt;a href=&quot;&quot;&gt;暂无&lt;/a&gt;&lt;br&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;br&gt;几个月之前在做项目的布局优化时，使用 &lt;strong&gt;Hierarchy Viewer&lt;/strong&gt; 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。
     
     </summary>
     
+      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="setContentView" scheme="http://yoursite.com/tags/setContentView/"/>
     
   </entry>
   

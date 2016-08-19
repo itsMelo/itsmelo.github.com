@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android,源码,setContentView," />
 
 
 
@@ -87,23 +87,15 @@
 <meta name="description" content="文章来源：itsCoder 的 WeeklyBolg 项目
 itsCoder主页：http://itscoder.com/
 作者：Melo
-审阅者：暂无
-
-
-写在前面：
-几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个">
+审阅者：暂无写在前面：几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Melo's Blog">
+<meta property="og:title" content="Activity 中不得不谈的 setContentView">
 <meta property="og:url" content="http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/index.html">
 <meta property="og:site_name" content="Melo's Blog">
 <meta property="og:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
 itsCoder主页：http://itscoder.com/
 作者：Melo
-审阅者：暂无
-
-
-写在前面：
-几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个">
+审阅者：暂无写在前面：几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-cec85b655a857ea2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-972bcb0f5f20225a?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-8437b107b9f42a95?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -113,17 +105,13 @@ itsCoder主页：http://itscoder.com/
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-81b5ec907ab9dbf5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-9a830d14a65e0fda?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-87182e07c37ac78e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-08-19T14:28:37.417Z">
+<meta property="og:updated_time" content="2016-08-19T14:31:22.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Melo's Blog">
+<meta name="twitter:title" content="Activity 中不得不谈的 setContentView">
 <meta name="twitter:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
 itsCoder主页：http://itscoder.com/
 作者：Melo
-审阅者：暂无
-
-
-写在前面：
-几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个">
+审阅者：暂无写在前面：几个月之前在做项目的布局优化时，使用 Hierarchy Viewer 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-cec85b655a857ea2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -147,7 +135,7 @@ itsCoder主页：http://itscoder.com/
 
   <link rel="canonical" href="http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/"/>
 
-  <title>  | Melo's Blog </title>
+  <title> Activity 中不得不谈的 setContentView | Melo's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +265,7 @@ itsCoder主页：http://itscoder.com/
             
             
               
-                
+                Activity 中不得不谈的 setContentView
               
             
           </h1>
@@ -294,6 +282,25 @@ itsCoder主页：http://itscoder.com/
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -329,11 +336,10 @@ itsCoder主页：http://itscoder.com/
 <li>文章来源：itsCoder 的 <a href="https://github.com/itsCoder/weeklyblog" target="_blank" rel="external">WeeklyBolg</a> 项目</li>
 <li>itsCoder主页：<a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
 <li>作者：<a href="https://itsmelo.github.io/" target="_blank" rel="external">Melo</a></li>
-<li>审阅者：<a href="">暂无</a></li>
+<li>审阅者：<a href="">暂无</a><br><strong>写在前面：</strong><br>几个月之前在做项目的布局优化时，使用 <strong>Hierarchy Viewer</strong> 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。<a id="more"></a>
+也许有的同学没看过 Hierarchy Viewer 下项目的界面布局，没关系，我现在带大家了解下。<br>新建一个 module ，打开 sdk tool 文件夹下的 Hierarchy Viewer ，布局结构展示如下：</li>
 </ul>
 </blockquote>
-<p><strong>写在前面：</strong></p>
-<p>几个月之前在做项目的布局优化时，使用 <strong>Hierarchy Viewer</strong> 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。<br><a id="more"></a><br>也许有的同学没看过 Hierarchy Viewer 下项目的界面布局，没关系，我现在带大家了解下。<br>新建一个 module ，打开 sdk tool 文件夹下的 Hierarchy Viewer ，布局结构展示如下：</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1915184-cec85b655a857ea2?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainActivity界面层级"></p>
 <p>先别着急找放大镜，想想我们新建项目的默认布局，按理说根布局应该是 RelativeLayout ，并且子 View 是一个 TextView 写着 “Hello World”才对啊~ <strong>多出来的这些布局层级是什么</strong>？</p>
 <p>既然陌生又看不懂，那就先从我们熟悉的入手，找一下我们自己写的布局：</p>
@@ -404,6 +410,16 @@ itsCoder主页：http://itscoder.com/
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
+            <a href="/tags/setContentView/" rel="tag">#setContentView</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -442,7 +458,7 @@ itsCoder主页：http://itscoder.com/
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/19/Android 中不得不谈的 setContentView/"
-           data-title="" data-url="http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/">
+           data-title="Activity 中不得不谈的 setContentView" data-url="http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/">
       </div>
     
   </div>
@@ -504,7 +520,7 @@ itsCoder主页：http://itscoder.com/
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
