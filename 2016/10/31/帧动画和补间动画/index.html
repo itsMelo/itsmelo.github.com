@@ -1,0 +1,745 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,动画," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+写在前面：为了使用户的交互更加流畅自然，动画也就成为了一个应用中必不可少的元素之一。在 Android 中常用的动画分类无外乎三种，最早的 帧动画 、补间动画，以及 3.0 之后加入的 属性动画，是它们组成了 Android 中各种炫酷亮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="帧动画和补间动画">
+<meta property="og:url" content="http://yoursite.com/2016/10/31/帧动画和补间动画/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+写在前面：为了使用户的交互更加流畅自然，动画也就成为了一个应用中必不可少的元素之一。在 Android 中常用的动画分类无外乎三种，最早的 帧动画 、补间动画，以及 3.0 之后加入的 属性动画，是它们组成了 Android 中各种炫酷亮">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-135a4d08be849a81?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-40afdfa768a4557f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-10-31T14:45:10.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="帧动画和补间动画">
+<meta name="twitter:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+写在前面：为了使用户的交互更加流畅自然，动画也就成为了一个应用中必不可少的元素之一。在 Android 中常用的动画分类无外乎三种，最早的 帧动画 、补间动画，以及 3.0 之后加入的 属性动画，是它们组成了 Android 中各种炫酷亮">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1915184-135a4d08be849a81?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/31/帧动画和补间动画/"/>
+
+  <title> 帧动画和补间动画 | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                帧动画和补间动画
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-31T22:43:46+08:00" content="2016-10-31">
+              2016-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/31/帧动画和补间动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/帧动画和补间动画/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<ul>
+<li>文章来源：itsCoder 的 <a href="https://github.com/itsCoder/weeklyblog" target="_blank" rel="external">WeeklyBolg</a> 项目</li>
+<li>itsCoder主页：<a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
+<li>作者：<a href="https://itsmelo.github.io/" target="_blank" rel="external">Melo</a></li>
+<li>审阅者：<a href="">暂无</a></li>
+</ul>
+</blockquote>
+<p><strong>写在前面：</strong><br>为了使用户的交互更加流畅自然，动画也就成为了一个应用中必不可少的元素之一。在 Android 中常用的动画分类无外乎三种，最早的 <strong>帧动画</strong> 、<strong>补间动画</strong>，以及 3.0 之后加入的 <strong>属性动画</strong>，是它们组成了 Android 中各种炫酷亮眼的动画效果。</p>
+<p>关于动画相关的博文说实话很多，但是为什么要写这篇文章呢？因为我发现很多博客都上来就“翻译”了一通 <strong>API</strong> ，这对很多没有建立起 Android 动画体系概念的新人来说，非常不友好。既没有说明各种动画的应用场景，也没有横向对比动画的优缺点。对于刚学习动画的同学来说，他们读起来心里就更没底了，面对稍微复杂的动画就无从下手，就好比那句歌词“懂得很多道理，却仍过不好这一生”。所以本文要有更多思考分析之外，也会教大家一些关于动画的小技巧和可能踩到的坑。本文我们就先来研究 帧动画 和 补间动画，话不多说，现在开始我们的内容吧。<br><a id="more"></a></p>
+<h2 id="帧动画"><a href="#帧动画" class="headerlink" title="帧动画"></a>帧动画</h2><p>我们由简到难，先来讲讲帧动画。帧动画就是 Frame 动画，它的原理十分“复古”，和我们小时候看的动画片原理一致（注意是我们小时候），就是把一张张准备好的，一系列图片，按照指定的时间播放出来，从而达到动画的效果。</p>
+<p>如此简单而又看似过时的帧动画，是否就被淘汰了呢？答案的自然是否定的。帧动画依然在这个复杂而有机的 Android 系统中占有一席之地。先来告诉大家帧动画的使用场景吧。</p>
+<ul>
+<li><p>设备的开机动画</p>
+</li>
+<li><p>及其“复杂”的效果，看似不可能完成的动画</p>
+</li>
+</ul>
+<p>设备的开机动画界面这个没什么好解释的，据我所知市面上99%的机器都是这么做的，因为这个时候系统或资源还没准备完全，所以就肯定会选择帧动画。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-135a4d08be849a81?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开机动画"></p>
+<p>我在我以前的魅族手机 /system/media 文件夹下，找到了一系列以上这种图片，组合到一起就是开机动画了。</p>
+<p>你可能还对我上面所说的第二种使用场景表示怀疑，前几天我看到一个应用有一个非常酷炫的效果，3D特效旋转的画面，请脑补一下数码宝贝进化的样子，我刚开始还纳闷，这个用代码怎么实现啊，想了下我想通了，这个用帧动画其实最好实现了，难为的可能就是设计师了（ 那可就不关能怪我推责任了哦~）。</p>
+<p>介绍完了应用场景，那现在就应该来介绍到底如何在代码中使用了。</p>
+<p>准备一个帧动画的图片资源：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1915184-40afdfa768a4557f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<p>可以通过 代码 或者 xml 方式来使用<strong>帧动画</strong></p>
+<p><strong>XML</strong><br>新建工程，然后在 drawable 目录下新建一个 xml 文件，名字是 bear_anim ，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:oneshot=&quot;false&quot;&gt;</div><div class="line"></div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp1&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp2&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp3&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp4&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp5&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp6&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp7&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp8&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item</div><div class="line">        android:drawable=&quot;@drawable/sp9&quot;</div><div class="line">        android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure>
+<p>需要注意的是，根节点必须为 <code>&lt;animation-list&gt;</code>，<code>oneshot</code>属性代表是否循环播放一次，true 为一次，false 为循环播放。<code>duration</code>属性表示此张图片滞留的时间，然后注意从上到下依次引用图片即可。</p>
+<p>接着给一个 ImageView 设置这个动画：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ImageView</div><div class="line">    android:id=&quot;@+id/iv_frame&quot;</div><div class="line">    android:layout_width=&quot;wrap_content&quot;</div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:background=&quot;@drawable/bear_anim&quot;</div><div class="line">    android:layout_centerInParent=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>最后一步当然是让动画跑起来了，需要用到 AnimationDrawable 对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">AnimationDrawable animationDrawable = (AnimationDrawable) ivFrame.getBackground();</div><div class="line">      animationDrawable.start();</div></pre></td></tr></table></figure></p>
+<p>这样一个帧动画就展现在我们面前了，想让它停下来也很简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(animationDrawable.isRunning())&#123;</div><div class="line">    animationDrawable.stop();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自然我们也可以用纯代码的方式实现，不过在此真的不推荐，显然 xml 的方式更省力，并且维护起来更方便。</p>
+<h2 id="补间动画"><a href="#补间动画" class="headerlink" title="补间动画"></a>补间动画</h2><p>tween 动画也叫作补间动画，它可以在一定的时间内使 View 完成四种基本的动画，即<strong>平移、缩放、透明度、旋转</strong>，也可以将它们组合到一起播放出来。这里先提一下未来会研究的 <strong>属性动画</strong>，也许从上面可以观察到， 无论是<strong>帧动画</strong>还是<strong>补间动画</strong>，都是把动画效果作用到 View 上，如果一个不是 View 的元素想实现动画，那这两种就无能为力了，只能请 <strong>属性动画</strong> 帮忙了。</p>
+<p>并且补间动画仅仅是给 View 增加了动画的“假象”，比如一个按钮从左侧跑到了右侧，你在右侧是无法点击它的，但是这不代表 补间动画就没有用武之地了，当你需要的动画效果无外乎上面那四种动画，并且仅仅是展示的时候，补间动画就再合适不过了。</p>
+<p>同样，补间动画的实现依然可以有两种方式，xml 定义或者是纯代码的方式，这里依然是建议使用 xml 的方式。</p>
+<p><strong>AlphaAnimation 透明度</strong></p>
+<p>在 res 文件夹下新建文件夹 anim ，新建文件 alpha_anim：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;alpha xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;200&quot;</div><div class="line">    android:fillAfter=&quot;true&quot;</div><div class="line">    android:fromAlpha=&quot;0&quot;</div><div class="line">    android:interpolator=&quot;@android:anim/linear_interpolator&quot;</div><div class="line">    android:repeatCount=&quot;-1&quot;</div><div class="line">    android:repeatMode=&quot;reverse&quot;</div><div class="line">    android:shareInterpolator=&quot;false&quot;</div><div class="line">    android:toAlpha=&quot;1&quot;&gt;</div><div class="line"></div><div class="line">&lt;/alpha&gt;</div></pre></td></tr></table></figure>
+<p>alpha 是透明度动画，分别介绍一下属性，共用属性下文不再重复介绍。</p>
+<p><code>duration</code>表示这一次动画持续的时间<br><code>fillAfter</code>表示动画结束时，是否保持最后一帧的样子<br><code>fillBefore</code>表示动画结束时，是否保持第一帧的样子<br><code>repeatCount</code>表示动画循环的次数，默认为 0 次不循环，-1 为无限循环。<br><code>repeatMode</code>表示是循环的模式，reverse 是从一次动画结束开始，restart 是从动画的开始处循环<br><code>interpolator</code>是一个插值器资源，它可以控制动画的播放速度<br><code>shareInterpolator</code>表示是否与 set 中其他动画共享插值器，false为各自使用各自的插值器</p>
+<p>上面共有的属性讲完了，下面来说 AlphaAnimation 特有的属性<br><code>fromAlpha</code>表示动画开始时的透明度<br><code>toAlpha</code> 表示动画结束时候的透明度<br>取值为[0.0,1.0]，0代表完全透明，1代表不透明。</p>
+<p>代码中借助 AnimationUtils 类来加载调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Animation alpha = AnimationUtils.loadAnimation(this, R.anim.alpha_anim);</div><div class="line">ivFrame.startAnimation(alpha);</div></pre></td></tr></table></figure>
+<p>以下的三种动画调用同理。</p>
+<p><strong>RotateAnimation 旋转动画</strong></p>
+<p>新建 xml 文件，rotate_anim </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;rotate xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;200&quot;</div><div class="line">    android:fromDegrees=&quot;0&quot;</div><div class="line">    android:pivotX=&quot;50%&quot;</div><div class="line">    android:pivotY=&quot;50%&quot;</div><div class="line">    android:toDegrees=&quot;360&quot;&gt;</div><div class="line"></div><div class="line">&lt;/rotate&gt;</div></pre></td></tr></table></figure>
+<p><code>fromDegrees</code> 起始角度 单位度 浮点值<br><code>toDegrees</code> 结尾角度 单位度 浮点值<br><code>pivotX</code>旋转中心点的 X 坐标，这个数值有三种表达方式<br><code>pivotY</code>旋转中心丶的 Y 坐标，这个数值也有三种表达方式</p>
+<ul>
+<li>纯数字 例如 20 ，代表相对于自身左边缘或顶边缘 + 20 像素</li>
+<li>num% 代表 相对于自身左边缘或顶边缘 + 自身宽 的百分之 num</li>
+<li>num%p 代表相对于自身左边缘或顶边缘 + 父容器 的百分之 num</li>
+</ul>
+<p><strong>ScaleAnimation 缩放动画</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;scale xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;2000&quot;</div><div class="line">    android:fromXScale=&quot;0.5&quot;</div><div class="line">    android:fromYScale=&quot;0.5&quot;</div><div class="line">    android:pivotX=&quot;50%&quot;</div><div class="line">    android:pivotY=&quot;50%&quot;</div><div class="line">    android:toXScale=&quot;2.0&quot;</div><div class="line">    android:toYScale=&quot;2.0&quot;&gt;</div><div class="line"></div><div class="line">&lt;/scale&gt;</div></pre></td></tr></table></figure>
+<p><code>fromXScale</code><br><code>fromYScale</code><br>　代表缩放时，X/Y 坐标起始大小，浮点值，0.5代表自身的一半，2.0代表自身的两倍大小。<br><code>toXScale</code><br><code>toYScale</code><br>　代表缩放时，X/Y 缩放结束时候大小。<br><code>pivotX</code><br><code>pivotY</code><br>缩放的中心坐标，单位与上面 RotateAnimation 介绍的同理</p>
+<p><strong>TranslateAnimation 平移动画</strong></p>
+<p>新建 xml 文件 translate_anim </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;translate xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;200&quot;</div><div class="line">    android:fromXDelta=&quot;0&quot;</div><div class="line">    android:fromYDelta=&quot;0&quot;</div><div class="line">    android:toXDelta=&quot;100%&quot;</div><div class="line">    android:toYDelta=&quot;100%&quot;&gt;</div><div class="line"></div><div class="line">&lt;/translate&gt;</div></pre></td></tr></table></figure>
+<p><code>fromXDelta</code><br><code>fromYDelta</code><br>起始时，X/Y 方向的位置<br><code>toXDelta</code><br><code>toYDelta</code><br>终止时，X/Y 方向的位置</p>
+<p>这四个属性都支持同样的单位，依然是三种表达方式，浮点数、num% 和 num%p</p>
+<ul>
+<li>浮点数 位置为 View 的左边距/上边距 + 此数值 正数为右，负数为左</li>
+<li>num% 位置为 View 的左边距/上边距 + View宽的百分之num 正数为右，负数为左</li>
+<li>num%p 位置为 View 的左边距/上边距 + 父容器的百分之num 正数为右，负数为左</li>
+</ul>
+<p>如果想将几个动画组合起来使用，可以选择跟布局节点为 set<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;200&quot;&gt;</div><div class="line"></div><div class="line">    &lt;translate</div><div class="line">        android:fromXDelta=&quot;0&quot;</div><div class="line">        android:fromYDelta=&quot;0&quot;</div><div class="line">        android:toXDelta=&quot;100%&quot;</div><div class="line">        android:toYDelta=&quot;100%&quot;&gt;</div><div class="line">    &lt;/translate&gt;</div><div class="line"></div><div class="line">    &lt;rotate</div><div class="line">        android:fromDegrees=&quot;0&quot;</div><div class="line">        android:pivotX=&quot;50%&quot;</div><div class="line">        android:pivotY=&quot;50%&quot;</div><div class="line">        android:toDegrees=&quot;360&quot;&gt;</div><div class="line">    &lt;/rotate&gt;</div><div class="line"></div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure></p>
+<p>代码中组合动画的实现方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Animation alpha = AnimationUtils.loadAnimation(this, R.anim.alpha_anim);</div><div class="line">Animation translate = AnimationUtils.loadAnimation(this, R.anim.translate_anim);</div><div class="line">AnimationSet set = new AnimationSet(false);</div><div class="line">set.addAnimation(alpha);</div><div class="line">set.addAnimation(translate);</div><div class="line">ivFrame.startAnimation(set);</div></pre></td></tr></table></figure>
+<p>到这里四种补间动画终于算是介绍完成了，下面在带来一点技巧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">alpha.setAnimationListener(new Animation.AnimationListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationStart(Animation animation) &#123;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animation animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationRepeat(Animation animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>给动画设置一个侦听，在一些回调中做你的操作。</p>
+<p><strong>停止一个补间动画的正确姿势：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public void stopAnimation(View v) &#123;</div><div class="line">    v.clearAnimation();</div><div class="line">    if (canCancelAnimation()) &#123;</div><div class="line">        v.animate().cancel();</div><div class="line">    &#125;</div><div class="line">    animation.setAnimationListener(null);</div><div class="line">	v.setAnimation(null);</div><div class="line">&#125;</div><div class="line">public static boolean canCancelAnimation() &#123;</div><div class="line">    return Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.ICE_CREAM_SANDWICH;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>啊哈，终于完成本文了，希望大家遇到动画的需求不要怂，拿起键盘开写就对了，未来会给大家带来<strong>属性动画</strong>的教程。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/动画/" rel="tag">#动画</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/19/Android 中不得不谈的 setContentView/" rel="next" title="Activity 中不得不谈的 setContentView">
+                <i class="fa fa-chevron-left"></i> Activity 中不得不谈的 setContentView
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/31/帧动画和补间动画/"
+           data-title="帧动画和补间动画" data-url="http://yoursite.com/2016/10/31/帧动画和补间动画/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#帧动画"><span class="nav-number">1.</span> <span class="nav-text">帧动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补间动画"><span class="nav-number">2.</span> <span class="nav-text">补间动画</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
