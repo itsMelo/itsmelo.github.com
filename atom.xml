@@ -1550,9 +1550,9 @@ action (such as pressing the BACK key)
     
       <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
     
-      <category term="技巧" scheme="http://yoursite.com/tags/%E6%8A%80%E5%B7%A7/"/>
-    
       <category term="eclipse" scheme="http://yoursite.com/tags/eclipse/"/>
+    
+      <category term="技巧" scheme="http://yoursite.com/tags/%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
