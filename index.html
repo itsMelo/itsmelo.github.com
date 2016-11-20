@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -63,9 +63,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -93,24 +93,35 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
 
   <title> Melo's Blog </title>
 </head>
@@ -214,6 +225,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -227,13 +240,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/20/面向对象六大原则和设计模式/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -255,24 +281,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-20T22:00:04+08:00" content="2016-11-20">
-              2016-11-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-20T22:00:04+08:00">
+                2016-11-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -280,7 +312,6 @@
 
                 
                 
-
               
             </span>
           
@@ -288,9 +319,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/11/20/面向对象六大原则和设计模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/面向对象六大原则和设计模式/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/面向对象六大原则和设计模式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -302,6 +333,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -328,11 +362,13 @@
 <p>在工作的初期，我们可能会经常有这样的感受，自己的代码接口设计混乱、代码耦合较为严重、一个类的代码过多等等，当自己回头再看这些代码时可能会感慨，怎么能写成这个鸟样。再看那些知名的开源库，它们大多有整洁的代码、清晰简单的接口、职责单一的类，这个时候我们会通常会捶胸顿足而感慨：什么时候老夫才能写出这样的代码！</p>
 <p>在做开发的这些年中，我渐渐的感觉到，其实国内的一些初、中级工程师写的东西不规范或者说不够清晰的原因是缺乏一些指导规则。他们手中挥舞着面向对象的大旗，写出来的东西却充斥着面向过程的气味。也许是他们不知道有这些规则，也许是他们知道但是不能很好的运用到实际的代码中，亦或是他们没有在实战项目中体会到这些原则能够带来的优点，以至于他们对这些原则并没有足够的重视。</p>
 <p>本章没有详细介绍 OOP 六大原则、设计模式、反模式等内容，只是对它们做了一些简单的介绍。并不是因为它们不重要，而是由于它们太重要，因此我们必须阅读更详尽的书籍来涉入这些知识，设计模式可以参考《设计模式之禅》、《设计模式：可复用面向对象软件的基础》以及《Android源码设计模式解析与实战》，反模式的权威书籍则为《反模式：危机中软件、架构和项目的重构》一书。</p>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/11/20/面向对象六大原则和设计模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -344,6 +380,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -362,13 +399,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/31/帧动画和补间动画/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -390,24 +440,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-31T22:43:46+08:00" content="2016-10-31">
-              2016-10-31
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-31T22:43:46+08:00">
+                2016-10-31
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -415,7 +471,6 @@
 
                 
                 
-
               
             </span>
           
@@ -423,9 +478,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/10/31/帧动画和补间动画/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/帧动画和补间动画/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/帧动画和补间动画/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -437,6 +492,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -459,11 +517,13 @@
 </blockquote>
 <p><strong>写在前面：</strong><br>为了使用户的交互更加流畅自然，动画也就成为了一个应用中必不可少的元素之一。在 Android 中常用的动画分类无外乎三种，最早的 <strong>帧动画</strong> 、<strong>补间动画</strong>，以及 3.0 之后加入的 <strong>属性动画</strong>，是它们组成了 Android 中各种炫酷亮眼的动画效果。</p>
 <p>关于动画相关的博文说实话很多，但是为什么要写这篇文章呢？因为我发现很多博客都上来就“翻译”了一通 <strong>API</strong> ，这对很多没有建立起 Android 动画体系概念的新人来说，非常不友好。既没有说明各种动画的应用场景，也没有横向对比动画的优缺点。对于刚学习动画的同学来说，他们读起来心里就更没底了，面对稍微复杂的动画就无从下手，就好比那句歌词“懂得很多道理，却仍过不好这一生”。所以本文要有更多思考分析之外，也会教大家一些关于动画的小技巧和可能踩到的坑。本文我们就先来研究 帧动画 和 补间动画，话不多说，现在开始我们的内容吧。<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/10/31/帧动画和补间动画/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -475,6 +535,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -493,13 +554,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/19/Android 中不得不谈的 setContentView/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -521,24 +595,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-19T22:24:34+08:00" content="2016-08-19">
-              2016-08-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-19T22:24:34+08:00">
+                2016-08-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -546,7 +626,6 @@
 
                 
                 
-
               
             </span>
           
@@ -554,9 +633,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/08/19/Android 中不得不谈的 setContentView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/Android 中不得不谈的 setContentView/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/Android 中不得不谈的 setContentView/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -568,6 +647,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -588,11 +670,13 @@
 <li>审阅者：<a href="">暂无</a><br><strong>写在前面：</strong><br>几个月之前在做项目的布局优化时，使用 <strong>Hierarchy Viewer</strong> 查看项目的层级结构，然后发现顶层的布局并不是在XML中我写的根布局，而是嵌套了多层 Layout ，简单查阅了一些资料之后明白这是系统为我们加上的。把这个知识点写在了印象笔记中的 TODO list（里面还有好多知识想研究，一直在拖延T.T），搁置了好久最近重新拿出来好好研究了一下，争取做到温故知新，融会贯通嘛。</li>
 </ul>
 </blockquote>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/19/Android 中不得不谈的 setContentView/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -604,6 +688,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -622,13 +707,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/12/开发一个Android应用之前，应该考虑点什么/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -650,24 +748,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-12T16:33:18+08:00" content="2016-08-12">
-              2016-08-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-12T16:33:18+08:00">
+                2016-08-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -675,7 +779,6 @@
 
                 
                 
-
               
             </span>
           
@@ -683,9 +786,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/08/12/开发一个Android应用之前，应该考虑点什么/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/开发一个Android应用之前，应该考虑点什么/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/开发一个Android应用之前，应该考虑点什么/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -697,6 +800,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -710,11 +816,13 @@
       
         
           <h1 id="开发一个Android应用之前，应该考虑点什么？"><a href="#开发一个Android应用之前，应该考虑点什么？" class="headerlink" title="开发一个Android应用之前，应该考虑点什么？"></a>开发一个Android应用之前，应该考虑点什么？</h1><p><img src="http://upload-images.jianshu.io/upload_images/1915184-e22b0058b534ace3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/12/开发一个Android应用之前，应该考虑点什么/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -726,6 +834,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -744,13 +853,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/01/Activity的生命周期，你足够了解吗？/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -772,24 +894,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T17:51:11+08:00" content="2016-08-01">
-              2016-08-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-01T17:51:11+08:00">
+                2016-08-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -797,7 +925,6 @@
 
                 
                 
-
               
             </span>
           
@@ -805,9 +932,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/08/01/Activity的生命周期，你足够了解吗？/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/Activity的生命周期，你足够了解吗？/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/Activity的生命周期，你足够了解吗？/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -819,6 +946,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -832,11 +962,13 @@
       
         
           <h1 id="Activity的生命周期，你足够了解吗？"><a href="#Activity的生命周期，你足够了解吗？" class="headerlink" title="Activity的生命周期，你足够了解吗？"></a>Activity的生命周期，你足够了解吗？</h1><p><strong>写在前面：</strong><br>对于Activity的生命周期，相信只要已经接触过Android的同学，一定可以说出个大概，因为Activity的生命周期真的是太重要的机制了。不过在开发中，我们在每个生命周期方法应该做些什么，还有一些比较关键的知识细节也许你还不清楚，所以本文会带着大家再来探寻一次Activity的生命周期。<br><img src="http://upload-images.jianshu.io/upload_images/1915184-ce9b7e9c5b9796ce?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开心一刻"><br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/01/Activity的生命周期，你足够了解吗？/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -848,6 +980,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -866,13 +999,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/28/ActivityThread的main方法究竟做了什么？/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -894,24 +1040,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:38:32+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T10:38:32+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -919,7 +1071,6 @@
 
                 
                 
-
               
             </span>
           
@@ -927,9 +1078,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/07/28/ActivityThread的main方法究竟做了什么？/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/ActivityThread的main方法究竟做了什么？/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/ActivityThread的main方法究竟做了什么？/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -941,6 +1092,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -954,11 +1108,13 @@
       
         
           <h1 id="ActivityThread的main方法究竟做了什么？"><a href="#ActivityThread的main方法究竟做了什么？" class="headerlink" title="ActivityThread的main方法究竟做了什么？"></a>ActivityThread的main方法究竟做了什么？</h1><p><strong>写在前面：</strong><br>在暴雨天能去上课的都是好学生，能去上班的都是游泳运动员~<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/28/ActivityThread的main方法究竟做了什么？/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -970,6 +1126,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -988,13 +1145,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/28/Android微信自动回复功能/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1016,24 +1186,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:35:00+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T10:35:00+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -1041,7 +1217,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1049,9 +1224,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/07/28/Android微信自动回复功能/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/Android微信自动回复功能/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/Android微信自动回复功能/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1063,6 +1238,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -1076,11 +1254,13 @@
       
         
           <h1 id="Android微信自动回复功能"><a href="#Android微信自动回复功能" class="headerlink" title="Android微信自动回复功能"></a>Android微信自动回复功能</h1><p><strong>写在前面：</strong><br>最近接到老大的一个需求，要求在手机端拦截微信的通知（Notification），从而获得联系人和内容。之后将联系人和内容发送到我们的硬件产品上，展示出来之后，再将我们想回复内容传给微信，并且发送给相应联系人。<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/28/Android微信自动回复功能/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1092,6 +1272,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -1110,13 +1291,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/28/跳出手机的Dialog--Presentation/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1138,24 +1332,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:33:09+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T10:33:09+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -1163,7 +1363,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1171,9 +1370,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/07/28/跳出手机的Dialog--Presentation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/跳出手机的Dialog--Presentation/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/跳出手机的Dialog--Presentation/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1185,6 +1384,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -1198,11 +1400,13 @@
       
         
           <h1 id="跳出手机的Dialog–Presentation"><a href="#跳出手机的Dialog–Presentation" class="headerlink" title="跳出手机的Dialog–Presentation"></a>跳出手机的Dialog–Presentation</h1><p><strong>写在前面：</strong><br><strong>Presentation 是 what？</strong><br>也许你刚看到标题的时候，会默默把这个单词扔到翻译工具里面，就像老大最开始跟我提起这个单词的时候一样。<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/28/跳出手机的Dialog--Presentation/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1214,6 +1418,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -1232,13 +1437,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/28/3分钟傻瓜式反编译一个APP/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1260,24 +1478,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:32:03+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T10:32:03+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -1285,7 +1509,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1293,9 +1516,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/07/28/3分钟傻瓜式反编译一个APP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/3分钟傻瓜式反编译一个APP/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/3分钟傻瓜式反编译一个APP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1307,6 +1530,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -1320,11 +1546,13 @@
       
         
           <h1 id="3分钟傻瓜式反编译一个APP"><a href="#3分钟傻瓜式反编译一个APP" class="headerlink" title="3分钟傻瓜式反编译一个APP"></a>3分钟傻瓜式反编译一个APP</h1><p><strong>写在前面：</strong><br>最近工作有些忙，一段时间没更新博客了，趁着刚吃完晚饭，来更新一下~<br>前几天，需求上有一个功能没思路，反编译了一下同类型的APP，找到了一个关键类，问题得以解决。网络上有很多比较成熟的文章，不过我个人对于反编译这块，有些需求过剩，不够简单粗暴，所以特来介绍一个方便的工具来进行反编译操作。<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/28/3分钟傻瓜式反编译一个APP/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1336,6 +1564,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -1354,13 +1583,26 @@
       
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/28/Handler可能造成内存泄漏（四）/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -1382,24 +1624,30 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T10:18:57+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T10:18:57+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+              <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Android/" itemprop="url" rel="index">
                     <span itemprop="name">Android</span>
                   </a>
@@ -1407,7 +1655,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1415,9 +1662,9 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/07/28/Handler可能造成内存泄漏（四）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/Handler可能造成内存泄漏（四）/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/Handler可能造成内存泄漏（四）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1429,6 +1676,9 @@
           
 
           
+
+          
+
         </div>
       </header>
     
@@ -1442,11 +1692,13 @@
       
         
           <h1 id="Handler可能造成内存泄漏（四）"><a href="#Handler可能造成内存泄漏（四）" class="headerlink" title="Handler可能造成内存泄漏（四）"></a>Handler可能造成内存泄漏（四）</h1><p><strong>写在前面：</strong><br>不知不觉中我们已经进行了三篇有关Android消息机制的研究，温故知新，我们先来回顾一下：<br>
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/28/Handler可能造成内存泄漏（四）/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1458,6 +1710,7 @@
     <div>
       
     </div>
+
 
     <footer class="post-footer">
       
@@ -1507,7 +1760,7 @@
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
@@ -1575,6 +1828,9 @@
         
         
 
+        
+
+
       </section>
 
       
@@ -1599,6 +1855,7 @@
   <span class="author" itemprop="copyrightHolder">Melo</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1609,6 +1866,7 @@
     NexT.Pisces
   </a>
 </div>
+
 
         
 
@@ -1642,49 +1900,49 @@
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -1714,6 +1972,8 @@
 
 
 
+
+
   
   
 
@@ -1722,6 +1982,9 @@
   
 
   
+
+  
+
 
 </body>
 </html>
