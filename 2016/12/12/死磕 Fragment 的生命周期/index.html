@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Fragment," />
+  <meta name="keywords" content="Android,动画," />
 
 
 
@@ -94,7 +94,7 @@ itsCoder主页：http://itscoder.com/
 曾经在北京拥挤的13号线地铁上，一名背着双肩包穿着格子衫带着鸭舌帽脚踏帆布鞋的程序员">
 <meta property="og:type" content="article">
 <meta property="og:title" content="死磕 Fragment 的生命周期">
-<meta property="og:url" content="http://yoursite.com/2016/10/31/帧动画和补间动画/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/12/12/死磕 Fragment 的生命周期/index.html">
 <meta property="og:site_name" content="Melo's Blog">
 <meta property="og:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
 itsCoder主页：http://itscoder.com/
@@ -118,7 +118,7 @@ itsCoder主页：http://itscoder.com/
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-303808d658d7e612?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-e5ca14d9d1143cba?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1915184-b0185314cdb61adc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-12-12T15:20:50.273Z">
+<meta property="og:updated_time" content="2016-12-12T15:25:37.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死磕 Fragment 的生命周期">
 <meta name="twitter:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
@@ -157,7 +157,7 @@ itsCoder主页：http://itscoder.com/
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/31/帧动画和补间动画/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/12/死磕 Fragment 的生命周期/"/>
 
 
 
@@ -284,7 +284,7 @@ itsCoder主页：http://itscoder.com/
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/31/帧动画和补间动画/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/12/死磕 Fragment 的生命周期/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Melo">
@@ -321,8 +321,8 @@ itsCoder主页：http://itscoder.com/
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-31T22:43:46+08:00">
-                2016-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-12T23:26:45+08:00">
+                2016-12-12
               </time>
             
 
@@ -355,8 +355,8 @@ itsCoder主页：http://itscoder.com/
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/31/帧动画和补间动画/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/帧动画和补间动画/" itemprop="commentCount"></span>
+                <a href="/2016/12/12/死磕 Fragment 的生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/12/死磕 Fragment 的生命周期/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -392,6 +392,7 @@ itsCoder主页：http://itscoder.com/
 </blockquote>
 <p>本文例子中 github 地址：<br><a href="https://github.com/itsMelo/BuzzerBeater" target="_blank" rel="external">github BuzzerBeater 项目链接</a><br>（第一个开源项目，目前在逐步更新一些知识点，希望对你有所帮助）</p>
 <p>曾经在北京拥挤的13号线地铁上，一名背着双肩包穿着格子衫带着鸭舌帽脚踏帆布鞋的程序员讲了一句：<br>“我觉得 Fragment 真的太难用了”。从而引起一阵躁动激烈的讨论。</p>
+<a id="more"></a>
 <p><strong>正方观点：</strong></p>
 <p>Fragment 真的太好用了。要知道因为 Activity 的启动，涉及到 Android 系统对 ActivityManager 的调度，会关联许多资源和进行诸多复杂运算，在一些高端手机上，这个调度的时长甚至会超过 100 ms。反观 Fragment，启动如巧克力入口般顺滑，轻量不消耗手机资源。还可以做成一个个模块，方便 Activity 复用。并且如果要涉及平板的适配，Fragment 更是必不可少。</p>
 <p><strong>反方观点：</strong></p>
@@ -497,7 +498,7 @@ itsCoder主页：http://itscoder.com/
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+            <a href="/tags/动画/" rel="tag"># 动画</a>
           
         </div>
       
@@ -506,8 +507,8 @@ itsCoder主页：http://itscoder.com/
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/19/Android 中不得不谈的 setContentView/" rel="next" title="Activity 中不得不谈的 setContentView">
-                <i class="fa fa-chevron-left"></i> Activity 中不得不谈的 setContentView
+              <a href="/2016/11/20/面向对象六大原则和设计模式/" rel="next" title="面向对象六大原则和设计模式">
+                <i class="fa fa-chevron-left"></i> 面向对象六大原则和设计模式
               </a>
             
           </div>
@@ -515,10 +516,6 @@ itsCoder主页：http://itscoder.com/
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/20/面向对象六大原则和设计模式/" rel="prev" title="面向对象六大原则和设计模式">
-                面向对象六大原则和设计模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -544,8 +541,8 @@ itsCoder主页：http://itscoder.com/
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/31/帧动画和补间动画/"
-           data-title="死磕 Fragment 的生命周期" data-url="http://yoursite.com/2016/10/31/帧动画和补间动画/">
+      <div class="ds-thread" data-thread-key="2016/12/12/死磕 Fragment 的生命周期/"
+           data-title="死磕 Fragment 的生命周期" data-url="http://yoursite.com/2016/12/12/死磕 Fragment 的生命周期/">
       </div>
     
   </div>
