@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-12T15:25:37.118Z</updated>
+  <updated>2017-01-04T15:47:20.175Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,70 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/01/04/Android%206.0%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9D%83%E9%99%90%E7%AE%80%E6%B4%81%E5%B0%81%E8%A3%85/"/>
+    <id>http://yoursite.com/2017/01/04/Android 6.0运行时权限简洁封装/</id>
+    <published>2017-01-04T15:48:23.063Z</published>
+    <updated>2017-01-04T15:47:20.175Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<ul>
+<li>文章来源：itsCoder 的 <a href="https://github.com/itsCoder/weeklyblog" target="_blank" rel="external">WeeklyBolg</a> 项目</li>
+<li>itsCoder主页：<a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
+<li>作者：<a href="https://itsmelo.github.io/" target="_blank" rel="external">Melo</a></li>
+<li>审阅者：<a href="">暂无</a></li>
+</ul>
+</blockquote>
+<h1 id="Android-6-0-运行时权限简洁封装"><a href="#Android-6-0-运行时权限简洁封装" class="headerlink" title="Android 6.0 运行时权限简洁封装"></a>Android 6.0 运行时权限简洁封装</h1><blockquote>
+<p>本文原创，转载请注明出处。<br>欢迎关注我的 <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" rel="external">简书</a> ，关注我的专题 <a href="http://www.jianshu.com/collection/b1fa46ec3b08" target="_blank" rel="external">Android Class</a> 我会长期坚持为大家收录简书上高质量的 Android 相关博文。</p>
+</blockquote>
+<p><strong>写在前面：</strong></p>
+<p>Android M 中有一个比较重要的知识点就是运行时权限了，关于运行时权限的文章和封装库目前也出现了不少，在开发的过程中始终觉得运行时权限这块的代码可以进一步封装一下，让其使用起来能再简洁一点，并且还不容易出错。关于 Android 运行时权限的知识就不多讲解了，可以参考下面的一些资料：</p>
+<p><a href="https://developer.android.com/training/permissions/requesting.html" target="_blank" rel="external">Android Runtime Permissions</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/50709663" target="_blank" rel="external">Android 6.0 运行时权限处理完全解析</a></p>
+<p>知识点比较简单，大致了解和使用过后，就来开始我的这次封装之旅吧。</p>
+<a id="more"></a>
+<p>现在直观的看看封装之后的使用，是不是清爽很多？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@OnClick(R.id.tv_toolbar_right)</div><div class="line">public void onClick() &#123;</div><div class="line">    performRequestPermissions(getString(R.string.permission_desc), new String[]&#123;Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION&#125;</div><div class="line">            , PER_REQUEST_CODE, new PermissionsResultListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onPermissionGranted() &#123;</div><div class="line">                    Toast.makeText(MainActivity.this, &quot;已申请权限&quot;, Toast.LENGTH_LONG).show();</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                @Override</div><div class="line">                public void onPermissionDenied() &#123;</div><div class="line">                    Toast.makeText(MainActivity.this, &quot;拒绝申请权限&quot;, Toast.LENGTH_LONG).show();</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我将运行时权限封装到 BaseActivity 中，MainActivty 继承BaseActivity，调用 performRequestPermissions 方法，此时我不用再去做一些判断，只需要穿入四个参数即可。当然你为了在 6.0 以下保证应用正常运行，你依然需要像以前一样，在<strong>清单文件</strong>中申明要使用的权限。</p>
+<p>首先我需要一个接口做通信：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public interface PermissionsResultListener &#123;</div><div class="line"></div><div class="line">    void onPermissionGranted();</div><div class="line"></div><div class="line">    void onPermissionDenied();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后把逻辑代码封装在 BaseActivity 里面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line">public class BaseActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    private PermissionsResultListener mListener;</div><div class="line"></div><div class="line">    private int mRequestCode;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 其他 Activity 继承 BaseActivity 调用 performRequestPermissions 方法</div><div class="line">     *</div><div class="line">     * @param desc        首次申请权限被拒绝后再次申请给用户的描述提示</div><div class="line">     * @param permissions 要申请的权限数组</div><div class="line">     * @param requestCode 申请标记值</div><div class="line">     * @param listener    实现的接口</div><div class="line">     */</div><div class="line">    protected void performRequestPermissions(String desc, String[] permissions, int requestCode, PermissionsResultListener listener) &#123;</div><div class="line">        if (permissions == null || permissions.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        mRequestCode = requestCode;</div><div class="line">        mListener = listener;</div><div class="line">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</div><div class="line">            if (checkEachSelfPermission(permissions)) &#123;// 检查是否声明了权限</div><div class="line">                requestEachPermissions(desc, permissions, requestCode);</div><div class="line">            &#125; else &#123;// 已经申请权限</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionGranted();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (mListener != null) &#123;</div><div class="line">                mListener.onPermissionGranted();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 申请权限前判断是否需要声明</div><div class="line">     *</div><div class="line">     * @param desc</div><div class="line">     * @param permissions</div><div class="line">     * @param requestCode</div><div class="line">     */</div><div class="line">    private void requestEachPermissions(String desc, String[] permissions, int requestCode) &#123;</div><div class="line">        if (shouldShowRequestPermissionRationale(permissions)) &#123;// 需要再次声明</div><div class="line">            showRationaleDialog(desc, permissions, requestCode);</div><div class="line">        &#125; else &#123;</div><div class="line">            ActivityCompat.requestPermissions(BaseActivity.this, permissions, requestCode);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 弹出声明的 Dialog</div><div class="line">     *</div><div class="line">     * @param desc</div><div class="line">     * @param permissions</div><div class="line">     * @param requestCode</div><div class="line">     */</div><div class="line">    private void showRationaleDialog(String desc, final String[] permissions, final int requestCode) &#123;</div><div class="line">        final AlertDialog.Builder builder = new AlertDialog.Builder(this);</div><div class="line">        builder.setTitle(getString(R.string.tips))</div><div class="line">                .setMessage(desc)</div><div class="line">                .setPositiveButton(getResources().getString(R.string.confrim), new DialogInterface.OnClickListener() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void onClick(DialogInterface dialogInterface, int i) &#123;</div><div class="line">                        ActivityCompat.requestPermissions(BaseActivity.this, permissions, requestCode);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .setNegativeButton(getResources().getString(R.string.cancle), new DialogInterface.OnClickListener() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void onClick(DialogInterface dialogInterface, int i) &#123;</div><div class="line">                        dialogInterface.dismiss();</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .setCancelable(false)</div><div class="line">                .show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 再次申请权限时，是否需要声明</div><div class="line">     *</div><div class="line">     * @param permissions</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    private boolean shouldShowRequestPermissionRationale(String[] permissions) &#123;</div><div class="line">        for (String permission : permissions) &#123;</div><div class="line">            if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 检察每个权限是否申请</div><div class="line">     *</div><div class="line">     * @param permissions</div><div class="line">     * @return true 需要申请权限,false 已申请权限</div><div class="line">     */</div><div class="line">    private boolean checkEachSelfPermission(String[] permissions) &#123;</div><div class="line">        for (String permission : permissions) &#123;</div><div class="line">            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 申请权限结果的回调</div><div class="line">     *</div><div class="line">     * @param requestCode</div><div class="line">     * @param permissions</div><div class="line">     * @param grantResults</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) &#123;</div><div class="line">        super.onRequestPermissionsResult(requestCode, permissions, grantResults);</div><div class="line">        if (requestCode == mRequestCode) &#123;</div><div class="line">            if (checkEachPermissionsGranted(grantResults)) &#123;</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionGranted();</div><div class="line">                &#125;</div><div class="line">            &#125; else &#123;// 用户拒绝申请权限</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionDenied();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 检查回调结果</div><div class="line">     *</div><div class="line">     * @param grantResults</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    private boolean checkEachPermissionsGranted(int[] grantResults) &#123;</div><div class="line">        for (int result : grantResults) &#123;</div><div class="line">            if (result != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                return false;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一个方法都有注释，逻辑也相对简单，就是我会遍历每个数组中申请的权限，如果需要申请就去申请，然后再处理一下回调的结果，其中还有对用户拒绝，然后再次申请弹出 Dialog 的处理。</p>
+<p>如果在 Fragment 中使用，只是改变了一下参数封到 BaseFragment 中，这里就不贴代码了，都已经上传 <strong>github</strong></p>
+<p>BaseActivity：</p>
+<p><a href="https://github.com/itsMelo/BuzzerBeater/blob/master/app/src/main/java/com/blog/melo/buzzerbeater/activity/BaseActivity.java" target="_blank" rel="external">BuzzerBeater BaseActivity</a></p>
+<p>BaseFragment：</p>
+<p><a href="https://github.com/itsMelo/BuzzerBeater/blob/master/app/src/main/java/com/blog/melo/buzzerbeater/fragment/BaseFragment.java" target="_blank" rel="external">BuzzerBeater BaseFragment</a></p>
+<p>如有问题，继续交流~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;文章来源：itsCoder 的 &lt;a href=&quot;https://github.com/itsCoder/weeklyblog&quot;&gt;WeeklyBolg&lt;/a&gt; 项目&lt;/li&gt;
+&lt;li&gt;itsCoder主页：&lt;a href=&quot;http://itscoder.com/&quot;&gt;http://itscoder.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;作者：&lt;a href=&quot;https://itsmelo.github.io/&quot;&gt;Melo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;审阅者：&lt;a href=&quot;&quot;&gt;暂无&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;Android-6-0-运行时权限简洁封装&quot;&gt;&lt;a href=&quot;#Android-6-0-运行时权限简洁封装&quot; class=&quot;headerlink&quot; title=&quot;Android 6.0 运行时权限简洁封装&quot;&gt;&lt;/a&gt;Android 6.0 运行时权限简洁封装&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;本文原创，转载请注明出处。&lt;br&gt;欢迎关注我的 &lt;a href=&quot;http://www.jianshu.com/users/f5909165c1e8/latest_articles&quot;&gt;简书&lt;/a&gt; ，关注我的专题 &lt;a href=&quot;http://www.jianshu.com/collection/b1fa46ec3b08&quot;&gt;Android Class&lt;/a&gt; 我会长期坚持为大家收录简书上高质量的 Android 相关博文。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;写在前面：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Android M 中有一个比较重要的知识点就是运行时权限了，关于运行时权限的文章和封装库目前也出现了不少，在开发的过程中始终觉得运行时权限这块的代码可以进一步封装一下，让其使用起来能再简洁一点，并且还不容易出错。关于 Android 运行时权限的知识就不多讲解了，可以参考下面的一些资料：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.android.com/training/permissions/requesting.html&quot;&gt;Android Runtime Permissions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/lmj623565791/article/details/50709663&quot;&gt;Android 6.0 运行时权限处理完全解析&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;知识点比较简单，大致了解和使用过后，就来开始我的这次封装之旅吧。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>死磕 Fragment 的生命周期</title>
@@ -1623,66 +1687,6 @@ action (such as pressing the BACK key)
       <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>3分钟教会你如何看eclipse中的崩溃信息</title>
-    <link href="http://yoursite.com/2016/07/27/3%E5%88%86%E9%92%9F%E6%95%99%E4%BC%9A%E4%BD%A0%E5%A6%82%E4%BD%95%E7%9C%8Beclipse%E4%B8%AD%E7%9A%84%E5%B4%A9%E6%BA%83%E4%BF%A1%E6%81%AF/"/>
-    <id>http://yoursite.com/2016/07/27/3分钟教会你如何看eclipse中的崩溃信息/</id>
-    <published>2016-07-27T14:07:01.801Z</published>
-    <updated>2016-07-27T14:07:47.934Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="3分钟教会你如何看eclipse中的崩溃信息"><a href="#3分钟教会你如何看eclipse中的崩溃信息" class="headerlink" title="3分钟教会你如何看eclipse中的崩溃信息"></a>3分钟教会你如何看eclipse中的崩溃信息</h1><blockquote>
-<p>本文原创，转载请注明出处，坚持长期原创博客，喜欢请加关注哦，你们支持就是我动力的源泉~</p>
-</blockquote>
-<a id="more"></a>
-<p><strong>写在前面：</strong></p>
-<p>前一阵花了足足一周的时间去研究了Context的源码，发布出来一篇文章，我觉得写得已经OK了却反响平平。前天写了一个解析json的教程却得到很多朋友门点赞认可。说明还有相当一部分刚刚入行的朋友们希望得到一些相对初级的知识和技巧，话不多说，<strong>我来一点点的教大家看崩溃Log。</strong></p>
-<blockquote>
-<p>以后准备每周出一篇入门、一篇进阶博客~</p>
-</blockquote>
-<p>我相信很多初学者用的开发工具是Eclipse，并且很多初级书籍也不会教大家怎么去看崩溃日志，虽然不难，但是靠自己琢磨还是挺浪费时间的，我们就写一个Demo来看看吧！</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-1b61f232e90373a1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="注释掉一行代码，让程序崩溃"></p>
-<p><strong>注释掉创建ViewHolder对象的代码，让程序崩溃。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-3bcff3ce97214b64?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MainActivity中展示一个ListView"></p>
-<p>这个Demo很简单，就是在MainActivity中展示一个ListView，《第一行代码》中的例子。<br>现在我们注释掉了创建ViewHolder对象的代码，连上手机，运行程序，看看崩溃信息吧！</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-ad7db11573d197f7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="崩溃信息"></p>
-<p>看图片中黑色的箭头，左边的箭头指向自己的<strong>包名过滤器</strong>，表示只显示我这个应用的logcat，右边箭头把信息的等级过滤为<strong>error</strong>级别。</p>
-<p>这时候我们进一步去<strong>缩小</strong>范围：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-1d014a2b4b6f139c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="黑框中的信息"></p>
-<p>其实黑框中的信息就是我们最主要关心的，但是为什么要这两个地方的信息呢？</p>
-<ul>
-<li>java.lang.xxxException，这个标明你的错误类型，如果没见过，用搜索工具搜一下，就能明白，在我们这个例子里是空指针异常。</li>
-</ul>
-<ul>
-<li>第二个黑框是我们<strong>自己应用</strong>的包名（第31行出了问题），说明这个错误就是我们自己的代码导致的，双击可以进入java代码中，后面那些android.widget开头的崩溃信息是一些牵连信息，也是可以提供参考的。</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/1915184-be4177455837afaf?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="双击进入31行"></p>
-<p>这行报了空指针异常，分析一下，说明我们的<strong>ViewHolder</strong>没有创建对象。</p>
-<p><strong>写在后面：</strong></p>
-<p>其实本文例子中的错误并不复杂，看错误日志也是一个经验活。遇到崩溃要理清头绪，寻找错误位置，分析可能造成的原因，看得多了，也就慢慢会看了。</p>
-<blockquote>
-<p>喜欢请加关注，最近应该会出产很多文章~</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;3分钟教会你如何看eclipse中的崩溃信息&quot;&gt;&lt;a href=&quot;#3分钟教会你如何看eclipse中的崩溃信息&quot; class=&quot;headerlink&quot; title=&quot;3分钟教会你如何看eclipse中的崩溃信息&quot;&gt;&lt;/a&gt;3分钟教会你如何看eclipse中的崩溃信息&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本文原创，转载请注明出处，坚持长期原创博客，喜欢请加关注哦，你们支持就是我动力的源泉~&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
-    
-      <category term="eclipse" scheme="http://yoursite.com/tags/eclipse/"/>
-    
-      <category term="技巧" scheme="http://yoursite.com/tags/%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   

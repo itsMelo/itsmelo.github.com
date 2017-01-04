@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+Android 6.0 运行时权限简洁封装
+本文原创，转载请注明出处。欢迎关注我的 简书 ，关注我的专题 Android Class 我会长期坚持为大家收录简书上高质量的 Android 相关博文。
+
+写在前面：
+Android M 中有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Melo's Blog">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/Android 6.0运行时权限简洁封装/index.html">
+<meta property="og:site_name" content="Melo's Blog">
+<meta property="og:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+Android 6.0 运行时权限简洁封装
+本文原创，转载请注明出处。欢迎关注我的 简书 ，关注我的专题 Android Class 我会长期坚持为大家收录简书上高质量的 Android 相关博文。
+
+写在前面：
+Android M 中有">
+<meta property="og:updated_time" content="2017-01-04T15:47:20.175Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Melo's Blog">
+<meta name="twitter:description" content="文章来源：itsCoder 的 WeeklyBolg 项目
+itsCoder主页：http://itscoder.com/
+作者：Melo
+审阅者：暂无
+
+
+Android 6.0 运行时权限简洁封装
+本文原创，转载请注明出处。欢迎关注我的 简书 ，关注我的专题 Android Class 我会长期坚持为大家收录简书上高质量的 Android 相关博文。
+
+写在前面：
+Android M 中有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/04/Android 6.0运行时权限简洁封装/"/>
+
+
+
+
+
+  <title>  | Melo's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Melo's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">耐心的偏执狂，浪漫的现实主义</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/04/Android 6.0运行时权限简洁封装/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Melo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Melo's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Melo's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-04T23:48:23+08:00">
+                2017-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/04/Android 6.0运行时权限简洁封装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/Android 6.0运行时权限简洁封装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<ul>
+<li>文章来源：itsCoder 的 <a href="https://github.com/itsCoder/weeklyblog" target="_blank" rel="external">WeeklyBolg</a> 项目</li>
+<li>itsCoder主页：<a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
+<li>作者：<a href="https://itsmelo.github.io/" target="_blank" rel="external">Melo</a></li>
+<li>审阅者：<a href="">暂无</a></li>
+</ul>
+</blockquote>
+<h1 id="Android-6-0-运行时权限简洁封装"><a href="#Android-6-0-运行时权限简洁封装" class="headerlink" title="Android 6.0 运行时权限简洁封装"></a>Android 6.0 运行时权限简洁封装</h1><blockquote>
+<p>本文原创，转载请注明出处。<br>欢迎关注我的 <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" rel="external">简书</a> ，关注我的专题 <a href="http://www.jianshu.com/collection/b1fa46ec3b08" target="_blank" rel="external">Android Class</a> 我会长期坚持为大家收录简书上高质量的 Android 相关博文。</p>
+</blockquote>
+<p><strong>写在前面：</strong></p>
+<p>Android M 中有一个比较重要的知识点就是运行时权限了，关于运行时权限的文章和封装库目前也出现了不少，在开发的过程中始终觉得运行时权限这块的代码可以进一步封装一下，让其使用起来能再简洁一点，并且还不容易出错。关于 Android 运行时权限的知识就不多讲解了，可以参考下面的一些资料：</p>
+<p><a href="https://developer.android.com/training/permissions/requesting.html" target="_blank" rel="external">Android Runtime Permissions</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/50709663" target="_blank" rel="external">Android 6.0 运行时权限处理完全解析</a></p>
+<p>知识点比较简单，大致了解和使用过后，就来开始我的这次封装之旅吧。</p>
+<a id="more"></a>
+<p>现在直观的看看封装之后的使用，是不是清爽很多？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@OnClick(R.id.tv_toolbar_right)</div><div class="line">public void onClick() &#123;</div><div class="line">    performRequestPermissions(getString(R.string.permission_desc), new String[]&#123;Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION&#125;</div><div class="line">            , PER_REQUEST_CODE, new PermissionsResultListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onPermissionGranted() &#123;</div><div class="line">                    Toast.makeText(MainActivity.this, &quot;已申请权限&quot;, Toast.LENGTH_LONG).show();</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                @Override</div><div class="line">                public void onPermissionDenied() &#123;</div><div class="line">                    Toast.makeText(MainActivity.this, &quot;拒绝申请权限&quot;, Toast.LENGTH_LONG).show();</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我将运行时权限封装到 BaseActivity 中，MainActivty 继承BaseActivity，调用 performRequestPermissions 方法，此时我不用再去做一些判断，只需要穿入四个参数即可。当然你为了在 6.0 以下保证应用正常运行，你依然需要像以前一样，在<strong>清单文件</strong>中申明要使用的权限。</p>
+<p>首先我需要一个接口做通信：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public interface PermissionsResultListener &#123;</div><div class="line"></div><div class="line">    void onPermissionGranted();</div><div class="line"></div><div class="line">    void onPermissionDenied();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后把逻辑代码封装在 BaseActivity 里面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line">public class BaseActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    private PermissionsResultListener mListener;</div><div class="line"></div><div class="line">    private int mRequestCode;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 其他 Activity 继承 BaseActivity 调用 performRequestPermissions 方法</div><div class="line">     *</div><div class="line">     * @param desc        首次申请权限被拒绝后再次申请给用户的描述提示</div><div class="line">     * @param permissions 要申请的权限数组</div><div class="line">     * @param requestCode 申请标记值</div><div class="line">     * @param listener    实现的接口</div><div class="line">     */</div><div class="line">    protected void performRequestPermissions(String desc, String[] permissions, int requestCode, PermissionsResultListener listener) &#123;</div><div class="line">        if (permissions == null || permissions.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        mRequestCode = requestCode;</div><div class="line">        mListener = listener;</div><div class="line">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</div><div class="line">            if (checkEachSelfPermission(permissions)) &#123;// 检查是否声明了权限</div><div class="line">                requestEachPermissions(desc, permissions, requestCode);</div><div class="line">            &#125; else &#123;// 已经申请权限</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionGranted();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (mListener != null) &#123;</div><div class="line">                mListener.onPermissionGranted();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 申请权限前判断是否需要声明</div><div class="line">     *</div><div class="line">     * @param desc</div><div class="line">     * @param permissions</div><div class="line">     * @param requestCode</div><div class="line">     */</div><div class="line">    private void requestEachPermissions(String desc, String[] permissions, int requestCode) &#123;</div><div class="line">        if (shouldShowRequestPermissionRationale(permissions)) &#123;// 需要再次声明</div><div class="line">            showRationaleDialog(desc, permissions, requestCode);</div><div class="line">        &#125; else &#123;</div><div class="line">            ActivityCompat.requestPermissions(BaseActivity.this, permissions, requestCode);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 弹出声明的 Dialog</div><div class="line">     *</div><div class="line">     * @param desc</div><div class="line">     * @param permissions</div><div class="line">     * @param requestCode</div><div class="line">     */</div><div class="line">    private void showRationaleDialog(String desc, final String[] permissions, final int requestCode) &#123;</div><div class="line">        final AlertDialog.Builder builder = new AlertDialog.Builder(this);</div><div class="line">        builder.setTitle(getString(R.string.tips))</div><div class="line">                .setMessage(desc)</div><div class="line">                .setPositiveButton(getResources().getString(R.string.confrim), new DialogInterface.OnClickListener() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void onClick(DialogInterface dialogInterface, int i) &#123;</div><div class="line">                        ActivityCompat.requestPermissions(BaseActivity.this, permissions, requestCode);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .setNegativeButton(getResources().getString(R.string.cancle), new DialogInterface.OnClickListener() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void onClick(DialogInterface dialogInterface, int i) &#123;</div><div class="line">                        dialogInterface.dismiss();</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .setCancelable(false)</div><div class="line">                .show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 再次申请权限时，是否需要声明</div><div class="line">     *</div><div class="line">     * @param permissions</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    private boolean shouldShowRequestPermissionRationale(String[] permissions) &#123;</div><div class="line">        for (String permission : permissions) &#123;</div><div class="line">            if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 检察每个权限是否申请</div><div class="line">     *</div><div class="line">     * @param permissions</div><div class="line">     * @return true 需要申请权限,false 已申请权限</div><div class="line">     */</div><div class="line">    private boolean checkEachSelfPermission(String[] permissions) &#123;</div><div class="line">        for (String permission : permissions) &#123;</div><div class="line">            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 申请权限结果的回调</div><div class="line">     *</div><div class="line">     * @param requestCode</div><div class="line">     * @param permissions</div><div class="line">     * @param grantResults</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) &#123;</div><div class="line">        super.onRequestPermissionsResult(requestCode, permissions, grantResults);</div><div class="line">        if (requestCode == mRequestCode) &#123;</div><div class="line">            if (checkEachPermissionsGranted(grantResults)) &#123;</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionGranted();</div><div class="line">                &#125;</div><div class="line">            &#125; else &#123;// 用户拒绝申请权限</div><div class="line">                if (mListener != null) &#123;</div><div class="line">                    mListener.onPermissionDenied();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 检查回调结果</div><div class="line">     *</div><div class="line">     * @param grantResults</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    private boolean checkEachPermissionsGranted(int[] grantResults) &#123;</div><div class="line">        for (int result : grantResults) &#123;</div><div class="line">            if (result != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                return false;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一个方法都有注释，逻辑也相对简单，就是我会遍历每个数组中申请的权限，如果需要申请就去申请，然后再处理一下回调的结果，其中还有对用户拒绝，然后再次申请弹出 Dialog 的处理。</p>
+<p>如果在 Fragment 中使用，只是改变了一下参数封到 BaseFragment 中，这里就不贴代码了，都已经上传 <strong>github</strong></p>
+<p>BaseActivity：</p>
+<p><a href="https://github.com/itsMelo/BuzzerBeater/blob/master/app/src/main/java/com/blog/melo/buzzerbeater/activity/BaseActivity.java" target="_blank" rel="external">BuzzerBeater BaseActivity</a></p>
+<p>BaseFragment：</p>
+<p><a href="https://github.com/itsMelo/BuzzerBeater/blob/master/app/src/main/java/com/blog/melo/buzzerbeater/fragment/BaseFragment.java" target="_blank" rel="external">BuzzerBeater BaseFragment</a></p>
+<p>如有问题，继续交流~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/12/死磕 Fragment 的生命周期/" rel="next" title="死磕 Fragment 的生命周期">
+                <i class="fa fa-chevron-left"></i> 死磕 Fragment 的生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/04/Android 6.0运行时权限简洁封装/"
+           data-title="" data-url="http://yoursite.com/2017/01/04/Android 6.0运行时权限简洁封装/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://d04.res.meilishuo.net/pic/_o/e9/37/94e03408be9a138d6413f80782d7_500_500.cf.jpeg_8fa80129_s1_q0_150_5_0_226_800.jpg"
+               alt="Melo" />
+          <p class="site-author-name" itemprop="name">Melo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/itsMelo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/f5909165c1e8/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-6-0-运行时权限简洁封装"><span class="nav-number">1.</span> <span class="nav-text">Android 6.0 运行时权限简洁封装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Melo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"melo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
